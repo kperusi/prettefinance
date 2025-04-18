@@ -1,0 +1,40 @@
+@font-face {
+    font-family:Nunito_Sans1 ;
+    src: url('/public/Assets/Nunito_Sans/NunitoSans-ExtraLight.ttf');
+}
+.single-btn{
+    display: flex;
+    flex-direction: row;
+    background-color: inherit;
+    color: inherit;
+    font-size: 1.2rem;
+    height: 40px;
+    width: 100px;
+    border-radius: 5px;
+    outline: none;
+    border: 0 solid;
+    box-shadow: 0px 3px 10px 1px rgb(31, 29, 29);
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-family: Nunito_Sans;
+
+}
+
+.border-btn{
+    background-color: inherit;
+    font-size: 0.9rem;
+    width: 80px;
+    border-radius: 3px;
+    outline: none;
+    border: 0px solid;
+    box-shadow: 0px 1px 5px 1px rgb(31, 29, 29);
+    text-align: center;
+    color: inherit;
+    font-family: Nunito_Sans1;
+}
+    
+.f-f-light{
+    font-family: Nunito_Sans1;
+
+}

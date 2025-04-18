@@ -1,0 +1,61 @@
+.income-main {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.income-main-month-title-cx {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.month-btn-cx {
+  display: flex;
+  justify-content: space-around;
+  background-color: var(--Primary);
+}
+
+.month-btn-cx button {
+  font-size: 1.2em;
+  border: none;
+  background-color: transparent;
+  color: #cecccc;
+  padding: 15px 0;
+}
+
+.income-main-title {
+  background-color: lightblue;
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+}
+
+.income-main-content {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.income-cx {
+  display: flex;
+  border-radius: 5px;
+  padding: 10px 0px;
+  align-items: center;
+}
+
+.income-desc-cx {
+  width: 100%;
+}
+
+.income-main-icon {
+  width: 5%;
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.income-amount-cx {
+  display: flex;
+  flex-direction: column;
+}/*# sourceMappingURL=incomestyles.css.map */

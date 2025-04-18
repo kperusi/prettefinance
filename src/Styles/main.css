@@ -1,0 +1,236 @@
+@import './fonts.css';
+@import './paddings.css';
+@import url(./margins.css);
+:root {
+   
+--DarkBlue: hsl(209, 23%, 22%); /*(Dark Mode Elements) */
+--VeryDarkBlue : hsl(207, 26%, 17%); /*(Dark Mode Background)*/
+--VeryDarkBlueText : hsl(200, 15%, 8%);  /*(Light Mode Text)*/
+--DarkGray : hsl(0, 0%, 52%) ;           /* (Light Mode Input)*/
+--VeryLightGray : hsl(0, 0%, 98%);       /* (Light Mode Background)*/
+--White : hsl(0, 0%, 100%)    ; /*(Dark Mode Text & Light Mode Elements)*/
+  --Primary: #070749;}
+  
+  /* semantic color variables for this project */
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* position: relative; */
+    /* font-weight: normal; */
+  }
+  @font-face {
+    font-family:Nunito_Sans ;
+    src: url(/public/Assets/Nunito_Sans/NunitoSans-SemiBold.ttf);
+    /* src: url(/public/Assets/Nunito_Sans/NunitoSans-ExtraLightItalic.ttf); */
+
+  }
+  
+  html ,body {
+    margin: 0;
+    padding: 0;
+    font-synthesis: none;
+    font-family: Nunito_Sans;
+    min-height: 100vh;
+    transition: color 0.5s, background-color 0.5s;
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+   
+  }
+ 
+/* .flex-rw{
+    display: flex;
+    flex-direction: row;
+}
+.flex-col{
+    display: flex;
+    flex-direction: column;
+}
+.wrap{
+    flex-wrap: wrap;
+}
+.b-any{
+    border:1px solid red;
+}
+.gap-1{
+    gap: 20px;
+}
+.gap-2{
+    gap: 5px;
+}
+.p-lr-1{
+    padding: 0 40px ;
+}
+.w-1{
+    width: 25px;
+}
+
+.w-2{
+    width: 20px;
+}
+.w-3{
+    width: 30px;
+}
+.w-4{
+    width: 40px;
+}
+.w-5{
+    width: 50px;
+}
+.w-6{
+    width: 60px;
+}
+.w-7{
+    width: 250px;
+}
+.w-8{
+    width: 40%;
+}
+.w-9{
+    width: 50%;
+}
+.w-10{
+    width: 35%;
+}
+
+
+.h-1{
+    height: 25px;
+}
+.h-2{
+    height: 20px;
+}
+.h-3{
+    height: 30px;
+}
+.h-4{
+    height: 40px;
+}
+.h-5{
+    height: 50px;
+}
+.h-6{
+    height: 160px;
+}
+.h-7{
+    height: 250px;
+}
+.h-8{
+    height: 300px;
+}
+.h-max{
+    min-height: 100vh;
+}
+
+
+.b-rx-1{
+    border-radius: 5px;
+}
+
+
+
+
+
+
+.space-bt{
+    justify-content: space-between;
+}
+.a-ct{
+    
+    align-items: center;
+}
+.j-ct{
+    justify-content: center;
+}
+.text-a{
+    text-align: center;
+}
+
+.hover:hover{
+    cursor: pointer;
+}
+.dark-mode-bg{
+    background-color: var(--VeryDarkBlue);
+    color: var(--White);
+}
+.dark-mode-text{
+    color: var(--White);
+}
+.dark-mode-element{
+    background-color: var(--DarkBlue);
+}
+.light-mode-bg{
+    background-color:var(--VeryLightGray);
+    color: var(--VeryDarkBlueText) ;
+}
+.light-mode-text{
+    color: var(--VeryDarkBlueText) ;
+}
+.light-mode-input{
+    background-color: var(--DarkGray);
+}
+.light-mode-element{
+    background-color: var(--White);
+}
+.label{
+    background-color: rgb(18, 54, 54);
+}
+
+.select{
+    position: absolute;
+    z-index: 1;
+    width: 150px;
+    top: 50px;
+    border-radius: 5px;
+    gap: 5px;
+  
+}
+.select button{
+    background-color: transparent;
+    border: 0 solid;
+    text-align: left;
+    color:inherit;
+}
+.close{
+    display: none;
+}
+.open{
+    display: flex;
+}
+.search-input{
+    background-color: inherit;
+    border: 0 solid;
+    font-size: 1rem;
+    outline: none;
+    color: inherit;
+}
+.nav-indicator{
+    gap: 15px;
+}
+.search-main{
+    border: solid grey;
+    border-radius: 10px;
+    width: 90%;
+    align-self: center;
+    padding-top: 50px;
+}
+.search-cx{
+    
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    
+}
+.cancel{
+    margin-top: -35px;
+    color: grey;
+
+} */

@@ -1,0 +1,276 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+}
+.layout-nav-cx {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--Primary);
+  width: 100%;
+  padding: 5px 20px;
+  background-image: url("../../images/bg-boost-mobile.svg");
+  // border-top-right-radius: 15px;
+  // border-top-left-radius: 15px;
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-size: 100px 100px;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+.layout-navlink {
+  text-decoration: none;
+  color: #add8e6;
+  font-weight: 900;
+}
+
+.divide {
+  display: block;
+  width: 70%;
+  height: 1px;
+  background-color: white;
+  // margin-top: -9px;
+  margin-bottom: 9px;
+}
+.selected {
+  color: white;
+  display: block;
+}
+.layout-logo {
+  display: flex;
+  width: 100%;
+  gap: 50px;
+}
+.layout-logo svg {
+  fill: white !important;
+  
+}
+.navbar-item-cx span {
+  height: 3px;
+  width: 100%;
+  background-color: white;
+}
+.input-div-cx {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 20px;
+}
+.input-div-cx label {
+  font-size: 1em;
+}
+.input-cx {
+  display: flex;
+  flex-direction: column;
+}
+.amount-naira-cx {
+  display: flex;
+  border: solid darkblue 1.2px;
+  align-items: center;
+  gap: 5px;
+  border-radius: 6px;
+  height: 50px;
+
+  // padding: 0 10px;
+}
+.amount-naira-cx h1 {
+  display: flex;
+  background-color: var(--Primary);
+  height: 100%;
+  // padding: 5px;
+  align-items: center;
+  justify-content: center;
+  width: 33px;
+  color: lightblue;
+  width: 15%;
+}
+.mod-input {
+  width: 100%;
+  height: 50px;
+  font-size: 1em;
+}
+.date-mod-cx {
+  display: flex;
+  gap: 5px;
+}
+.mod-cx {
+}
+.expense-date-cx {
+  width: 50%;
+}
+.input-cx input[type="number"] {
+  border: none;
+  outline: none;
+  padding: 10px;
+  font-size: 1.1em;
+}
+.input-cx input[type="number"]::-moz-focus-outer {
+  outline: none;
+}
+.input-cx input[type="date"],
+textarea,
+select,
+.input-cx input[type="text"] {
+  padding: 10px;
+  border: solid darkblue 1.2px;
+  font-size: 1.1em;
+  border-radius: 6px;
+  outline: none;
+}
+input[type="date"] {
+  font-size: 1.1em;
+  font-family: Nunito_Sans_bold;
+  font-weight: 500;
+  font-style: bold;
+  height: 50px;
+}
+textarea {
+  padding: 5px 10px;
+  border: solid darkblue 1.2px;
+  font-size: 1.1em;
+  border-radius: 6px;
+  outline: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 200;
+  font-style: bold;
+  height: 80px;
+}
+
+.error {
+  color: red;
+  text-align: right;
+  font-size: 0.9em;
+  border-color: red;
+}
+.income-source {
+  width: 80%;
+}
+.custom-select select {
+  width: 75%;
+  appearance: button;
+  position: relative;
+  top: 0px;
+  //   appearance: none;
+}
+.option {
+  display: block;
+  font-size: 0.85em;
+  // background-color: rebeccapurple;
+  width: 10%;
+  appearance: none;
+  float: left;
+}
+.editing-title-del-cx {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: solid var(--Primary) 0.15em;
+  // border-radius: 5px;
+}
+
+.editing-title-del-cx button {
+  border: none;
+  background-color: transparent;
+}
+.editing-title h1 {
+  font-size: 1.4em;
+  color: var(--Primary);
+}
+.editing-title h4 {
+  font-size: 0.9em;
+  margin-top: -7px;
+  color: rgb(192, 190, 192);
+}
+input[type="number"]::-webkit-inner-spin-button {
+  appearance: none;
+  margin: 0;
+}
+.trx-save-btn-cx{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0;
+  background-color: var(--Primary);
+  border-radius: 5px;
+  padding: 1px 5px;
+  
+}
+
+
+.add-btn {
+  height: 45px;
+ background-color: transparent;
+  color: lightblue;
+  outline: none;
+  border: none;
+  font-size: 1.1em;
+  width: 100%;
+}
+.trx-loading {
+  display: flex;
+  flex-direction: row;
+  height: 9px;
+  background-color: white;
+  width: 97%;
+ align-self: center;
+  border-radius: 5px;
+  border: solid 1px var(--Primary);
+  
+}
+
+.trx-loading span {
+  height: 100%;
+  background-color: var(--Primary);
+  width: 20%;
+  animation-name: motionLoading;
+  animation-duration: 3s;
+  transition: all ease-in;
+  animation-iteration-count: infinite;
+  border-radius: 5px;
+}
+@keyframes motionLoading {
+  from {
+    margin-left: 0px;
+  }
+  to {
+    margin-left: 80%;
+  }
+}
+.confirmation-cx{
+  position: absolute;
+  top: 0px;
+  height: 100vh;
+  left: 0;
+  background-color: rgb(0, 0, 0,0.7);
+  width: 100%;
+ padding: 20px;
+}
+.confirmation{
+ 
+  color: var(--Primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 10px;
+  gap: 40px;
+  // padding-top: 10px;
+  background-color: white;
+  border-radius: 10px;
+  font-size: 1.3em;
+  
+  
+}
+.confirmation button {
+  width: 100%;
+  padding: 20px;
+  font-size: 1em;
+  background-color: var(--Primary);
+  color: white;
+  border-radius: 5px;
+  border: none;
+}

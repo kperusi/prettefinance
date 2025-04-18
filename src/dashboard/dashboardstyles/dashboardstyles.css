@@ -1,0 +1,181 @@
+.content-main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 15px;
+}
+
+.dashboard-logo {
+  display: flex;
+  background-color: var(--Primary);
+  height: 70px;
+  padding: 10px;
+}
+
+.dashboard-logo div {
+  display: flex;
+  flex-direction: column;
+  color: white;
+  gap: -10px;
+}
+
+.dashboard-logo div h4 {
+  color: gray;
+}
+
+.dashboard-logo h1 {
+  color: white;
+  width: 100%;
+  letter-spacing: 2px;
+  font-size: 1.6em;
+  margin-bottom: -10px;
+}
+
+.dashboard-title {
+  display: flex;
+  border-radius: 5px;
+  height: 70px;
+  background-color: aliceblue;
+  justify-content: space-between;
+  padding: 0 10px;
+  align-items: center;
+}
+
+.logout {
+  border: solid var(--Primary);
+  background-color: transparent;
+  font-size: 1em;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.show-income-cx {
+  display: flex;
+  flex-direction: row;
+  border-bottom: solid 0.15rem grey;
+  padding: 10px;
+  gap: 9px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.show-income-cx h3 {
+  font-weight: 900;
+  font-size: 1.3em;
+}
+
+.desc-cx {
+  width: 80%;
+  padding: 10px;
+}
+
+.amount-cx {
+  display: flex;
+  align-self: flex-end;
+}
+
+.amount-cx h1 {
+  font-size: 1.5em;
+}
+
+.dashboard-section-one {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: var(--Primary);
+  margin-left: 9px;
+  margin-right: 9px;
+  gap: 20px;
+}
+
+.dashboard-section-one h1,
+.dashboard-section-one h3 {
+  color: white;
+}
+
+.dashboard-section-one h1 {
+  font-size: 3em;
+}
+
+.dashboard-section-one svg {
+  fill: white;
+}
+
+.dashboard-section-one-income svg {
+  fill: white;
+}
+
+.dashboard-section-one-income h3 {
+  display: flex;
+  font-size: 1.8em;
+  align-items: center;
+  text-align: center;
+}
+
+.dashboard-section-income-expenses-cx {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dashboard-section-two {
+  display: flex;
+  flex-direction: column;
+  margin-top: 40px;
+  border-radius: 5px;
+}
+
+.dashboard-expenses-cx {
+  margin-top: 15px;
+}
+
+.income-section-title {
+  padding: 5px 5px;
+}
+
+.income-section-title h1 {
+  font-size: 1.2em;
+}
+
+.expenses-section-title {
+  padding: 5px 5px;
+}
+
+.income-title {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.income-list-items {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  background-color: white;
+}
+
+.dashboard-add-transaction-cx {
+  position: absolute;
+  z-index: 1000;
+  bottom: 80px;
+  right: 15px;
+  background-color: rgba(2, 2, 49, 0.8);
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.mouseEnter {
+  background-color: var(--Primary);
+}
+
+.dashboard-expenses-cx {
+  background-color: rgb(236, 236, 236);
+  padding: 10px 5px;
+  margin-top: -10px;
+}
+
+.dashboard-income-cx {
+  background-color: rgb(197, 235, 245);
+  padding: 10px 5px;
+}/*# sourceMappingURL=dashboardstyles.css.map */

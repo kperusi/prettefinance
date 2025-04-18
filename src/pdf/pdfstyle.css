@@ -1,0 +1,78 @@
+.document {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 30px;
+  font-size: 0.7em;
+  width: 100%;
+  flex-grow: 1;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.section-cx h2 {
+  background-color: rgb(201, 200, 200);
+}
+
+.document-title {
+  line-height: 1.2em;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.pdf-income-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding-right: 20px;
+}
+
+.pdf-income-item p {
+  display: flex;
+}
+
+.pdf-download-btn {
+  display: flex;
+  border: none;
+  background-color: var(--Primary);
+  color: white;
+  width: 100%;
+  padding: 15px;
+  font-size: 1.1em;
+  border-radius: 5px;
+  margin-top: 70px;
+  text-align: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.pdf-download-back-btn {
+  display: flex;
+  border: solid var(--Primary);
+  background-color: transparent;
+  color: var(--Primary);
+  width: 100%;
+  padding: 15px;
+  font-size: 1.1em;
+  border-radius: 5px;
+  margin-top: 70px;
+  text-align: center;
+  justify-content: center;
+  outline: none;
+}
+
+.document-total-income {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.document-total-income-amount {
+  border-bottom: solid;
+  border-top: solid;
+}/*# sourceMappingURL=pdfstyle.css.map */

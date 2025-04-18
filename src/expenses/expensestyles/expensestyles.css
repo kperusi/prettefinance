@@ -1,0 +1,22 @@
+.expenses-main-content {
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.expenses-cx {
+  gap: 10px;
+  padding: 0;
+}
+
+.expenses-desc-cx {
+  width: 100%;
+}
+
+.expenses-main-icon {
+  width: 5%;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  color: #a8a8a8;
+}/*# sourceMappingURL=expensestyles.css.map */

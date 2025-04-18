@@ -1,0 +1,113 @@
+.single-income-section-one {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+}
+
+.single-income-cancel-edit-del-btn-cx {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.single-income-cancel-btn-cx {
+  padding: 10px 20px;
+}
+
+.single-income-edit-del-btn-cx {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  padding: 10px;
+  width: 60%;
+  border-top-left-radius: 10px;
+}
+
+.single-income-title {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+  margin-top: 10px;
+}
+
+.single-income-title h1 {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+  background-color: var(--Primary);
+  width: -moz-fit-content;
+  width: fit-content;
+  color: white;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.single-income-section-one button {
+  border: none;
+  background-color: transparent;
+}
+
+.single-income-section-two {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+}
+
+.single-income-amount {
+  background-color: rgb(233, 247, 252);
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.single-income-amount h1 {
+  font-size: 3em;
+  text-align: center;
+}
+
+.single-income-amount svg {
+  fill: black;
+}
+
+.single-income-desc-cx h3 {
+  color: grey;
+  font-weight: 600;
+}
+
+.back-btn {
+  display: flex;
+  background-color: var(--Primary);
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
+  color: white;
+  font-size: 1.2em;
+  margin-top: 20px;
+  cursor: pointer;
+  width: 90%;
+  place-content: center;
+}
+
+.back-btn svg {
+  fill: white;
+}
+
+.del-loading-cx {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgb(0, 0, 0);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  color: white;
+  padding: 50px 20px;
+}
+
+.del-loading-cx div {
+  background-color: white;
+  color: black;
+}/*# sourceMappingURL=singleincomestyles.css.map */

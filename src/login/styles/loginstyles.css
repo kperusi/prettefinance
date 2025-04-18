@@ -1,0 +1,35 @@
+.login-section-rw-2 {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.login-loading {
+  display: flex;
+  flex-direction: row;
+  height: 9px;
+  background-color: white;
+  width: 100%;
+  border-radius: 5px;
+  border: solid 1px var(--Primary);
+}
+
+.login-loading span {
+  height: 100%;
+  background-color: var(--Primary);
+  width: 20%;
+  animation-name: motionLoading;
+  animation-duration: 3s;
+  transition: all ease-in;
+  animation-iteration-count: infinite;
+  border-radius: 5px;
+}
+
+@keyframes motionLoading {
+  from {
+    margin-left: 0px;
+  }
+  to {
+    margin-left: 80%;
+  }
+}/*# sourceMappingURL=loginstyles.css.map */

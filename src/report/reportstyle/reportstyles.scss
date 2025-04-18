@@ -1,0 +1,47 @@
+.main-report{
+    display: flex;
+    flex-direction: column;
+    padding:10px 20px;
+    gap: 20px;
+
+}
+.report-income-item{
+    display: flex;
+    
+}
+
+.hide{
+    display: none;
+}
+.pdf-preview-btn{
+    border: none;
+    background-color: var(--Primary);
+    color: white;
+    width: 100%;
+    padding: 15px;
+    font-size: 1.4em;
+    border-radius: 5px;
+    margin-top: 70px;
+}
+.main-report form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.show{
+    display: flex;
+}
+.pdf-preview-cx{
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    background-color: white;
+    // border: solid;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+}
+.container{
+ 
+}

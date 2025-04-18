@@ -1,0 +1,28 @@
+.page-main {
+  display: flex;
+  flex-direction: column;
+  //   width: 100%;
+  gap: 20px;
+ 
+ 
+
+}
+.page-header {
+  display: flex;
+  flex-direction: row;
+}
+.navbar-cx {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 5px 0px;
+  width: 100%;
+
+  //   height:50px;
+}
+.content-cx{
+    // border: solid green;
+    overflow-y: scroll;
+    height: 89vh;
+}
