@@ -8,6 +8,7 @@ import { signOut } from "firebase/auth";
 import { NavLink } from "react-router-dom";
 export default function Dashboard({ handleSelected, select, setSelect }) {
   const [user, setUser] = useState();
+  const [avatarName,setAvatarName]=useState()
   const [expenses, setExpenses] = useState([]);
   const [incomes, setIncomes] = useState([]);
   const [totalIncome, setTotalIncome] = useState();
@@ -21,35 +22,10 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
   const [mouseEnter, setMouseEnter] = useState("");
   const balancebf= 1219033.01
 
-  console.log(select);
+  // console.log(select);
 
   useEffect(() => {
-    // try {
-    //   const loginUserDetailsRef = collection(db, "users");
-    //   const q = query(loginUserDetailsRef);
-    //   onSnapshot(q, (snapshot) => {
-    //     const loginUsersDetails = snapshot.docs.map((doc) => ({
-    //       id: doc.id,
-    //       ...doc.data(),
-    //     }));
-    //     setLoading(false);
-
-    //     const fetchLoginUser = loginUsersDetails.find(
-    //       (_user) => _user?.id === user?.uid
-    //     );
-
-    //     if (fetchLoginUser) {
-    //       localStorage.setItem(
-    //         "loginUserDetails",
-    //         JSON.stringify(fetchLoginUser)
-    //       );
-    //     }
-
-    //     // setLoginUserDetail(fetchLoginUser);
-    //   });
-    // } catch (error) {
-    //   setError(error);
-    // }
+   
 
     try {
       const expensesRef = collection(db, "Expenses");
@@ -110,6 +86,11 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
     setLoginUserDetail(storedUserDetails);
     setId(storedUser.uid);
     setUser(storedUser);
+    let fName = storedUser?.displayName.split(' ')[0].slice(0,1)
+    let sName = storedUser?.displayName.split(' ')[1].slice(0,1)
+    let avatarName = fName+sName
+    console.log(avatarName)
+    setAvatarName(avatarName)
     const totalExpenses = storedExpense.reduce(
       (sum, each) => sum + (each?.amount || 0),
       0
@@ -123,7 +104,7 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
     setTotalBalance(totalIncomes-totalExpenses);
   }, []);
 
-  console.log(totalBalance);
+  // console.log(totalBalance);
 
   const handleLogout = () => {
     localStorage.removeItem("ebcfinance-user");
@@ -146,16 +127,19 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
     <main className="content-main">
       <section className="dashboard-logo">
         <div>
-          <h1>AuditoR</h1>
-          <h4>Easy Control and See Your Finance</h4>
+          <h1>Prette</h1>
+          <h4>Easy Financial Keep</h4>
         </div>
       </section>
 
       <section className="dashboard-title">
-        <h3>{user?.displayName}</h3>
-        <button onClick={handleLogout} className="logout">
+        <div className='dashboard-avatar' onClick={handleLogout}>
+          <h3>{avatarName}</h3>
+          </div>
+        
+        {/* <button onClick={handleLogout} className="logout">
           Logout
-        </button>
+        </button> */}
       </section>
       {loginUserDetail?.role === "admin" && (
         <section

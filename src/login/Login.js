@@ -126,8 +126,8 @@ export default function Login() {
   return (
     <main className="login-main">
       <section className="hero">
-        <h1>AuditoR</h1>
-        <p>Login</p>
+        <h1>Prettefinance</h1>
+        <p>Welcome Back</p>
       </section>
 
       <div className="register-cx">

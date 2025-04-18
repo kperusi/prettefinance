@@ -45,7 +45,7 @@ export default function Report() {
   const [salary, setSalary] = useState([]);
   const [cooperative, setCooperative] = useState([]);
   const [generatorExpenses, setGeneratorExpenses] = useState([]);
-  const [dues, setDues] = useState([]);
+
   const [assocationalDues, setAssocationalDues] = useState([]);
   const [conferenceDues, setConferenceDues] = useState([]);
   const [conventionDues, setConventionDues] = useState([]);
@@ -179,6 +179,7 @@ export default function Report() {
     setConventionDues(filterExpensesByName("Convention Dues"));
     setAllocation(filterExpensesByName("Allocation"));
 
+
     if (display === "hide") {
       setDisplay("show");
     } else {
@@ -204,7 +205,6 @@ export default function Report() {
 
     if (incomeByMonth.length > 0) {
       allExpenses.push({ heading: "", name: "Income", items: incomeByMonth });
-      // allExpenses.push({ heading: "", name: "", items: balancebf})
       itemCount += incomeByMonth.length;
     }
 
@@ -389,7 +389,7 @@ export default function Report() {
           desc: "Monthly Balance",
           amount: totalIncomeAmountThisMonth - totalExpensesAmountThisMonth,
         },
-        // { desc: "____________________________________________________", amount: '' },
+       
       ],
     });
 
@@ -406,8 +406,8 @@ export default function Report() {
 
     allExpenses.push({
       name: "Sign",
-      signedByOne:'Ojakovo A.',
-      signedByTwo:'Prosper S.',
+      signedByOne:'Ojakovo Aminamu.',
+      signedByTwo:'Prosper Sodje.',
       items: [],
     });
 
@@ -571,8 +571,8 @@ export default function Report() {
               loading ? "loading" : "Download Pdf"
             }
           </PDFDownloadLink> */}
-          <button onClick={handleDownload}>Download pdf</button>
-          <button onClick={handleSetDisplay} className="pdf-download-back-btn">
+          <button onClick={handleDownload} className="pdf-preview-btn">Download pdf</button>
+          <button onClick={handleSetDisplay} className="pdf-preview-back-btn pdf-preview-btn">
             Back
           </button>
         </div>

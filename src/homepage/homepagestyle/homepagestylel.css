@@ -6,14 +6,18 @@
 }
 
 .hero {
-  background-color: darkblue;
+  background-color: var(--Primary);
   color: white;
+  height: 100px;
+  background: url("../../images/bg-main-mobile.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100px;
 }
 
 .hero-para {
   display: flex;
   flex-direction: column;
-  padding: 0 10px;
+  padding: 10px;
   gap: 20px;
 }
 

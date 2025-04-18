@@ -55,7 +55,7 @@ export default function MyRouter() {
  }
   },[])
 
-console.log(select)
+// console.log(select)
   return (
     <div className="">
       <Routes>

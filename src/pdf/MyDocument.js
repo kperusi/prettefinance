@@ -74,7 +74,7 @@ signSection:{
     width:'50%'
   },
   border:{
-    marginTop:50,
+    marginTop:110,
     borderBottom:'2px solid black'
   },
   signedText:{

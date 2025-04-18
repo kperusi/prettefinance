@@ -42,4 +42,10 @@
   left: 0;
   height: 100vh;
   width: 100%;
+}
+
+.pdf-preview-back-btn {
+  background-color: white;
+  border: solid 2px var(--Primary);
+  color: var(--Primary);
 }/*# sourceMappingURL=reportstyles.css.map */
