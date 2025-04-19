@@ -46,10 +46,34 @@ function AddExpenses() {
 
   let date2 = new Date(Date.now());
 
+  const formatNumber = (values) => {
+    return values
+      .replace(/\W/g, "") // Remove non-digit characters
+      .replace(/\B(?=(\d{3})+(?!\d))/g, " "); // Add spaces every 3 digits
+
+    
+  };
  
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    // setForm({ ...form, [e.target.name]: e.target.value });
+
+
+    if (e.target.name === "amount") {
+      const newValue = e.target.value.replace(/[^0-9]/g, "");
+      // setFormartedNumber(formatNumber(newValue));
+      setForm({ ...form, amount: formatNumber(newValue)});
+      console.log("changing number");
+    }
+
+    if (e.target.name !== "amount") {
+      setForm({ ...form, [e.target.name]: e.target.value });
+      console.log("changing", e.target.name);
+    }
+
+
+
+
     if (e.target.name === "MOD") {
       setTypeErrors("");
     }
@@ -153,20 +177,7 @@ function AddExpenses() {
       setGivenByError("Please enter a giver name");
       return
     }
-    // if (form.date === "") {
-    //   setDateErrors("Please enter a date");
-    //   return
-    // }
-    // if (
-    //   form.amount === "" ||
-    //   form.MOD === "" ||
-    //   form.desc === "" ||
-    //   form.date === "" ||
-    //   form.expensesCategory === "" ||
-    //   form.givenBy
-    // ) {
-    //   return;
-    // }
+   
 
     if (!user) {
       navigate("/ebcfinance-login");
@@ -174,7 +185,7 @@ function AddExpenses() {
       setLoading(true);
       console.log("updating");
       await updateDoc(doc(db, "Expenses", id.trim()), {
-        amount: parseInt(form.amount),
+        amount: parseInt((form.amount).split(' ').join('')),
         date: form.date,
         MOD: form.MOD,
         desc: form.desc,
@@ -193,7 +204,7 @@ function AddExpenses() {
         createdAt: Timestamp.now().toDate(),
         createdBy: user?.displayName,
         userId: user?.uid,
-        amount: parseInt(form.amount),
+        amount: parseInt((form.amount).split(' ').join('')),
         date: form.date,
         desc: form.desc,
         MOD: form.MOD,
@@ -242,9 +253,7 @@ function AddExpenses() {
       setError(error);
     }
   };
-  // console.log(user);
-  // console.log(error);
-  // console.log(id);
+
 
   return (
     <main className="addexpenses">
@@ -298,11 +307,12 @@ function AddExpenses() {
                 </svg>
               </h1>
               <input
-                type="number"
+                style={{ border: "none", outline: "none" }}
+                type="text"
                 name="amount"
                 id="income"
                 required
-                placeholder="123 456 678"
+                placeholder="123 456 670"
                 value={form.amount}
                 onInput={() => {
                   setAmountErrors("");

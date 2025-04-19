@@ -10,6 +10,7 @@ import { db } from "../firebase/firebase";
 import { useNavigate, useParams } from "react-router-dom";
 import "./transactionstyle/transactionstyles.css";
 import Confirmation from "./confirmation";
+
 function AddIncome() {
   const [form, setForm] = useState({
     main: "Income",
@@ -31,42 +32,33 @@ function AddIncome() {
   const [totalIncome, setTotalIncome] = useState();
   const [singleIncome, setSingleIncome] = useState({});
   const [showConfirmation, setShowConfirmation] = useState(false);
- 
- const[formatedNumber,setFormartedNumber]=useState()
+
+  const [formatedNumber, setFormartedNumber] = useState();
   const navigate = useNavigate();
 
   const formatNumber = (values) => {
-    return values.replace(/\D/g, "") // Remove non-digit characters
-    .replace(/\B(?=(\d{3})+(?!\d))/g, " "); // Add spaces every 3 digits
-
-
-
-
-    // return value.replace(/\D/g, "") // Remove non-digit characters
-                // .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1 "); // Add spaces every 3 digits
+    return values
+      .replace(/\W/g, "") // Remove non-digit characters
+      .replace(/\B(?=(\d{3})+(?!\d))/g, " "); // Add spaces every 3 digits
   };
 
-
-  const CheckForLetters = (str)=>{
-    
-    return /[a-z]/i.test(str);
-
-}
 
   let date2 = new Date(Date.now());
   // console.log(date2.toDateString());
   const handleChange = (e) => {
-//  if (e.target.name === "amount") {
-//       setFormartedNumber(formatNumber(e.target.value))
-//       if (CheckForLetters(e.target.value)){
-//         return
-//       }
-//       console.log("changing date");
-    
-//     }
+  
+    if (e.target.name === "amount") {
+      const newValue = e.target.value.replace(/[^0-9]/g, "");
+      setFormartedNumber(formatNumber(newValue));
+      setForm({ ...form, amount: formatNumber(newValue)});
+      console.log("changing number");
+    }
 
+    if (e.target.name !== "amount") {
+      setForm({ ...form, [e.target.name]: e.target.value });
+      console.log("changing", e.target.name);
+    }
 
-    setForm({ ...form, [e.target.name]: e.target.value });
     if (e.target.name === "amount") {
       setAmountErrors("");
     }
@@ -76,24 +68,15 @@ function AddIncome() {
     if (e.target.name === "income_type") {
       setSourceErrors("");
     }
-
-    // if (e.target.name === "amount") {
-    //   setFormartedNumber(formatNumber(e.target.value))
-    //   if (CheckForLetters(e.target.value)){
-    //     return
-    //   }
-    //   console.log("changing date");
-    
-    // }
   };
-  // console.log(parseInt(formatedNumber?.replace(/,/g,''),10)+4)
-  
+
+
+
+  console.log(form);
 
   const handleShowConfirmation = () => {
     setShowConfirmation(!showConfirmation);
   };
-
-// useEffect(()=>{},[])
 
   useEffect(() => {
     set_Date(new Date(Date.now()).toISOString().split("T")[0]);
@@ -138,8 +121,6 @@ function AddIncome() {
       ...form,
     };
 
-    
-    
     console.log(form);
     if (form.amount === "") {
       setAmountErrors("Please enter a valid amount");
@@ -156,7 +137,7 @@ function AddIncome() {
       setLoading(true);
       console.log("updating");
       await updateDoc(doc(db, "Income", id.trim()), {
-        amount: parseInt(form.amount),
+        amount: parseInt((form.amount).split(' ').join('')),
         date: form.date,
         desc: form.desc,
         incomeSource: form.income_source,
@@ -173,7 +154,7 @@ function AddIncome() {
         createdAt: Timestamp.now().toDate(),
         createdBy: user?.displayName,
         userId: user?.uid,
-        amount: parseInt(form.amount),
+        amount: parseInt((form.amount).split(' ').join('')),
         date: form.date,
         desc: form.desc,
         color: form.color,
@@ -182,7 +163,7 @@ function AddIncome() {
         incomeSource: form.income_source,
       });
     }
-    // console.log(form);
+   
     setLoading(false);
     handleShowConfirmation();
     setForm({
@@ -191,12 +172,14 @@ function AddIncome() {
       date: new Date(Date.now()).toISOString().split("T")[0],
       desc: "",
       // color: "",
-      month: new Date(Date.now()).toLocaleDateString("en-US", { month: "long" }),
+      month: new Date(Date.now()).toLocaleDateString("en-US", {
+        month: "long",
+      }),
       income_source: "",
     });
   };
 
-  // console.log(showConfirmation);
+ console.log(form.amount)
   return (
     <main className="addincome">
       <section>
@@ -259,8 +242,8 @@ function AddIncome() {
                 </svg>
               </h1>
               <input
-              style={{border:'none',outline:'none'}}
-                type="number"
+                style={{ border: "none", outline: "none" }}
+                type="text"
                 name="amount"
                 id="income"
                 required

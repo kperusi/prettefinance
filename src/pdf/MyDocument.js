@@ -110,7 +110,7 @@ const MyDocument = ({ chunks }) => (
                   <Text style={styles.descText}>
                     {each.incomeSource || each.desc}
                   </Text>
-                  <Text>{each.amount}</Text>
+                  <Text>{(each?.amount).toLocaleString()}</Text>
                 </View>
               ))}
               {each.name === "Sign" && (
