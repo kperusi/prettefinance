@@ -406,8 +406,8 @@ export default function Report() {
 
     allExpenses.push({
       name: "Sign",
-      signedByOne:'Ojakovo Aminamu.',
-      signedByTwo:'Prosper Sodje.',
+      signedByOne:'Ojakovo Animamu',
+      signedByTwo:'Prosper Sodje',
       items: [],
     });
 
