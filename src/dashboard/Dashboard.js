@@ -7,9 +7,11 @@ import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { signOut } from "firebase/auth";
 import { NavLink } from "react-router-dom";
 import { Splitter } from "../Splitter";
+import { FormatedDate } from "../FormatedDate";
+import { TruncateTex } from "../TruncateText";
 export default function Dashboard({ handleSelected, select, setSelect }) {
   const [user, setUser] = useState();
-  const [avatarName,setAvatarName]=useState()
+  const [avatarName, setAvatarName] = useState();
   const [expenses, setExpenses] = useState([]);
   const [incomes, setIncomes] = useState([]);
   const [totalIncome, setTotalIncome] = useState();
@@ -21,11 +23,10 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
   const [userRole, setUserRole] = useState();
   const [loginUserDetail, setLoginUserDetail] = useState({});
   const [mouseEnter, setMouseEnter] = useState("");
-  const balancebf= 1219033.01
+  const balancebf = 1219033.01;
 
   // console.log(select);
 
-  
   const formatNumber = (values) => {
     return values
       .replace(/\W/g, "") // Remove non-digit characters
@@ -92,11 +93,11 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
     setLoginUserDetail(storedUserDetails);
     setId(storedUser.uid);
     setUser(storedUser);
-    let fName = storedUser?.displayName.split(' ')[0].slice(0,1)
-    let sName = storedUser?.displayName.split(' ')[1].slice(0,1)
-    let avatarName = fName+sName
-    console.log(avatarName)
-    setAvatarName(avatarName)
+    let fName = storedUser?.displayName.split(" ")[0].slice(0, 1);
+    let sName = storedUser?.displayName.split(" ")[1].slice(0, 1);
+    let avatarName = fName + sName;
+    console.log(avatarName);
+    setAvatarName(avatarName);
     const totalExpenses = storedExpense.reduce(
       (sum, each) => sum + (each?.amount || 0),
       0
@@ -107,7 +108,7 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
     );
     setTotalIncome(totalIncomes);
     setTotalExpenses(totalExpenses);
-    setTotalBalance(totalIncomes-totalExpenses);
+    setTotalBalance(totalIncomes - totalExpenses);
   }, []);
 
   // console.log(totalBalance);
@@ -139,10 +140,10 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
       </section>
 
       <section className="dashboard-title">
-        <div className='dashboard-avatar' onClick={handleLogout}>
+        <div className="dashboard-avatar" onClick={handleLogout}>
           <h3>{avatarName}</h3>
-          </div>
-        
+        </div>
+
         {/* <button onClick={handleLogout} className="logout">
           Logout
         </button> */}
@@ -171,58 +172,89 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
       )}
 
       <section className="dashboard-section-one">
-        <div>
-          <h3>Balance b/f</h3>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <svg
-              fill="#ffffff"
-              version="1.1"
-              id="Capa_1"
-              xmlns="http://www.w3.org/2000/svg"
-              width="30px"
-              height="30px"
-              viewBox="0 0 496.262 496.262"
-            >
-              <path d="M477.832,274.28h-67.743v-65.106h67.743c10.179,0,18.43-8.243,18.43-18.424c0-10.182-8.251-18.43-18.43-18.43h-67.743 V81.982c0-13.187-2.606-22.866-7.743-28.762c-4.882-5.609-11.301-8.219-20.19-8.219c-8.482,0-14.659,2.592-19.447,8.166 c-5.077,5.902-7.654,15.599-7.654,28.821v90.343H227.627l-54.181-81.988c-4.637-7.317-8.997-14.171-13.231-20.75 c-3.812-5.925-7.53-10.749-11.042-14.351c-3.109-3.189-6.652-5.657-10.796-7.554c-3.91-1.785-8.881-2.681-14.762-2.681 c-7.501,0-14.31,2.055-20.83,6.277c-6.452,4.176-10.912,9.339-13.636,15.785c-2.391,6.126-3.656,15.513-3.656,27.63v77.626h-67.07 C8.246,172.326,0,180.574,0,190.755c0,10.181,8.246,18.424,18.424,18.424h67.07v65.113h-67.07C8.246,274.292,0,282.538,0,292.722 C0,302.9,8.246,311.14,18.424,311.14h67.07v103.143c0,12.797,2.689,22.378,8.015,28.466c5.065,5.805,11.487,8.5,20.208,8.5 c8.414,0,14.786-2.707,20.07-8.523c5.411-5.958,8.148-15.533,8.148-28.442V311.14h115.308l62.399,95.683 c4.339,6.325,8.819,12.709,13.287,18.969c4.031,5.621,8.429,10.574,13.069,14.711c4.179,3.742,8.659,6.484,13.316,8.157 c4.794,1.726,10.397,2.601,16.615,2.601c16.875,0,34.158-5.166,34.158-43.479V311.14h67.743c10.179,0,18.43-8.252,18.43-18.43 C496.262,282.532,488.011,274.28,477.832,274.28z M355.054,209.173v65.106h-60.041l-43.021-65.106H355.054z M141.936,134.364 l24.76,37.956h-24.76V134.364z M141.936,274.28v-65.106h48.802l42.466,65.106H141.936z M355.054,365.153l-35.683-54.013h35.683 V365.153z" />{" "}
-            </svg>
-            <h2 style={{ color: "white" }}>{balancebf.toLocaleString('en-US',{
-              useGrouping:true,
-              groupingSeparator:''
-            })}</h2>
-          </div>
-        </div>
-        <div className="balance-cx">
-          <h3>Balance</h3>
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <svg
-              fill="#ffffff"
-              version="1.1"
-              id="Capa_1"
-              xmlns="http://www.w3.org/2000/svg"
-              width="50px"
-              height="50px"
-              viewBox="0 0 496.262 496.262"
-            >
-              <path d="M477.832,274.28h-67.743v-65.106h67.743c10.179,0,18.43-8.243,18.43-18.424c0-10.182-8.251-18.43-18.43-18.43h-67.743 V81.982c0-13.187-2.606-22.866-7.743-28.762c-4.882-5.609-11.301-8.219-20.19-8.219c-8.482,0-14.659,2.592-19.447,8.166 c-5.077,5.902-7.654,15.599-7.654,28.821v90.343H227.627l-54.181-81.988c-4.637-7.317-8.997-14.171-13.231-20.75 c-3.812-5.925-7.53-10.749-11.042-14.351c-3.109-3.189-6.652-5.657-10.796-7.554c-3.91-1.785-8.881-2.681-14.762-2.681 c-7.501,0-14.31,2.055-20.83,6.277c-6.452,4.176-10.912,9.339-13.636,15.785c-2.391,6.126-3.656,15.513-3.656,27.63v77.626h-67.07 C8.246,172.326,0,180.574,0,190.755c0,10.181,8.246,18.424,18.424,18.424h67.07v65.113h-67.07C8.246,274.292,0,282.538,0,292.722 C0,302.9,8.246,311.14,18.424,311.14h67.07v103.143c0,12.797,2.689,22.378,8.015,28.466c5.065,5.805,11.487,8.5,20.208,8.5 c8.414,0,14.786-2.707,20.07-8.523c5.411-5.958,8.148-15.533,8.148-28.442V311.14h115.308l62.399,95.683 c4.339,6.325,8.819,12.709,13.287,18.969c4.031,5.621,8.429,10.574,13.069,14.711c4.179,3.742,8.659,6.484,13.316,8.157 c4.794,1.726,10.397,2.601,16.615,2.601c16.875,0,34.158-5.166,34.158-43.479V311.14h67.743c10.179,0,18.43-8.252,18.43-18.43 C496.262,282.532,488.011,274.28,477.832,274.28z M355.054,209.173v65.106h-60.041l-43.021-65.106H355.054z M141.936,134.364 l24.76,37.956h-24.76V134.364z M141.936,274.28v-65.106h48.802l42.466,65.106H141.936z M355.054,365.153l-35.683-54.013h35.683 V365.153z" />{" "}
-            </svg>
-            <h1 style={{color:'white',fontSize:'2.3em'}}>{(totalBalance?.toLocaleString())}</h1>
-          </div>
-        </div>
-        <hr />
-        <div className="dashboard-section-income-expenses-cx">
-          <div className="dashboard-section-one-income">
-            <h5 style={{ color: "#e7e5e5" }}>Income</h5>
-            <h3 style={{ display: "flex", alignItems: "center" ,fontSize:'1.4em',color:'white'}}>
+        <div className="total-balance-cx">
+          <div className="balancebf-cx">
+            <h3>Balance b/f</h3>
+            <div style={{ display: "flex", alignItems: "center" }}>
               <svg
                 fill="#ffffff"
                 version="1.1"
                 id="Capa_1"
                 xmlns="http://www.w3.org/2000/svg"
-                // xmlns:xlink="http://www.w3.org/1999/xlink"
-                width="30px"
-                height="30px"
+                width="25px"
+                height="20px"
+                viewBox="0 0 496.262 496.262"
+              >
+                <path d="M477.832,274.28h-67.743v-65.106h67.743c10.179,0,18.43-8.243,18.43-18.424c0-10.182-8.251-18.43-18.43-18.43h-67.743 V81.982c0-13.187-2.606-22.866-7.743-28.762c-4.882-5.609-11.301-8.219-20.19-8.219c-8.482,0-14.659,2.592-19.447,8.166 c-5.077,5.902-7.654,15.599-7.654,28.821v90.343H227.627l-54.181-81.988c-4.637-7.317-8.997-14.171-13.231-20.75 c-3.812-5.925-7.53-10.749-11.042-14.351c-3.109-3.189-6.652-5.657-10.796-7.554c-3.91-1.785-8.881-2.681-14.762-2.681 c-7.501,0-14.31,2.055-20.83,6.277c-6.452,4.176-10.912,9.339-13.636,15.785c-2.391,6.126-3.656,15.513-3.656,27.63v77.626h-67.07 C8.246,172.326,0,180.574,0,190.755c0,10.181,8.246,18.424,18.424,18.424h67.07v65.113h-67.07C8.246,274.292,0,282.538,0,292.722 C0,302.9,8.246,311.14,18.424,311.14h67.07v103.143c0,12.797,2.689,22.378,8.015,28.466c5.065,5.805,11.487,8.5,20.208,8.5 c8.414,0,14.786-2.707,20.07-8.523c5.411-5.958,8.148-15.533,8.148-28.442V311.14h115.308l62.399,95.683 c4.339,6.325,8.819,12.709,13.287,18.969c4.031,5.621,8.429,10.574,13.069,14.711c4.179,3.742,8.659,6.484,13.316,8.157 c4.794,1.726,10.397,2.601,16.615,2.601c16.875,0,34.158-5.166,34.158-43.479V311.14h67.743c10.179,0,18.43-8.252,18.43-18.43 C496.262,282.532,488.011,274.28,477.832,274.28z M355.054,209.173v65.106h-60.041l-43.021-65.106H355.054z M141.936,134.364 l24.76,37.956h-24.76V134.364z M141.936,274.28v-65.106h48.802l42.466,65.106H141.936z M355.054,365.153l-35.683-54.013h35.683 V365.153z" />{" "}
+              </svg>
+              <h3>
+                {balancebf.toLocaleString("en-US", {
+                  useGrouping: true,
+                  groupingSeparator: "",
+                })}
+              </h3>
+            </div>
+          </div>
+          <hr />
+          <div className="balance-cx">
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="40px"
+                viewBox="0 -960 960 960"
+                width="40px"
+                fill="#1f1f1f"
+              >
+                <path d="M240-160q-66 0-113-47T80-320v-320q0-66 47-113t113-47h480q66 0 113 47t47 113v320q0 66-47 113t-113 47H240Zm0-480h480q22 0 42 5t38 16v-21q0-33-23.5-56.5T720-720H240q-33 0-56.5 23.5T160-640v21q18-11 38-16t42-5Zm-74 130 445 108q9 2 18 0t17-8l139-116q-11-15-28-24.5t-37-9.5H240q-26 0-45.5 13.5T166-510Z" />
+              </svg>
+              <h3> Total Balance</h3>
+            </span>
+
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <svg
+                fill="#ffffff"
+                version="1.1"
+                id="Capa_1"
+                xmlns="http://www.w3.org/2000/svg"
+                width="40px"
+                height="45px"
+                viewBox="0 0 496.262 496.262"
+              >
+                <path d="M477.832,274.28h-67.743v-65.106h67.743c10.179,0,18.43-8.243,18.43-18.424c0-10.182-8.251-18.43-18.43-18.43h-67.743 V81.982c0-13.187-2.606-22.866-7.743-28.762c-4.882-5.609-11.301-8.219-20.19-8.219c-8.482,0-14.659,2.592-19.447,8.166 c-5.077,5.902-7.654,15.599-7.654,28.821v90.343H227.627l-54.181-81.988c-4.637-7.317-8.997-14.171-13.231-20.75 c-3.812-5.925-7.53-10.749-11.042-14.351c-3.109-3.189-6.652-5.657-10.796-7.554c-3.91-1.785-8.881-2.681-14.762-2.681 c-7.501,0-14.31,2.055-20.83,6.277c-6.452,4.176-10.912,9.339-13.636,15.785c-2.391,6.126-3.656,15.513-3.656,27.63v77.626h-67.07 C8.246,172.326,0,180.574,0,190.755c0,10.181,8.246,18.424,18.424,18.424h67.07v65.113h-67.07C8.246,274.292,0,282.538,0,292.722 C0,302.9,8.246,311.14,18.424,311.14h67.07v103.143c0,12.797,2.689,22.378,8.015,28.466c5.065,5.805,11.487,8.5,20.208,8.5 c8.414,0,14.786-2.707,20.07-8.523c5.411-5.958,8.148-15.533,8.148-28.442V311.14h115.308l62.399,95.683 c4.339,6.325,8.819,12.709,13.287,18.969c4.031,5.621,8.429,10.574,13.069,14.711c4.179,3.742,8.659,6.484,13.316,8.157 c4.794,1.726,10.397,2.601,16.615,2.601c16.875,0,34.158-5.166,34.158-43.479V311.14h67.743c10.179,0,18.43-8.252,18.43-18.43 C496.262,282.532,488.011,274.28,477.832,274.28z M355.054,209.173v65.106h-60.041l-43.021-65.106H355.054z M141.936,134.364 l24.76,37.956h-24.76V134.364z M141.936,274.28v-65.106h48.802l42.466,65.106H141.936z M355.054,365.153l-35.683-54.013h35.683 V365.153z" />{" "}
+              </svg>
+              <h1 style={{ color: "white", fontSize: "2.3em" }}>
+                {totalBalance?.toLocaleString()}
+              </h1>
+            </div>
+          </div>
+        </div>
+
+        <div className="dashboard-section-income-expenses-cx">
+          <div className="dashboard-section-one-income">
+            <span className="income-span">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="36px"
+                viewBox="0 -960 960 960"
+                width="39px"
+                fill="#000000"
+              >
+                <path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z" />
+              </svg>
+              <h5 className="txt-color">Income</h5>
+            </span>
+
+            <h3>
+              <svg
+                fill="#290a0a"
+                version="1.1"
+                id="Capa_1"
+                xmlns="http://www.w3.org/2000/svg"
+                width="25px"
+                height="20px"
                 viewBox="0 0 496.260 496.262"
-                // xml:space="preserve"
+                // className="naira-icon"
+                // style={{fill:'black'}}
               >
                 <g id="SVGRepo_bgCarrier" stroke-width="0" />
 
@@ -233,28 +265,40 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
                 />
 
                 <g id="SVGRepo_iconCarrier">
-                  {" "}
                   <g>
-                    {" "}
                     <path d="M477.832,274.28h-67.743v-65.106h67.743c10.179,0,18.43-8.243,18.43-18.424c0-10.182-8.251-18.43-18.43-18.43h-67.743 V81.982c0-13.187-2.606-22.866-7.743-28.762c-4.882-5.609-11.301-8.219-20.19-8.219c-8.482,0-14.659,2.592-19.447,8.166 c-5.077,5.902-7.654,15.599-7.654,28.821v90.343H227.627l-54.181-81.988c-4.637-7.317-8.997-14.171-13.231-20.75 c-3.812-5.925-7.53-10.749-11.042-14.351c-3.109-3.189-6.652-5.657-10.796-7.554c-3.91-1.785-8.881-2.681-14.762-2.681 c-7.501,0-14.31,2.055-20.83,6.277c-6.452,4.176-10.912,9.339-13.636,15.785c-2.391,6.126-3.656,15.513-3.656,27.63v77.626h-67.07 C8.246,172.326,0,180.574,0,190.755c0,10.181,8.246,18.424,18.424,18.424h67.07v65.113h-67.07C8.246,274.292,0,282.538,0,292.722 C0,302.9,8.246,311.14,18.424,311.14h67.07v103.143c0,12.797,2.689,22.378,8.015,28.466c5.065,5.805,11.487,8.5,20.208,8.5 c8.414,0,14.786-2.707,20.07-8.523c5.411-5.958,8.148-15.533,8.148-28.442V311.14h115.308l62.399,95.683 c4.339,6.325,8.819,12.709,13.287,18.969c4.031,5.621,8.429,10.574,13.069,14.711c4.179,3.742,8.659,6.484,13.316,8.157 c4.794,1.726,10.397,2.601,16.615,2.601c16.875,0,34.158-5.166,34.158-43.479V311.14h67.743c10.179,0,18.43-8.252,18.43-18.43 C496.262,282.532,488.011,274.28,477.832,274.28z M355.054,209.173v65.106h-60.041l-43.021-65.106H355.054z M141.936,134.364 l24.76,37.956h-24.76V134.364z M141.936,274.28v-65.106h48.802l42.466,65.106H141.936z M355.054,365.153l-35.683-54.013h35.683 V365.153z" />{" "}
-                  </g>{" "}
+                  </g>
                 </g>
               </svg>
-              {(totalIncome?.toLocaleString())}
+              {totalIncome?.toLocaleString()}
             </h3>
           </div>
-          <hr />
+
           <div className="dashboard-section-one-income">
-            <h5 style={{ color: "#e7e5e5" }}>Expenses</h5>
-            <h3 style={{ display: "flex", alignItems: "center",fontSize:'1.4em', }}>
+            <span className="expenses-span">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="36px"
+                viewBox="0 -960 960 960"
+                width="39px"
+                fill="#000000"
+              >
+                <path d="M446.67-160v-513l-240 240L160-480l320-320 320 320-46.67 47-240-240v513h-66.66Z" />
+              </svg>
+              <h5 className="txt-color">Expenses</h5>
+            </span>
+
+            <h3>
               <svg
                 fill="#ffffff"
                 version="1.1"
                 id="Capa_1"
                 xmlns="http://www.w3.org/2000/svg"
-                width="30px"
-                height="30px"
+                width="25px"
+                height="20px"
                 viewBox="0 0 496.262 496.262"
+                // className="naira-icon"
+                // style={{fill:'black'}}
               >
                 <path d="M477.832,274.28h-67.743v-65.106h67.743c10.179,0,18.43-8.243,18.43-18.424c0-10.182-8.251-18.43-18.43-18.43h-67.743 V81.982c0-13.187-2.606-22.866-7.743-28.762c-4.882-5.609-11.301-8.219-20.19-8.219c-8.482,0-14.659,2.592-19.447,8.166 c-5.077,5.902-7.654,15.599-7.654,28.821v90.343H227.627l-54.181-81.988c-4.637-7.317-8.997-14.171-13.231-20.75 c-3.812-5.925-7.53-10.749-11.042-14.351c-3.109-3.189-6.652-5.657-10.796-7.554c-3.91-1.785-8.881-2.681-14.762-2.681 c-7.501,0-14.31,2.055-20.83,6.277c-6.452,4.176-10.912,9.339-13.636,15.785c-2.391,6.126-3.656,15.513-3.656,27.63v77.626h-67.07 C8.246,172.326,0,180.574,0,190.755c0,10.181,8.246,18.424,18.424,18.424h67.07v65.113h-67.07C8.246,274.292,0,282.538,0,292.722 C0,302.9,8.246,311.14,18.424,311.14h67.07v103.143c0,12.797,2.689,22.378,8.015,28.466c5.065,5.805,11.487,8.5,20.208,8.5 c8.414,0,14.786-2.707,20.07-8.523c5.411-5.958,8.148-15.533,8.148-28.442V311.14h115.308l62.399,95.683 c4.339,6.325,8.819,12.709,13.287,18.969c4.031,5.621,8.429,10.574,13.069,14.711c4.179,3.742,8.659,6.484,13.316,8.157 c4.794,1.726,10.397,2.601,16.615,2.601c16.875,0,34.158-5.166,34.158-43.479V311.14h67.743c10.179,0,18.43-8.252,18.43-18.43 C496.262,282.532,488.011,274.28,477.832,274.28z M355.054,209.173v65.106h-60.041l-43.021-65.106H355.054z M141.936,134.364 l24.76,37.956h-24.76V134.364z M141.936,274.28v-65.106h48.802l42.466,65.106H141.936z M355.054,365.153l-35.683-54.013h35.683 V365.153z" />{" "}
               </svg>
@@ -265,43 +309,54 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
       </section>
 
       <section className="dashboard-section-two dashboard-income-cx">
-        <div
-          className="income-section-title"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            paddingRight: "10px",
-          }}
-        >
-          <h1>Recent Income</h1>
-          <NavLink
-            to="/ebcfinance/views/income"
-            onClick={() =>
-              setSelect({
-                dashboard: "",
-                income: "select",
-                expenses: "",
-                report: "",
-              })
-            }
+        <div className="income-section-title">
+          <span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="26px"
+              viewBox="0 -960 960 960"
+              width="29px"
+              fill="#000000"
+            >
+              <path d="M440-800v487L216-537l-56 57 320 320 320-320-56-57-224 224v-487h-80Z" />
+            </svg>
+          </span>
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              width: "90%",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+            }}
           >
-            View All
-          </NavLink>
+            <h1>Recent Income</h1>
+            <NavLink
+              to="/ebcfinance/views/income"
+              onClick={() =>
+                setSelect({
+                  dashboard: "",
+                  income: "select",
+                  expenses: "",
+                  report: "",
+                })
+              }
+            >
+              View All
+            </NavLink>
+          </div>
         </div>
 
         <div className="income-title">
-          {incomes.slice(0, 3).map((income, i) => (
+          {incomes?.slice(0, 3).map((income, i) => (
             <div
               className="show-income-cx"
-              style={{ borderBottom: `solid 2px ${income?.color}` }}
+              style={{ borderTop: `solid 4px ${income?.color}` }}
+              key={i}
             >
-              {/* <span
-                className="income-icon"
-                style={{ backgroundColor: `${income?.color}` }}
-              ></span> */}
-
               <div className="desc-cx">
-                <h4>{income.date}</h4>
+                <h4>{FormatedDate(income.date)}</h4>
                 <h3>{income.incomeSource}</h3>
               </div>
 
@@ -312,15 +367,20 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
                   id="Capa_1"
                   style={{ fill: "black" }}
                   xmlns="http://www.w3.org/2000/svg"
-                  width="25px"
-                  height="30px"
+                  width="17px"
+                  height="17px"
                   viewBox="0 0 496.262 496.262"
                 >
                   <path d="M477.832,274.28h-67.743v-65.106h67.743c10.179,0,18.43-8.243,18.43-18.424c0-10.182-8.251-18.43-18.43-18.43h-67.743 V81.982c0-13.187-2.606-22.866-7.743-28.762c-4.882-5.609-11.301-8.219-20.19-8.219c-8.482,0-14.659,2.592-19.447,8.166 c-5.077,5.902-7.654,15.599-7.654,28.821v90.343H227.627l-54.181-81.988c-4.637-7.317-8.997-14.171-13.231-20.75 c-3.812-5.925-7.53-10.749-11.042-14.351c-3.109-3.189-6.652-5.657-10.796-7.554c-3.91-1.785-8.881-2.681-14.762-2.681 c-7.501,0-14.31,2.055-20.83,6.277c-6.452,4.176-10.912,9.339-13.636,15.785c-2.391,6.126-3.656,15.513-3.656,27.63v77.626h-67.07 C8.246,172.326,0,180.574,0,190.755c0,10.181,8.246,18.424,18.424,18.424h67.07v65.113h-67.07C8.246,274.292,0,282.538,0,292.722 C0,302.9,8.246,311.14,18.424,311.14h67.07v103.143c0,12.797,2.689,22.378,8.015,28.466c5.065,5.805,11.487,8.5,20.208,8.5 c8.414,0,14.786-2.707,20.07-8.523c5.411-5.958,8.148-15.533,8.148-28.442V311.14h115.308l62.399,95.683 c4.339,6.325,8.819,12.709,13.287,18.969c4.031,5.621,8.429,10.574,13.069,14.711c4.179,3.742,8.659,6.484,13.316,8.157 c4.794,1.726,10.397,2.601,16.615,2.601c16.875,0,34.158-5.166,34.158-43.479V311.14h67.743c10.179,0,18.43-8.252,18.43-18.43 C496.262,282.532,488.011,274.28,477.832,274.28z M355.054,209.173v65.106h-60.041l-43.021-65.106H355.054z M141.936,134.364 l24.76,37.956h-24.76V134.364z M141.936,274.28v-65.106h48.802l42.466,65.106H141.936z M355.054,365.153l-35.683-54.013h35.683 V365.153z" />{" "}
                 </svg>
-                {/* <img src={naira} alt="naira" width="23px" height="30px" /> */}
-                <h1 style={{ display: "flex", alignItems: "center" }}>
-                  {(income.amount).toLocaleString()}
+                <h1
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    textAlign: "center",
+                  }}
+                >
+                  {income.amount.toLocaleString()}
                 </h1>
               </div>
             </div>
@@ -337,36 +397,58 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
             paddingRight: "10px",
           }}
         >
-          <h1>Recent Expenses</h1>
-          <NavLink
-            to="/ebcfinance/views/expenses"
-            onClick={() =>
-              setSelect({
-                dashboard: "",
-                income: "",
-                expenses: "select",
-                report: "",
-              })
-            }
+          <span className="expenses-title-span">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="26px"
+              viewBox="0 -960 960 960"
+              width="29px"
+              fill="#000000"
+            >
+              <path d="M446.67-160v-513l-240 240L160-480l320-320 320 320-46.67 47-240-240v513h-66.66Z" />
+            </svg>
+          </span>
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              width: "90%",
+              justifyContent: "space-between",
+              alignItems: "flex-end",
+            }}
           >
-            View All
-          </NavLink>
+            <h1>Recent Expenses</h1>
+            <NavLink
+              to="/ebcfinance/views/expenses"
+              onClick={() =>
+                setSelect({
+                  dashboard: "",
+                  income: "",
+                  expenses: "select",
+                  report: "",
+                })
+              }
+            >
+              View All
+            </NavLink>
+          </div>
         </div>
         <div className="income-title">
           {expenses.slice(0, 3).map((expense, i) => (
             <div
               className="show-income-cx"
-              style={{ borderBottom: `solid 2px ${expense?.color}` }}
+              style={{ borderTop: `solid 4px ${expense?.color}` }}
+              key={i}
             >
-              {/* <span
-                className="income-icon"
-                style={{ backgroundColor: `${expense?.color}` }}
-              ></span> */}
-
               <div className="desc-cx">
-                <h4>{expense.date}</h4>
-                <h3>{expense.expensesCategory}</h3>
-                <h4 styel={{ color: "gray" }}>{expense.desc}</h4>
+                <h4>{FormatedDate(expense.date)}</h4>
+                <div className="expenses-desc-cx">
+                  <h3>{expense.expensesCategory}</h3>
+                  <h5 styel={{ color: "gray" }}>
+                    {TruncateTex(expense.desc, 40)}
+                  </h5>
+                </div>
               </div>
 
               <div className="amount-cx">
@@ -376,15 +458,15 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
                   id="Capa_1"
                   style={{ fill: "black" }}
                   xmlns="http://www.w3.org/2000/svg"
-                  width="25px"
-                  height="30px"
+                  width="17px"
+                  height="17px"
                   viewBox="0 0 496.262 496.262"
                 >
                   <path d="M477.832,274.28h-67.743v-65.106h67.743c10.179,0,18.43-8.243,18.43-18.424c0-10.182-8.251-18.43-18.43-18.43h-67.743 V81.982c0-13.187-2.606-22.866-7.743-28.762c-4.882-5.609-11.301-8.219-20.19-8.219c-8.482,0-14.659,2.592-19.447,8.166 c-5.077,5.902-7.654,15.599-7.654,28.821v90.343H227.627l-54.181-81.988c-4.637-7.317-8.997-14.171-13.231-20.75 c-3.812-5.925-7.53-10.749-11.042-14.351c-3.109-3.189-6.652-5.657-10.796-7.554c-3.91-1.785-8.881-2.681-14.762-2.681 c-7.501,0-14.31,2.055-20.83,6.277c-6.452,4.176-10.912,9.339-13.636,15.785c-2.391,6.126-3.656,15.513-3.656,27.63v77.626h-67.07 C8.246,172.326,0,180.574,0,190.755c0,10.181,8.246,18.424,18.424,18.424h67.07v65.113h-67.07C8.246,274.292,0,282.538,0,292.722 C0,302.9,8.246,311.14,18.424,311.14h67.07v103.143c0,12.797,2.689,22.378,8.015,28.466c5.065,5.805,11.487,8.5,20.208,8.5 c8.414,0,14.786-2.707,20.07-8.523c5.411-5.958,8.148-15.533,8.148-28.442V311.14h115.308l62.399,95.683 c4.339,6.325,8.819,12.709,13.287,18.969c4.031,5.621,8.429,10.574,13.069,14.711c4.179,3.742,8.659,6.484,13.316,8.157 c4.794,1.726,10.397,2.601,16.615,2.601c16.875,0,34.158-5.166,34.158-43.479V311.14h67.743c10.179,0,18.43-8.252,18.43-18.43 C496.262,282.532,488.011,274.28,477.832,274.28z M355.054,209.173v65.106h-60.041l-43.021-65.106H355.054z M141.936,134.364 l24.76,37.956h-24.76V134.364z M141.936,274.28v-65.106h48.802l42.466,65.106H141.936z M355.054,365.153l-35.683-54.013h35.683 V365.153z" />{" "}
                 </svg>
                 {/* <img src={naira} alt="naira" width="23px" height="30px" /> */}
                 <h1 style={{ display: "flex", alignItems: "center" }}>
-                  {(expense.amount).toLocaleString()}
+                  {expense.amount.toLocaleString()}
                 </h1>
               </div>
             </div>

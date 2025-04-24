@@ -8,21 +8,24 @@
 .income-main-month-title-cx {
   display: flex;
   flex-direction: column;
-  gap: 2px;
 }
 
 .month-btn-cx {
   display: flex;
-  justify-content: space-around;
+  flex-direction: row;
+  gap: 20px;
+  justify-content: center;
   background-color: var(--Primary);
+  width: 70%;
 }
 
-.month-btn-cx button {
+.month-btn {
   font-size: 1.2em;
   border: none;
   background-color: transparent;
   color: #cecccc;
   padding: 15px 0;
+  height: 50px;
 }
 
 .income-main-title {
@@ -58,4 +61,26 @@
 .income-amount-cx {
   display: flex;
   flex-direction: column;
+}
+
+.income-filter-back-btn {
+  background-color: white;
+  height: 2px;
+  width: 4px;
+}
+
+.month-back-btn-cx {
+  display: flex;
+  align-items: center;
+  width: 10%;
+  min-width: 10%;
+}
+
+.month-back-btn-cx img {
+  height: 20px;
+  width: 20px;
+}
+
+.disable {
+  display: none;
 }/*# sourceMappingURL=incomestyles.css.map */
