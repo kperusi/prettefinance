@@ -2,55 +2,58 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-
   width: 100%;
+  background-color: #f0f1f2;
 }
 .income-main-month-title-cx {
   display: flex;
   flex-direction: column;
-  // gap: 2px;
-  // padding: 10px;
+
 }
 .month-btn-cx {
   display: flex;
   flex-direction: row;
- gap: 20px;
- 
+  gap: 20px;
+  transition: all 0.4s;
   justify-content: center;
-  // padding: 5px 10px;
-  background-color: var(--Primary);
-  // border: solid white;
-  width: 70%;
 
+  background-color: var(--Primary);
+
+  width: 70%;
 }
-.month-btn{
+.month-btn {
   font-size: 1.2em;
   border: none;
   background-color: transparent;
   color: #cecccc;
   padding: 15px 0;
   // border-bottom: solid white;
-  height:50px;
-  
+  height: 50px;
 }
 .income-main-title {
-  background-color: lightblue;
+  // background-color: lightblue;
   display: flex;
-  gap: 10px;
-  padding: 10px;
+  flex-direction: column;
+line-height: 1.5em;
+  padding: 5px 20px;
+
 }
 .income-main-content {
   display: flex;
   flex-direction: column;
   padding: 15px;
+  // border: solid;
+  gap: 10px;
 }
 .income-cx {
   display: flex;
-  // box-shadow: 0px 1px 4px 0px rgb(0, 0, 0,0.5);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   padding: 10px 0px;
   align-items: center;
+  background-color: white;
   // border: solid;
+
 }
 
 .income-desc-cx {
@@ -71,8 +74,7 @@
   height: 2px;
   width: 4px;
 }
-.month-btn{
-
+.month-btn {
 }
 .month-back-btn-cx {
   display: flex;

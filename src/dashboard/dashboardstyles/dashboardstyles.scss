@@ -98,6 +98,103 @@
   align-items: center;
 }
 
+.dashboard-analytic-cx {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1px 0px;
+  box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  margin: 10px;
+  border: 1px solid var(--Primary);
+  // width: 100%;
+}
+.dashboard-analytic-cx h1 {
+  // border: solid;
+  align-self: flex-start;
+}
+.analytic-month-cx {
+  display: flex;
+  flex-direction: row;
+
+  overflow-x: scroll;
+  gap: 20px;
+  padding: 5px 20px;
+  width: 345px;
+  cursor: pointer;
+  // background-color: rgb(236, 236, 234);
+  border-bottom: 1px solid gray;
+  // border-radius: 13px;
+}
+.analytic-month-cx::-webkit-scrollbar {
+  background-color: transparent;
+  background: transparent;
+  height: 0px;
+}
+.analytic-month {
+  border: none;
+  padding: 5px 50px;
+  background-color: transparent;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  // width: 100px;
+  // border: solid red;
+}
+
+.analytic-balance {
+  // padding: 0 20px;
+  line-height: 1.6em;
+}
+.analytic-balance h3{
+  background-color: var(--Primary);
+  color: white;
+  width: fit-content;
+  margin: 5px 0px;
+  padding: 0 5px;
+  border-radius: 5px;
+}
+.analytic-details {
+  // border: solid;
+  display: flex;
+  flex-direction: column;
+}
+
+.analytic-income-expenses-cx {
+  display: flex;
+  flex-direction: row;
+  gap: 50px;
+  // justify-content: space-between;
+  padding: 10px;
+}
+.analytic-btn-active {
+  color: var(--Primary);
+  // font-size: 1.4rem;
+  // border-bottom: 2px solid var(--Primary);
+  transition: all 0.3s ease-in-out;
+}
+
+
+.analytic-btn-active::after{
+  width: 100%;
+  background-color: var(--Primary);
+  display: block;
+  height: 3px;
+  position: relative;
+  top: 10px;
+  content: '';
+  border-radius: 2px;
+  transform: scale(1.2);
+  transition: all 0.5s ease-in-out;
+  
+  
+}
+
+
+.no-active {
+  color: grey;
+}
+
 .dashboard-section-income-expenses-cx {
   display: flex;
   gap: 5px;
@@ -139,7 +236,8 @@
 .txt-color {
   color: white;
 }
-.income-section-title,.expenses-section-title {
+.income-section-title,
+.expenses-section-title {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
@@ -159,7 +257,7 @@
   background-color: rgb(12, 240, 141);
   border-radius: 50%;
 }
-.expenses-section-title span{
+.expenses-section-title span {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -169,8 +267,8 @@
   background-color: rgb(240, 77, 12);
   border-radius: 50%;
 }
-.expenses-section-title svg{
-  fill:white;
+.expenses-section-title svg {
+  fill: white;
 }
 .dashboard-section-two {
   display: flex;
@@ -216,7 +314,6 @@
   font-size: 0.805rem;
   color: rgb(85, 84, 84);
   font-weight: 100;
- 
 }
 .amount-cx {
   display: flex;
@@ -226,7 +323,7 @@
   gap: 2px;
   // border: solid;
 }
-.amount-cx h1{
+.amount-cx h1 {
   text-align: center;
 }
 .expenses-desc-cx {
@@ -238,8 +335,7 @@
 h5 {
   line-height: 1.1rem;
 }
-.expenses-desc-cx h5{
-
+.expenses-desc-cx h5 {
 }
 
 .dashboard-expenses-cx {
@@ -289,4 +385,7 @@ h5 {
   border-bottom-left-radius: 7px;
   margin-left: 5px;
   margin-right: 5px;
+}
+.red-color {
+  color: red;
 }

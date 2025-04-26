@@ -5,6 +5,8 @@ import backbtn from "../images/arrow_back_ios_24dp_FFFFFF_FILL0_wght400_GRAD0_op
 import forwardbtn from '../images/arrow_forward_ios_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg'
 import { Splitter } from "../Splitter";
 import { NextPage } from "../NextPages";
+import { ListOfMonths } from "../ListOfMonths";
+import { FormatedDate } from "../FormatedDate";
 export default function Expenses() {
   const [expenses, setExpenses] = useState([]);
   const [totalExpenses, setTotalExpenses] = useState();
@@ -12,20 +14,7 @@ export default function Expenses() {
   const [mouseEnter, setMouseEnter] = useState("");
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
-  const monthsArrAy = [
-    "All",
-    "January",
-    "February",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
+  const monthsArrAy = ListOfMonths(new Date().getFullYear());
   useEffect(() => {
     const storedExpense = JSON.parse(localStorage.getItem("expenses")) || [];
     const storedUserDetails =
@@ -82,31 +71,54 @@ export default function Expenses() {
         </section>
       )}
       <section className="income-main-month-title-cx">
-        <div className="month-btn-cx">
+      <h1
+          style={{
+            backgroundColor: "var(--Primary)",
+            color: "white",
+            textAlign: "center",
+            padding: "5px 0px",
+          }}
+        >
+          Expenses
+        </h1>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            backgroundColor: "var(--Primary)",
+            justifyContent: "space-between",
+            padding: "0px 10px",
+            marginTop: "-1px",
+          }}
+        >
           <span
-            className={`month-back-btn-cx ${
-              currentPage <= 1 ? " disable" : ""
-            }`}
+            className={`month-back-btn-cx`}
             aria-disabled={currentPage <= 1}
-            onClick={() => setCurrentPage(currentPage - 1)}
           >
-            <img src={backbtn} />
+            <img
+              src={backbtn}
+              className={` ${currentPage <= 1 ? " disable" : ""}`}
+              onClick={() => setCurrentPage(currentPage - 1)}
+            />
           </span>
-          {monthsArrAy.slice(0, 4).map((month, i) => (
-            <button key={month} type="button" className="month-btn">
-              {month}
-            </button>
-          ))}
-
-          <span
-            className={`month-back-btn-cx ${
-              currentPage >= numberOfPages ? " disable" : ""
-            }`}
-            onClick={() => setCurrentPage(currentPage + 1)}
-          >
-            <img src={forwardbtn} />
+          {/* ************************************************************** */}
+          <div className="month-btn-cx">
+            {monthsArrAy.slice(startIndex, lastIndex).map((month, i) => (
+              <button type="button" className="month-btn" key={month}>
+                {month}
+              </button>
+            ))}
+          </div>
+          {/* ************************************************************************ */}
+          <span className="month-back-btn-cx ">
+            <img
+              src={forwardbtn}
+              className={` ${currentPage >= numberOfPages ? " disable" : ""}`}
+              onClick={() => setCurrentPage(currentPage + 1)}
+            />
           </span>
         </div>
+
         <div className="income-main-title">
           <h3>Total Expenses:</h3>
           <h3 style={{ display: "flex", alignItems: "center" }}>
@@ -134,7 +146,7 @@ export default function Expenses() {
               navigate(`/ebcfinance/expense/ ${expense.id}`);
             }}
             className="income-cx"
-            style={{ borderBottom: `solid ${expense?.color}` }}
+            style={{ borderTop: `solid ${expense?.color}` }}
           >
             <span
               className="income-main-icon"
@@ -160,7 +172,7 @@ export default function Expenses() {
                       borderRadius: "5px",
                     }}
                   >
-                    {expense?.date}
+                    {FormatedDate(expense?.date)}
                   </p>
                 </div>
 
@@ -168,7 +180,7 @@ export default function Expenses() {
                   style={{
                     display: "flex",
                     gap: "2px",
-                    fontSize: "2em",
+                    fontSize: "1.4rem",
                     textAlign: "center",
                     alignItems: "center",
                     marginTop: "-5px",
@@ -191,10 +203,10 @@ export default function Expenses() {
 
               <div>
                 <h3 style={{ color: "#a9a9a9" }}>Given to:</h3>
-                <h2>{expense.expensesCategory}</h2>
+                <h2 style={{fontSize:'1.2rem'}}>{expense.expensesCategory}</h2>
               </div>
               <div>
-                <p style={{ fontSize: "1.2em" }}>{expense.desc}</p>
+                <p style={{ fontSize: "1rem" }}>{expense.desc}</p>
               </div>
             </div>
           </div>
