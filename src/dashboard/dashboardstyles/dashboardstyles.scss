@@ -146,6 +146,7 @@
   // padding: 0 20px;
   line-height: 1.6em;
 }
+
 .analytic-balance h3{
   background-color: var(--Primary);
   color: white;
@@ -153,6 +154,11 @@
   margin: 5px 0px;
   padding: 0 5px;
   border-radius: 5px;
+}
+.analytic-balance h2{
+  text-align: center;
+  font-size: 1.3rem;
+  
 }
 .analytic-details {
   // border: solid;
