@@ -38,6 +38,10 @@ svg {
   fill: darkblue;
 }
 
+.navlink:active {
+  background-color: transparent;
+}
+
 .select {
   width: 80px;
   background-color: rgb(4, 4, 63);

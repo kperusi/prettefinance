@@ -9,8 +9,13 @@ import forwardbtn from "../images/arrow_forward_ios_24dp_FFFFFF_FILL0_wght400_GR
 import { NextPage } from "../NextPages";
 import { ListOfMonths } from "../ListOfMonths";
 import { useDispatch, useSelector } from "react-redux";
-import { handleSelectedMonth } from "../store/storeSlice";
+import {
+  handleSelectedMonth,
+  handleShowFilterOption,
+} from "../store/storeSlice";
 import { FormatedDate } from "../FormatedDate";
+import Filter from "../Filter/Filter";
+import Search from "../Filter/Search";
 export default function Income() {
   const [incomes, setIncomes] = useState([]);
   const [totalIncome, setTotalIncome] = useState();
@@ -19,11 +24,16 @@ export default function Income() {
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
   const monthsArrAy = ListOfMonths(new Date().getFullYear());
-  const dispatch = useDispatch()
-  const selectedMonth = useSelector((state) => state.slice.selectedMonth);
+  const dispatch = useDispatch();
+  const [displayedTotalIncome, setDisplayedTotalIncome] = useState();
+  const selectedMonth = useSelector((state) => state.sliceData.selectedMonth);
+  const [emptyFilter, setEmptyFilter] = useState(false);
+  const filteredIncome = useSelector(
+    (state) => state.sliceData.filteredIncome_Expenses
+  );
 
-
-
+  const [displayedIncome, setDisplayedIncome] = useState([]);
+  const catArray = ["Main Offfering", "Rent"];
 
   useEffect(() => {
     const storedIncome = JSON.parse(localStorage.getItem("incomes")) || [];
@@ -38,8 +48,28 @@ export default function Income() {
       0
     );
     setTotalIncome(totalIncome);
-    // setTotalExpenses(totalExpenses);
+
+    return () => {
+      dispatch(handleShowFilterOption("close"));
+      console.log("onmounted");
+    };
   }, []);
+
+  useEffect(() => {
+    if (filteredIncome.length > 0) {
+      const totalFilteredIncome = filteredIncome.reduce(
+        (sum, each) => sum + (each.amount || 0),
+        0
+      );
+      setDisplayedTotalIncome(totalFilteredIncome);
+      setDisplayedIncome(filteredIncome);
+      setEmptyFilter(true);
+    } else {
+      setDisplayedIncome(incomes);
+      setDisplayedTotalIncome(totalIncome);
+    }
+  }, [filteredIncome, incomes, totalIncome]);
+
   const handleMouseEnter = () => {
     if (mouseEnter === "") {
       setMouseEnter("mouseEnter");
@@ -47,13 +77,6 @@ export default function Income() {
       setMouseEnter("");
     }
   };
-  console.log(selectedMonth);
-
-  const { lastIndex, startIndex, numberOfPages } = NextPage(
-    monthsArrAy,
-    3,
-    currentPage
-  );
 
   return (
     <main className="income-main">
@@ -62,7 +85,6 @@ export default function Income() {
           className={`dashboard-add-transaction-cx ${mouseEnter}`}
           onMouseEnter={handleMouseEnter}
         >
-        
           <NavLink to="/ebcfinance/addtransactions" className="navlink">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -78,56 +100,49 @@ export default function Income() {
         </section>
       )}
       <section className="income-main-month-title-cx">
-        <h1
-          style={{
-            backgroundColor: "var(--Primary)",
-            color: "white",
-            textAlign: "center",
-            padding: "5px 0px",
-          }}
-        >
-          Income
-        </h1>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            backgroundColor: "var(--Primary)",
-            justifyContent: "space-between",
-            padding: "0px 10px",
-            marginTop: "-1px",
-          }}
-        >
-          <span
-            className={`month-back-btn-cx`}
-            aria-disabled={currentPage <= 1}
-          >
-            <img
-              src={backbtn}
-              className={` ${currentPage <= 1 ? " disable" : ""}`}
-              onClick={() => setCurrentPage(currentPage - 1)}
-            />
+        <div className="heading-cx">
+          <span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="white"
+            >
+              <path d="M360-240 120-480l240-240 56 56-144 144h568v80H272l144 144-56 56Z" />
+            </svg>
           </span>
-          {/* ************************************************************** */}
-          <div className="month-btn-cx">
-            {monthsArrAy.slice(startIndex, lastIndex).map((month, i) => (
-              <button type="button" className="month-btn" key={month} onClick={()=>dispatch(handleSelectedMonth(month))}>
-                {month}
-              </button>
-            ))}
-          </div>
-          {/* ************************************************************************ */}
-          <span className="month-back-btn-cx ">
-            <img
-              src={forwardbtn}
-              className={` ${currentPage >= numberOfPages ? " disable" : ""}`}
-              onClick={() => setCurrentPage(currentPage + 1)}
-            />
+          <p> Income</p>
+
+          <span className="moon-cx">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              // fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="2.5"
+              color="blue"
+              height="30px"
+              // viewBox="0 -960 960 960"
+              width="30px"
+             
+              class="moon"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                strokeWidth='1.2'
+                d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"
+              />
+            </svg>
           </span>
+        </div>
+        <div className="income-search-filter-cx">
+          <Search />
+          <Filter name="income" catArray={catArray} desc="Source" />
         </div>
 
         <div className="income-main-title">
-          <h3>Total Income:</h3>
+          <p>Total Income:</p>
           <h2 style={{ display: "flex", alignItems: "center" }}>
             <svg
               fill="#ffffff"
@@ -145,7 +160,7 @@ export default function Income() {
         </div>
       </section>
       <section className="income-main-content">
-        {incomes.map((income, i) => (
+        {displayedIncome.map((income, i) => (
           <div
             key={income.id}
             onClick={() => {
@@ -170,11 +185,11 @@ export default function Income() {
                     paddingRight: "10px",
                   }}
                 >
-                  <h3 style={{ color: "#cecccc" }}>Amount</h3>
+                  <p style={{ color: "#cecccc" }}>Amount</p>
                   <p
                     style={{
-                      color: `${income?.color} `,
-                      padding: "5px",
+                      // color: `${income?.color} `,
+                      padding: "2px",
                       borderRadius: "5px",
                     }}
                   >
@@ -208,43 +223,16 @@ export default function Income() {
               </div>
 
               <div>
-                {/* <h4 style={{ color: "lightgrey" }}>Source:</h4> */}
-                <h2 style={{  fontSize: "1.2rem",}}>{income.incomeSource}</h2>
+                <p
+                // style={{ fontSize: "1.2rem" }}
+                >
+                  {income.incomeSource}
+                </p>
               </div>
             </div>
           </div>
         ))}
       </section>
-
-      {/* <section className="income-main-content">
-        {incomes.map((income, i) => (
-          <div
-            key={income.id}
-            onClick={() => {
-              navigate(`/ebcfinance/income/ ${income.id}`);
-            }}
-            className="income-cx"
-            style={{ borderBottom: `solid 2px ${income?.color}` }}
-          >
-            <span
-              className="income-main-icon"
-              style={{ backgroundColor: `${income?.color}` }}
-            ></span>
-
-            <div className="desc-cx">
-              <h4>{income.date}</h4>
-              <h3>{income.incomeSource}</h3>
-            </div>
-
-            <div className="amount-cx">
-              <img src={naira} alt="naira" width="23px" height="30px" />
-              <h1 style={{ display: "flex", alignItems: "center" }}>
-                {income.amount}
-              </h1>
-            </div>
-          </div>
-        ))}
-      </section> */}
     </main>
   );
 }

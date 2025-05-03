@@ -2,64 +2,38 @@ import React, { useEffect, useState } from "react";
 import "./navbarstyles/navbaarstyles.css";
 // import { useSelector, useDispatch } from "react-redux";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { handleShowFilterOption } from "../store/storeSlice";
 
-function Navbar({setSelect,select,handleSelected}) {
-  const params = useParams()
-  // const toggle = useSelector((state) => state.data.toggle);
-  // const themeMode = useSelector((state) => state.data.themeMode);
-  // const dispatch = useDispatch();
+function Navbar({ setSelect, select, handleSelected }) {
+  const params = useParams();
+
   const navigate = useNavigate();
-  // console.log(window.location.pathname);
-  // const [select, setSelect] = useState({
-  //   dashboard: "",
-  //   income: "",
-  //   expenses: "",
-  //   report: "",
-  // });
+  const dispatch = useDispatch();
 
-  // const handleSelected = (name) => {
-  //   if (name === "dashboard") {
-  //     setSelect({ dashboard: "select", income: "", expenses: "", report: "" });
-  //   }
-
-  //   if (name === "income") {
-  //     setSelect({ dashboard: "", income: "select", expenses: "", report: "" });
-  //   }
-
-  //   if (name === "expenses") {
-  //     setSelect({ dashboard: "", income: "", expenses: "select", report: "" });
-  //   }
-
-  //   if (name === "report") {
-  //     setSelect({ dashboard: "", income: "", expenses: "", report: "select" });
-  //   }
-  // };
-
-  // console.log(select)
-
-  useEffect(()=>{
+  useEffect(() => {
     setSelect({ dashboard: "select", income: "", expenses: "", report: "" });
- if(window.location.pathname.includes('income')){
-  setSelect({ dashboard: "", income: "select", expenses: "", report: "" });
-
- }
- if(window.location.pathname.includes('expenses')){
-  setSelect({ dashboard: "", income: "", expenses: "select", report: "" });
-
- }
-  },[])
+    if (window.location.pathname.includes("income")) {
+      setSelect({ dashboard: "", income: "select", expenses: "", report: "" });
+    }
+    if (window.location.pathname.includes("expenses")) {
+      setSelect({ dashboard: "", income: "", expenses: "select", report: "" });
+    }
+  }, []);
 
   return (
-    <main className="mainnav">
+    <main className="mainnav" onClick={()=>{
+      dispatch(handleShowFilterOption('close'))
+      
+    }}>
       <div
         className={`navbar-item-cx ${select.dashboard}`}
-        onClick={() => setSelect({ dashboard: "select", income: "", expenses: ""})}
-      >
-        <NavLink
-          to="/ebcfinance/views"
-          className={`navlink `}
+        onClick={() => {
          
-        >
+          setSelect({ dashboard: "select", income: "", expenses: "" });
+        }}
+      >
+        <NavLink to="/ebcfinance/views" className={`navlink `}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="40px"
@@ -75,7 +49,14 @@ function Navbar({setSelect,select,handleSelected}) {
 
       <div
         className={`navbar-item-cx ${select.income}`}
-        onClick={() => setSelect({dashboard:'', income:'select',expenses:'',report:''})}
+        onClick={() =>
+          setSelect({
+            dashboard: "",
+            income: "select",
+            expenses: "",
+            report: "",
+          })
+        }
       >
         <NavLink to="/ebcfinance/views/income" className="navlink">
           <svg
@@ -91,8 +72,17 @@ function Navbar({setSelect,select,handleSelected}) {
         </NavLink>
       </div>
 
-      <div      className={`navbar-item-cx ${select.expenses}`}
-        onClick={() => setSelect({dashboard:'', income:'',expenses:'select',report:''})}>
+      <div
+        className={`navbar-item-cx ${select.expenses}`}
+        onClick={() =>
+          setSelect({
+            dashboard: "",
+            income: "",
+            expenses: "select",
+            report: "",
+          })
+        }
+      >
         <NavLink to="expenses" className="navlink">
           <svg
             xmlns="http://www.w3.org/2000/svg"

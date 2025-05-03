@@ -1,0 +1,107 @@
+.option-main {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  width: 80%;
+  border-radius: 10px;
+  height: 100%;
+  padding: 20px;
+  transition: all 3ms;
+}
+.option-close-btn {
+  align-self: flex-end;
+  border: none;
+  border-radius: 50%;
+  padding: 7px;
+  width: 40px;
+  height: 40px;
+}
+li {
+  list-style: none;
+  padding: 3px 10px;
+  border-radius: 5px;
+}
+.option-no-active {
+  color: black;
+}
+.option-active {
+  background-color: var(--Primary);
+  color: white;
+  width: fit-content;
+}
+
+.months-cx ul{
+  padding: 0 10px;
+}
+.months-cx h3{
+  background-color: rgb(208, 208, 208);
+  padding: 0 5px;
+}
+.months-cx form {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+.months-cx span:hover {
+  color: var(--Primary);
+}
+.option-cat-cx{
+  overflow-y: scroll;
+  /* border: solid; */
+  height: 40vh;
+}
+.option-cat-list{
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: center;
+
+}
+.month-input-label-cx{
+  display: flex;
+  border-radius: 10px;
+  padding: 1px 5px;
+  /* border: solid; */
+ 
+}
+label{
+  font-size: 1rem;
+}
+.option-cat-list input{
+  width: 10px;
+  
+}
+.option-cat-list input:checked{
+
+  /* opacity: 0; */
+}
+
+.apply-filter-btn-cx {
+  display: flex;
+  padding: 10px;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 10px;
+}
+.apply-filter-btn-cx button {
+  padding: 10px;
+  border-radius: 10px;
+}
+.apply-filter-btn-cx :nth-child(1) {
+  border: 1px solid rgb(204, 203, 203);
+  background-color: transparent;
+
+}
+.apply-filter-btn-cx :nth-child(2) {
+  border:none;
+  background-color: var(--Primary);
+  color: white;
+}
+.filter-list-cx{
+  display: flex;
+  gap: 5px;
+}
+.filter-list-cx span{
+  border: solid 1px gray;
+background-color: rgba(0, 255, 255, 0.3);
+}

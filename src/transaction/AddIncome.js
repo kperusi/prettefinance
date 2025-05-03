@@ -224,8 +224,6 @@ function AddIncome() {
               <h1>
                 <svg
                   fill="#ffffff"
-                  version="1.1"
-                  id="Capa_1"
                   style={{ fill: "white" }}
                   xmlns="http://www.w3.org/2000/svg"
                   width="30px"

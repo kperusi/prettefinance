@@ -3,7 +3,11 @@
   flex-direction: column;
   gap: 15px;
   width: 100%;
-  background-color: #f0f1f2;
+  background-color: rgba(167, 237, 255, 0.2392156863);
+}
+
+.expense-main {
+  background-color: rgba(167, 237, 255, 0.2392156863);
 }
 
 .income-main-month-title-cx {
@@ -17,7 +21,6 @@
   gap: 20px;
   transition: all 0.4s;
   justify-content: center;
-  background-color: var(--Primary);
   width: 70%;
 }
 
@@ -25,7 +28,6 @@
   font-size: 1.2em;
   border: none;
   background-color: transparent;
-  color: #cecccc;
   padding: 15px 0;
   height: 50px;
 }
@@ -34,13 +36,30 @@
   display: flex;
   flex-direction: column;
   line-height: 1.5em;
-  padding: 5px 20px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin: 15px 15px 0px 15px;
+}
+
+.heading-cx {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+.moon-cx {
+  display: flex;
+}
+
+.moon {
+  fill: rgb(139, 139, 139);
 }
 
 .income-main-content {
   display: flex;
   flex-direction: column;
-  padding: 15px;
+  padding: 15px 15px 65px 15px;
   gap: 10px;
 }
 
@@ -88,4 +107,14 @@
 
 .disable {
   display: none;
+}
+
+.income-search-filter-cx {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  background-color: rgba(117, 228, 248, 0.2470588235);
+  border-radius: 5px;
+  margin: 0 11px;
 }/*# sourceMappingURL=incomestyles.css.map */

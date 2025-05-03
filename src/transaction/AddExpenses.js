@@ -50,19 +50,15 @@ function AddExpenses() {
     return values
       .replace(/\W/g, "") // Remove non-digit characters
       .replace(/\B(?=(\d{3})+(?!\d))/g, " "); // Add spaces every 3 digits
-
-    
   };
- 
 
   const handleChange = (e) => {
     // setForm({ ...form, [e.target.name]: e.target.value });
 
-
     if (e.target.name === "amount") {
       const newValue = e.target.value.replace(/[^0-9]/g, "");
-      // setFormartedNumber(formatNumber(newValue));
-      setForm({ ...form, amount: formatNumber(newValue)});
+
+      setForm({ ...form, amount: formatNumber(newValue) });
       console.log("changing number");
     }
 
@@ -70,9 +66,6 @@ function AddExpenses() {
       setForm({ ...form, [e.target.name]: e.target.value });
       console.log("changing", e.target.name);
     }
-
-
-
 
     if (e.target.name === "MOD") {
       setTypeErrors("");
@@ -100,13 +93,11 @@ function AddExpenses() {
         }),
       });
     }
-
-
   };
 
   useEffect(() => {
     set_Date(new Date(Date.now()).toISOString().split("T")[0]);
-    // setColor("#" + Math.floor(Math.random() * 16777215).toString(16));
+
     const storedUser =
       JSON.parse(localStorage.getItem("ebcfinance-user")) || null;
 
@@ -149,35 +140,31 @@ function AddExpenses() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-
-    console.log(form)
+    console.log(form);
     const updatedForm = {
       ...form,
     };
 
-  
-
     if (form.amount === "") {
       setAmountErrors("Please enter a valid amount");
-      return
+      return;
     }
     if (form.MOD === "") {
       setTypeErrors("Please enter a valid MOF");
-      return
+      return;
     }
     if (form.desc === "") {
       setDescErrors("Please enter a valid description");
-      return
+      return;
     }
     if (form.expensesCategory === "") {
       setCategoryErrors("Please select a department");
-      return
+      return;
     }
     if (form.givenBy === "") {
       setGivenByError("Please enter a giver name");
-      return
+      return;
     }
-   
 
     if (!user) {
       navigate("/ebcfinance-login");
@@ -185,7 +172,7 @@ function AddExpenses() {
       setLoading(true);
       console.log("updating");
       await updateDoc(doc(db, "Expenses", id.trim()), {
-        amount: parseInt((form.amount).split(' ').join('')),
+        amount: parseInt(form.amount.split(" ").join("")),
         date: form.date,
         MOD: form.MOD,
         desc: form.desc,
@@ -204,7 +191,7 @@ function AddExpenses() {
         createdAt: Timestamp.now().toDate(),
         createdBy: user?.displayName,
         userId: user?.uid,
-        amount: parseInt((form.amount).split(' ').join('')),
+        amount: parseInt(form.amount.split(" ").join("")),
         date: form.date,
         desc: form.desc,
         MOD: form.MOD,
@@ -227,7 +214,9 @@ function AddExpenses() {
       givenBy: "",
       // color: "",
       MOD: "",
-      month: new Date(Date.now()).toLocaleDateString("en-US", { month: "long" }),
+      month: new Date(Date.now()).toLocaleDateString("en-US", {
+        month: "long",
+      }),
     });
   };
 
@@ -253,7 +242,6 @@ function AddExpenses() {
       setError(error);
     }
   };
-
 
   return (
     <main className="addexpenses">
@@ -373,9 +361,7 @@ function AddExpenses() {
               value={form.expensesCategory}
               onChange={(e) => handleChange(e)}
             >
-              <option className="option">
-                Please Select a Department
-              </option>
+              <option className="option">Please Select a Department</option>
               <optgroup label="Department">
                 <option className="option" value="Building Committee" selected>
                   Building Committee
@@ -429,7 +415,7 @@ function AddExpenses() {
                   Allocation
                 </option>
                 <option className="option" value="Cooperative Payment">
-                 Cooperative Payment
+                  Cooperative Payment
                 </option>
               </optgroup>
               <optgroup label="Dues">
@@ -444,8 +430,8 @@ function AddExpenses() {
                 </option>
               </optgroup>
               <option className="option" value="Others">
-                 Others
-                </option>
+                Others
+              </option>
             </select>
             <p className="error">{categoryErrors}</p>
           </div>

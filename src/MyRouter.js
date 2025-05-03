@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import Home from "./homepage/Home";
@@ -15,14 +15,16 @@ import AddIncome from "./transaction/AddIncome";
 import AddExpenses from "./transaction/AddExpenses";
 import SingleIncome from "./singleincome/SingleIncome";
 import Report from "./report/Report";
+import { useDispatch } from "react-redux";
+import { addExpenses } from "./store/storeSlice";
 export default function MyRouter() {
-
- const [select, setSelect] = useState({
+  const [select, setSelect] = useState({
     dashboard: "",
     income: "",
     expenses: "",
     report: "",
   });
+  const dispatch = useDispatch();
 
   const handleSelected = (name) => {
     if (name === "dashboard") {
@@ -42,28 +44,46 @@ export default function MyRouter() {
     }
   };
 
-
-  useEffect(()=>{
+  useEffect(() => {
     setSelect({ dashboard: "select", income: "", expenses: "", report: "" });
- if(window.location.pathname.includes('income')){
-  setSelect({ dashboard: "", income: "select", expenses: "", report: "" });
+    if (window.location.pathname.includes("income")) {
+      setSelect({ dashboard: "", income: "select", expenses: "", report: "" });
+    }
+    if (window.location.pathname.includes("expenses")) {
+      setSelect({ dashboard: "", income: "", expenses: "select", report: "" });
+    }
+  }, []);
+  useEffect(() => {
+    dispatch(addExpenses(JSON.parse(localStorage.getItem("expenses"))));
+  }, []);
 
- }
- if(window.location.pathname.includes('expenses')){
-  setSelect({ dashboard: "", income: "", expenses: "select", report: "" });
-
- }
-  },[])
-
-// console.log(select)
+  // console.log(select)
   return (
     <div className="">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/ebcfinance-register" element={<Register />} />
         <Route path="/ebcfinance-login" element={<Login />} />
-        <Route path="/ebcfinance/views" element={<Page handleSelected={handleSelected} setSelect={setSelect} select={select} />}>
-          <Route index element={<Dashboard handleSelected={handleSelected} select={select} setSelect={setSelect} />} />
+        <Route
+          path="/ebcfinance/views"
+          element={
+            <Page
+              handleSelected={handleSelected}
+              setSelect={setSelect}
+              select={select}
+            />
+          }
+        >
+          <Route
+            index
+            element={
+              <Dashboard
+                handleSelected={handleSelected}
+                select={select}
+                setSelect={setSelect}
+              />
+            }
+          />
           <Route path="income" element={<Income />} />
           <Route path="expenses" element={<Expenses />} />
         </Route>
@@ -75,11 +95,14 @@ export default function MyRouter() {
           <Route path="addincome" element={<AddIncome />} />
           <Route path="addexpenses" element={<AddExpenses />} />
         </Route>
-        <Route path='/ebcfinance/income/:id' element={<SingleIncome/>}/>
-        <Route path='/ebcfinance/editingincome/:id' element={<AddIncome/>}/>
-        <Route path='/ebcfinance/expense/:id' element={<SingleIncome/>}/>
-        <Route path='/ebcfinance/editingexpense/:id' element={<AddExpenses/>}/>
-        <Route path='/ebcfinance/generatereport' element={<Report/>}/>
+        <Route path="/ebcfinance/income/:id" element={<SingleIncome />} />
+        <Route path="/ebcfinance/editingincome/:id" element={<AddIncome />} />
+        <Route path="/ebcfinance/expense/:id" element={<SingleIncome />} />
+        <Route
+          path="/ebcfinance/editingexpense/:id"
+          element={<AddExpenses />}
+        />
+        <Route path="/ebcfinance/generatereport" element={<Report />} />
       </Routes>
     </div>
   );
