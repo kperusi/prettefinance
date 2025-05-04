@@ -23,7 +23,7 @@ export default function Expenses() {
   const dispatch = useDispatch();
   const [displayedExpenses, setDisplayedExpenses] = useState([]);
 
-  const [displayedTotalExpenses, setDisplayedTotalExpenses] = useState();
+  const [displayedTotalExpenses, setDisplayedTotalExpenses] = useState(0);
   const selectedMonth = useSelector((state) => state.sliceData.selectedMonth);
   const filteredExpenses = useSelector(
     (state) => state.sliceData.filteredIncome_Expenses
@@ -59,19 +59,41 @@ export default function Expenses() {
 
     setLoginUserDetail(storedUserDetails);
     // Update state with retrieved values
+
+
     setExpenses(storedExpense);
 
-    const totalExpenses = storedExpense.reduce(
+    const total_Expenses = storedExpense.reduce(
       (sum, each) => sum + (each?.amount || 0),
       0
     );
-    setTotalExpenses(totalExpenses);
-   
+    setTotalExpenses(total_Expenses);
 
-    return () => {
-      dispatch(handleShowFilterOption("close"));
-    };
+    // return () => {
+    //   dispatch(handleShowFilterOption("close"));
+    // };
   }, []);
+  useEffect(() => {
+    const storedExpense = JSON.parse(localStorage.getItem("expenses")) || [];
+    const total_Expenses = storedExpense.reduce(
+      (sum, each) => sum + (each?.amount || 0),
+      0
+    );
+    if (filteredExpenses.length <= 0) {
+      setDisplayedExpenses(expenses);
+      setDisplayedTotalExpenses(total_Expenses);
+    }
+
+    if (filteredExpenses.length > 0) {
+      const totalFilteredExpenses = filteredExpenses.reduce(
+        (sum, each) => sum + (each.amount || 0),
+        0
+      );
+      setDisplayedTotalExpenses(totalFilteredExpenses);
+      setDisplayedExpenses(filteredExpenses);
+    }
+  }, [filteredExpenses, expenses, totalExpenses]);
+
 
   const handleMouseEnter = () => {
     if (mouseEnter === "") {
@@ -81,22 +103,9 @@ export default function Expenses() {
     }
   };
 
-  useEffect(() => {
-    if (filteredExpenses.length > 0) {
-      const totalFilteredExpenses = filteredExpenses.reduce(
-        (sum, each) => sum + (each.amount || 0),
-        0
-      );
-      setDisplayedTotalExpenses(totalFilteredExpenses)
-      setDisplayedExpenses(filteredExpenses);
-
-    } else {
-      setDisplayedExpenses(expenses);
-      setDisplayedTotalExpenses(totalExpenses)
-    }
-  }, [filteredExpenses, expenses,totalExpenses]);
-
-  console.log(displayedTotalExpenses)
+  
+  console.log(displayedTotalExpenses);
+  console.log(totalExpenses);
   return (
     <main className="expense-main">
       {loginUserDetail?.role === "admin" && (
@@ -120,7 +129,7 @@ export default function Expenses() {
         </section>
       )}
       <section className="income-main-month-title-cx">
-      <div className="heading-cx">
+        <div className="heading-cx">
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -144,13 +153,12 @@ export default function Expenses() {
               height="30px"
               // viewBox="0 -960 960 960"
               width="30px"
-             
               class="moon"
             >
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
-                strokeWidth='1.2'
+                strokeWidth="1.2"
                 d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z"
               />
             </svg>

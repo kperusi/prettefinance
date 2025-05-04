@@ -56,6 +56,11 @@ export default function Income() {
   }, []);
 
   useEffect(() => {
+    const storedIncome = JSON.parse(localStorage.getItem("incomes")) || [];
+    const totalIncome = storedIncome.reduce(
+      (sum, each) => sum + (each?.amount || 0),
+      0
+    );
     if (filteredIncome.length > 0) {
       const totalFilteredIncome = filteredIncome.reduce(
         (sum, each) => sum + (each.amount || 0),
@@ -77,6 +82,7 @@ export default function Income() {
       setMouseEnter("");
     }
   };
+  console.log(displayedTotalIncome)
 
   return (
     <main className="income-main">
