@@ -4,9 +4,9 @@
   gap: 15px;
   width: 100%;
   background-color: #a7edff3d;
-  border: solid greenyellow;
+  // border: solid greenyellow;
 }
-.expense-main{
+.expense-main {
   background-color: #a7edff3d;
 }
 .income-main-month-title-cx {
@@ -42,28 +42,23 @@
   // border-top: solid 6px var(--Primary);
   margin: 15px 15px 0px 15px;
   // box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
- 
-
 }
-.heading-cx{
+.heading-cx {
   display: flex;
   flex-direction: row;
-justify-content: space-between;
-padding: 10px 20px;
-
+  justify-content: space-between;
+  padding: 10px 20px;
 }
-.moon-cx{
+.moon-cx {
   display: flex;
 }
-.moon{
+.moon {
   fill: rgb(139, 139, 139);
- 
-  
 }
 .income-main-content {
   display: flex;
   flex-direction: column;
-  padding:15px 15px 65px 15px;
+  padding: 15px 15px 65px 15px;
 
   // border: solid;
   gap: 10px;
@@ -121,18 +116,18 @@ padding: 10px 20px;
   border-radius: 5px;
   margin: 0 11px;
 }
-@media (min-width:600px) and (max-width:767px){
+@media (min-width: 600px) and (max-width: 767px) {
   .income-main {
-  border: solid red;
+    border: solid red;
   }
 }
-@media (min-width:768px) and (max-width:991px){
+@media (min-width: 768px) and (max-width: 991px) {
   .income-main {
     border: solid blue;
-    }
+  }
 }
-@media  screen and  (min-width:992px) and (max-width:1199px){
+@media screen and (min-width: 992px) and (max-width: 1199px) {
   .income-main {
     border: solid violet;
-    }
+  }
 }

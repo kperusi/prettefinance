@@ -55,6 +55,8 @@ export default function Income() {
     };
   }, []);
 
+  
+
   useEffect(() => {
     const storedIncome = JSON.parse(localStorage.getItem("incomes")) || [];
     const totalIncome = storedIncome.reduce(
@@ -74,6 +76,9 @@ export default function Income() {
       setDisplayedTotalIncome(totalIncome);
     }
   }, [filteredIncome, incomes, totalIncome]);
+
+
+
 
   const handleMouseEnter = () => {
     if (mouseEnter === "") {

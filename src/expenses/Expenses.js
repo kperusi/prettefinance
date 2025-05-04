@@ -23,7 +23,7 @@ export default function Expenses() {
   const dispatch = useDispatch();
   const [displayedExpenses, setDisplayedExpenses] = useState([]);
 
-  const [displayedTotalExpenses, setDisplayedTotalExpenses] = useState(0);
+  const [displayedTotalExpenses, setDisplayedTotalExpenses] = useState();
   const selectedMonth = useSelector((state) => state.sliceData.selectedMonth);
   const filteredExpenses = useSelector(
     (state) => state.sliceData.filteredIncome_Expenses
