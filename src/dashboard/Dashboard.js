@@ -220,7 +220,7 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
           className={`dashboard-add-transaction-cx ${mouseEnter}`}
           onMouseEnter={handleMouseEnter}
         >
-          {/* <div className="navbar-item-cx"> */}
+        
           <NavLink to="/ebcfinance/addtransactions" className="navlink">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -232,9 +232,9 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
             >
               <path d="M446.67-446.67H200v-66.66h246.67V-760h66.66v246.67H760v66.66H513.33V-200h-66.66v-246.67Z" />
             </svg>
-            {/* <h5>Transaction</h5> */}
+          
           </NavLink>
-          {/* </div> */}
+       
         </section>
       )}
 

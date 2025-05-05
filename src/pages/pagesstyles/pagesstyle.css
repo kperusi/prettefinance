@@ -3,7 +3,6 @@
   flex-direction: column;
   height: -moz-fit-content;
   height: fit-content;
-  border: solid red;
 }
 
 .page-header {
@@ -25,5 +24,4 @@
 .content-cx {
   overflow-y: scroll;
   height: 91%;
-  border: solid rgb(0, 17, 255);
 }/*# sourceMappingURL=pagesstyle.css.map */
