@@ -1,6 +1,8 @@
 .page-main {
   display: flex;
   flex-direction: column;
+  height: 100vh;
+  border: solid red;
 }
 
 .page-header {
@@ -17,6 +19,7 @@
   z-index: 1000;
   height: -moz-fit-content;
   height: fit-content;
+  border: solid green;
 }
 
 .content-cx {
