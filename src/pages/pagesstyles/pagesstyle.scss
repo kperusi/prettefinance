@@ -16,10 +16,11 @@
   width: 100%;
   z-index: 1000;
   height: fit-content;
-  border: solid green;
+  // border: solid green;
 
 }
 .content-cx {
   overflow-y: scroll;
   height: 91vh;
+  border: solid rgb(0, 17, 255);
 }
