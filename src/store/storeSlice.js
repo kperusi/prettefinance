@@ -8,6 +8,7 @@ export const storeSlice = createSlice({
     selectedMonth: "",
     showFilterOption: "close",
     filteredIncome_Expenses: [],
+    selectedMonthAndSource:[]
   },
   reducers: {
     addIncome: (state, action) => {},
@@ -21,9 +22,13 @@ export const storeSlice = createSlice({
       state.showFilterOption = action.payload;
     },
     handleFilteredIncome_Expenses: (state, action) => {
-      console.log(action.payload)
+   
       state.filteredIncome_Expenses = action.payload;
     },
+    handleSelectedMonthAndSource:(state,action)=>{
+      state.selectedMonthAndSource.push(action.payload)
+
+    }
   },
 });
 export const {
@@ -32,5 +37,6 @@ export const {
   handleSelectedMonth,
   handleShowFilterOption,
   handleFilteredIncome_Expenses,
+  handleSelectedMonthAndSource,
 } = storeSlice.actions;
 export default storeSlice.reducer;

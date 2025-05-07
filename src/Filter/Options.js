@@ -6,12 +6,12 @@ import { ListOfMonths } from "../ListOfMonths";
 import "./filterstyles/optionstyle.css";
 import {
   handleFilteredIncome,
+  handleSelectedMonthAndSource,
   handleShowFilterOption,
 } from "../store/storeSlice";
 import { TruncateTex } from "../TruncateText";
 
 function Options(props) {
-
   const months = ListOfMonths(new Date().getFullYear());
   const dispatch = useDispatch();
   const [selectedMonth, setSelectedMonth] = useState("");
@@ -19,13 +19,9 @@ function Options(props) {
   const [filterArray, setFilterArray] = useState([]);
   const [selectedMonthArray, setSelectedMonthArray] = useState([]);
   const [selectedCat, setSelectedCat] = useState();
-
   const [catIndex, setCatIndex] = useState("");
-
   const [count, setCount] = useState(0);
-  const filterIncomeItem = useSelector(
-    (state) => state.sliceData.filterIncomeItem
-  );
+  
 
   const handleSelectedMonth = (month, index) => {
     setSelectedMonth(month);
@@ -33,19 +29,19 @@ function Options(props) {
     selectedMonthArray.push(month);
 
     filterArray[0] = month;
-
-    setCount(count + 1);
+   
+   
   };
 
   const handleSelectedCat = (cat, index) => {
     setSelectedCat(cat);
     setCatIndex(index);
-
     filterArray[1] = cat;
   };
 
   const handleApplyFilter = () => {
     props.handleFilterItem(filterArray);
+    // dispatch(handleSelectedMonthAndSource(selectedMonth,selectedCat))
     dispatch(handleShowFilterOption("close"));
   };
 
@@ -67,9 +63,8 @@ function Options(props) {
         </svg>
       </button>
       <div className="months-cx">
- 
         <h3>Months</h3>
-     
+
         <ul>
           {months.slice(1).map((month, index) => (
             <li
@@ -86,10 +81,8 @@ function Options(props) {
           ))}
         </ul>
 
-        
-         <h3>{props.desc}</h3>   
+        <h3>{props.desc}</h3>
         <div className="option-cat-cx">
-         
           <ul>
             {props.catArray.map((cat, index) => (
               <li

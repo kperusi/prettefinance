@@ -18,16 +18,136 @@ export default function Filter({ name, catArray, desc }) {
   const filteredTransaction = useSelector(
     (state) => state.sliceData.filteredIncome_Expenses
   );
+  const selectedMonthAndSource=useSelector((state)=>state.sliceData.sle)
 
   const handleClearFilter = (items) => {};
+
+
+
+
 
   const handlefilterItem = (items) => {
     console.log("i am controlled from child");
     setFilterItems(items);
+   
     const storedIncome = JSON.parse(localStorage.getItem("incomes")) || [];
     setIncome(storedIncome);
-  };
 
+
+
+    if (name === "income") {
+    
+      console.log(filterItems)
+      if (filterItems.length >1) {
+       console.log('...')
+        const localFilteredIncome = income.filter(function (item) {
+          const date = new Date(item.date);
+
+          const month = date.toLocaleDateString("en-US", {
+            month: "long",
+          });
+
+          return (
+            filterItems.includes(month) &&
+            filterItems.includes(item.incomeSource)
+          );
+        });
+
+        setFilteredIncome_expenses(localFilteredIncome);
+        dispatch(handleFilteredIncome_Expenses(localFilteredIncome));
+      }
+      if (filterItems.length <= 1) {
+        const localFilteredIncome = income.filter(function (item) {
+          const date = new Date(item.date);
+
+          const month = date.toLocaleDateString("en-US", {
+            month: "long",
+          });
+
+          return (
+            filterItems.includes(month) ||
+            filterItems.includes(item.incomeSource)
+          );
+        });
+
+        setFilteredIncome_expenses(localFilteredIncome);
+        dispatch(handleFilteredIncome_Expenses(localFilteredIncome));
+      }
+
+      if (filterItems[0] === undefined) {
+        const localFilteredIncome = income.filter(function (item) {
+          const date = new Date(item.date);
+
+          const month = date.toLocaleDateString("en-US", {
+            month: "long",
+          });
+
+          return (
+            filterItems.includes(month) ||
+            filterItems.includes(item.incomeSource)
+          );
+        });
+
+        setFilteredIncome_expenses(localFilteredIncome);
+        dispatch(handleFilteredIncome_Expenses(localFilteredIncome));
+      }
+    } else if (name === "expenses") {
+      if (filterItems.length > 1) {
+        const localFilteredExpenses = expenses.filter(function (item) {
+          const date = new Date(item.date);
+
+          const month = date.toLocaleDateString("en-US", {
+            month: "long",
+          });
+
+          return (
+            filterItems.includes(month) &&
+            filterItems.includes(item.expensesCategory)
+          );
+        });
+
+        setFilteredIncome_expenses(localFilteredExpenses);
+        dispatch(handleFilteredIncome_Expenses(localFilteredExpenses));
+      }
+      if (filterItems.length <= 1) {
+        const localFilteredExpenses = expenses.filter(function (item) {
+          const date = new Date(item.date);
+
+          const month = date.toLocaleDateString("en-US", {
+            month: "long",
+          });
+
+          return (
+            filterItems.includes(month) ||
+            filterItems.includes(item.expensesCategory)
+          );
+        });
+
+        setFilteredIncome_expenses(localFilteredExpenses);
+        dispatch(handleFilteredIncome_Expenses(localFilteredExpenses));
+      }
+
+      if (filterItems[0] === undefined) {
+        const localFilteredExpenses = expenses.filter(function (item) {
+          const date = new Date(item.date);
+
+          const month = date.toLocaleDateString("en-US", {
+            month: "long",
+          });
+
+          return (
+            filterItems.includes(month) ||
+            filterItems.includes(item.expensesCategory)
+          );
+        });
+
+        setFilteredIncome_expenses(localFilteredExpenses);
+        dispatch(handleFilteredIncome_Expenses(localFilteredExpenses));
+      }
+    }
+console.log('outside')
+  };
+// console.log(filterItems)
   useEffect(() => {
     if (name === "income") {
       if (filterItems.length > 1) {
@@ -138,8 +258,14 @@ export default function Filter({ name, catArray, desc }) {
     }
   }, [filterItems, income, name, expenses]);
 
+
+
+
+  // console.log(filteredIncome_expenses)
+
   const handleDelectItem = (index) => {
     setFilterItems(filterItems.filter((item, i) => i !== index));
+
   };
 
   const handlefilterIncome = () => {

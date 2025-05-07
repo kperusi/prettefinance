@@ -117,20 +117,4 @@
   background-color: rgba(117, 228, 248, 0.2470588235);
   border-radius: 5px;
   margin: 0 11px;
-}
-
-@media (min-width: 600px) and (max-width: 767px) {
-  .income-main {
-    border: solid red;
-  }
-}
-@media (min-width: 768px) and (max-width: 991px) {
-  .income-main {
-    border: solid blue;
-  }
-}
-@media screen and (min-width: 992px) and (max-width: 1199px) {
-  .income-main {
-    border: solid violet;
-  }
 }/*# sourceMappingURL=incomestyles.css.map */
