@@ -190,7 +190,7 @@ export default function Income() {
       </section>
       <section className="income-main-content">
         {filteredIncome.length > 0 ? (
-          <div>
+          <div className="items-list-x">
             {filteredIncome.map((income, i) => (
               <div
                 key={income.id}
@@ -264,7 +264,7 @@ export default function Income() {
             ))}
           </div>
         ) : (
-          <div>
+          <div className="items-list-x">
             {incomes.map((income, i) => (
               <div
                 key={income.id}
