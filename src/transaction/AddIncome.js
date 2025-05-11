@@ -137,7 +137,8 @@ function AddIncome() {
       setLoading(true);
       console.log("updating");
       await updateDoc(doc(db, "Income", id.trim()), {
-        amount: parseInt((form.amount).split(' ').join('')),
+        // amount: parseInt((form.amount).split(' ').join('')),
+        amount:parseInt(form.amount),
         date: form.date,
         desc: form.desc,
         incomeSource: form.income_source,

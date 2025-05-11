@@ -123,11 +123,13 @@ function AddExpenses() {
     const filterTasksById = (id) => {
       return expense?.find((task) => task?.id.trim() === id?.trim());
     };
+
+
     setSingleExpenses(filterTasksById(id));
     if (id) {
       setForm({
         ...form,
-        amount: singleExpenses?.amount,
+        amount:singleExpenses?.amount,
         date: singleExpenses?.date,
         MOD: singleExpenses?.MOD,
         desc: singleExpenses?.desc,
@@ -172,7 +174,8 @@ function AddExpenses() {
       setLoading(true);
       console.log("updating");
       await updateDoc(doc(db, "Expenses", id.trim()), {
-        amount: parseInt(form.amount.split(" ").join("")),
+        // amount: parseInt(form?.amount.split(" ").join("")),
+        amount:parseInt(form?.amount),
         date: form.date,
         MOD: form.MOD,
         desc: form.desc,
@@ -191,7 +194,7 @@ function AddExpenses() {
         createdAt: Timestamp.now().toDate(),
         createdBy: user?.displayName,
         userId: user?.uid,
-        amount: parseInt(form.amount.split(" ").join("")),
+        amount: parseInt(form?.amount.split(" ").join("")),
         date: form.date,
         desc: form.desc,
         MOD: form.MOD,
