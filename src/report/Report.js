@@ -13,6 +13,7 @@ import {
 import "./reportstyle/reportstyles.css";
 import { useNavigate } from "react-router-dom";
 import MyDocument from "../pdf/MyDocument";
+import { ListOfMonths } from "../ListOfMonths";
 // import PdfGenerator2 from "../pdf/PdfGenerator2";
 
 export default function Report() {
@@ -66,6 +67,10 @@ export default function Report() {
   const navigate = useNavigate();
   const [numberItems, setNumberItems] = useState(0);
   const [chunks, setChunks] = useState([]);
+  const [cummulativeExpenses, setCummulativeExpenses] = useState([]);
+  const [cummulativeExpensesAmount, setCummulativeExpenseAmount] = useState(0);
+  const [cummulativeIncomes, setCummulativeIncomes] = useState([]);
+  const [cummulativeIncomesAmount, setCummulativeIncomesAmount] = useState(0);
 
   const balancebf = 1219033.01;
 
@@ -80,6 +85,20 @@ export default function Report() {
       setNameError("");
     }
   };
+
+  const cummulativeMonth = (month) => {
+    const monthArr = ListOfMonths().slice(1);
+    const monthIndex = monthArr.indexOf(month);
+    const cummulativeMonths = [];
+    for (let i = 0; i <= monthIndex; i++) {
+      cummulativeMonths.push(monthArr[i]);
+    }
+    return cummulativeMonths;
+  };
+
+ 
+
+  // console.log(cummulativeMonth(form.month));
 
   useEffect(() => {
     const storedIncome = JSON.parse(localStorage.getItem("incomes")) || [];
@@ -99,6 +118,7 @@ export default function Report() {
 
       return month === form.month;
     });
+
     setIncomeByMonth(thisMonthIncome);
 
     const thisMonthExpenses = expenses?.filter(function (item) {
@@ -110,6 +130,47 @@ export default function Report() {
       return month === form.month;
     });
     setExpensesByMonth(thisMonthExpenses);
+
+    // cummulated Incoomes and expenses/////////////////////////////////////////////////////////
+
+   
+    const cummulatedIncomes = incomes?.filter(function (item) {
+      const date = new Date(item.date);
+      const month = date.toLocaleDateString("en-US", {
+        month: "long",
+      });
+
+      return cummulativeMonth(form.month).includes(month);
+    });
+    setCummulativeIncomes(cummulatedIncomes);
+   
+    const cummulatedExpenses = expenses?.filter(function (item) {
+      const date = new Date(item.date);
+      const month = date.toLocaleDateString("en-US", {
+        month: "long",
+      });
+
+      return cummulativeMonth(form.month).includes(month);
+    });
+    setCummulativeExpenses(cummulatedExpenses);
+
+// Cummulated amounts ==========================================================
+     const _cummulatedIncomeAmount = cummulatedIncomes.reduce(
+      (sum, each) => sum + (each?.amount || 0),
+      0
+    );
+
+    setCummulativeIncomesAmount(_cummulatedIncomeAmount)
+
+
+    const _cummulatedExpensesAmount = cummulatedExpenses.reduce(
+      (sum, each) => sum + (each?.amount || 0),
+      0
+    );
+
+    setCummulativeExpenseAmount(_cummulatedExpensesAmount)
+
+
 
     const totalExpenses = storedExpense.reduce(
       (sum, each) => sum + (each?.amount || 0),
@@ -135,12 +196,18 @@ export default function Report() {
     setTotalIncome(totalIncomes);
 
     setTotalExpenses(totalExpenses);
-    setTotalBalance((totalIncomes - totalExpenses).toFixed(2));
+
+    console.log(cummulativeExpensesAmount)
+
+    setTotalBalance(cummulativeIncomesAmount - cummulativeExpensesAmount)
+    // setTotalBalance((cummulativeIncomesAmount - cummulativeExpensesAmount));
     setForm({ ...form, name: user?.displayName });
   }, [form.month]);
 
-  console.log(totalBalance);
-  console.log(totalIncome);
+  // console.log(cummulativeIncomesAmount);
+  // console.log(cummulativeIncomesAmount - cummulativeExpensesAmount)
+
+
   const handlePreviewReport = () => {
     if (form.month === "") {
       setMonthError("Please select month");
@@ -178,7 +245,6 @@ export default function Report() {
     setConferenceDues(filterExpensesByName("Conference Dues"));
     setConventionDues(filterExpensesByName("Convention Dues"));
     setAllocation(filterExpensesByName("Allocation"));
-
 
     if (display === "hide") {
       setDisplay("show");
@@ -389,7 +455,6 @@ export default function Report() {
           desc: "Monthly Balance",
           amount: totalIncomeAmountThisMonth - totalExpensesAmountThisMonth,
         },
-       
       ],
     });
 
@@ -398,16 +463,16 @@ export default function Report() {
         new Date(Date.now()).toDateString().split("T")[0]
       }`,
       items: [
-        { desc: "Total Income", amount: totalIncome },
-        { desc: "Total Expenses", amount: totalExpenses },
-        { desc: "Total Balance", amount: totalBalance },
+        { desc: "Total Income", amount: cummulativeIncomesAmount },
+        { desc: "Total Expenses", amount: cummulativeExpensesAmount },
+        { desc: "Total Balance", amount: cummulativeIncomesAmount-cummulativeExpensesAmount},
       ],
     });
 
     allExpenses.push({
       name: "Sign",
-      signedByOne:'Ojakovo Animamu',
-      signedByTwo:'Prosper Sodje',
+      signedByOne: "Ojakovo Animamu",
+      signedByTwo: "Prosper Sodje",
       items: [],
     });
 
@@ -450,7 +515,7 @@ export default function Report() {
 
       const link = document.createElement("a");
       link.href = blobUrl;
-      link.download = `resume-${Date.now()}.pdf`;
+      link.download = `Monthly Report-${form.month}.pdf`;
       link.click();
     } catch (error) {
       console.error("Error in download process:", error);
@@ -458,9 +523,6 @@ export default function Report() {
       if (url) URL.revokeObjectURL(url);
     }
   };
-
-  console.log(incomeByMonth);
-  console.log(totalIncomeAmountThisMonth);
 
   return (
     <main className="main-report">
@@ -571,8 +633,13 @@ export default function Report() {
               loading ? "loading" : "Download Pdf"
             }
           </PDFDownloadLink> */}
-          <button onClick={handleDownload} className="pdf-preview-btn">Download pdf</button>
-          <button onClick={handleSetDisplay} className="pdf-preview-back-btn pdf-preview-btn">
+          <button onClick={handleDownload} className="pdf-preview-btn">
+            Download pdf
+          </button>
+          <button
+            onClick={handleSetDisplay}
+            className="pdf-preview-back-btn pdf-preview-btn"
+          >
             Back
           </button>
         </div>

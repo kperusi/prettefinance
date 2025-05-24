@@ -135,7 +135,6 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
     // filtering monthly transactions******************************************
   }, []);
 
-  console.log(selectedIndex);
   useEffect(() => {
     const thisMonthIncome = incomes.filter(function (item) {
       console.log("month running");
@@ -170,9 +169,6 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
     );
     setTotalExpensesAmountThisMonth(addThisMonthExpenses);
   }, [selectedMonth]);
-  console.log(incomes);
-  console.log(incomeByMonth);
-  console.log(selectedMonth);
 
   const handleLogout = () => {
     localStorage.removeItem("ebcfinance-user");
@@ -191,11 +187,17 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
     }
   };
 
-  const { startIndex, lastIndex, numberOfPages } = NextPage(
-    monthArray,
-    3,
-    currentPage
-  );
+  const cummulativeMonth = (month) => {
+    const monthArr = ListOfMonths().slice(1);
+    const monthIndex = monthArr.indexOf(month);
+    const cummulativeMonths = [];
+    for (let i = 0; i <= monthIndex; i++) {
+      cummulativeMonths.push(monthArr[i]);
+    }
+    console.log(cummulativeMonths);
+  };
+
+  cummulativeMonth("April");
 
   return (
     <main className="content-main">
@@ -220,7 +222,6 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
           className={`dashboard-add-transaction-cx ${mouseEnter}`}
           onMouseEnter={handleMouseEnter}
         >
-        
           <NavLink to="/ebcfinance/addtransactions" className="navlink">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -232,9 +233,7 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
             >
               <path d="M446.67-446.67H200v-66.66h246.67V-760h66.66v246.67H760v66.66H513.33V-200h-66.66v-246.67Z" />
             </svg>
-          
           </NavLink>
-       
         </section>
       )}
 
@@ -407,9 +406,7 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
                 display: "flex",
                 flexDirection: "row",
                 alignItems: "center",
-                gap:'5px'
-              
-               
+                gap: "5px",
               }}
             >
               <svg
