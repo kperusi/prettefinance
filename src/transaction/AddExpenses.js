@@ -15,9 +15,9 @@ import { formatedNumber } from "./FormatedNumber";
 import { useSelector } from "react-redux";
 
 function AddExpenses() {
-  const account_type=useSelector((state)=>state.sliceData.account_type)
+  const account_type = useSelector((state) => state.sliceData.account_type);
   const [form, setForm] = useState({
-    account_type:account_type,
+    account_type: account_type,
     amount: "",
     date: new Date(Date.now()).toISOString().split("T")[0],
     desc: "",
@@ -128,12 +128,11 @@ function AddExpenses() {
       return expense?.find((task) => task?.id.trim() === id?.trim());
     };
 
-
     setSingleExpenses(filterTasksById(id));
     if (id) {
       setForm({
         ...form,
-        amount:singleExpenses?.amount,
+        amount: singleExpenses?.amount,
         date: singleExpenses?.date,
         MOD: singleExpenses?.MOD,
         desc: singleExpenses?.desc,
@@ -179,7 +178,7 @@ function AddExpenses() {
       console.log("updating");
       await updateDoc(doc(db, "Expenses", id.trim()), {
         // amount: parseInt(form?.amount.split(" ").join("")),
-        amount:parseInt(form?.amount),
+        amount: parseInt(form?.amount),
         date: form.date,
         MOD: form.MOD,
         desc: form.desc,
@@ -195,6 +194,7 @@ function AddExpenses() {
       const blogRef = doc(collection(db, "Expenses"));
 
       await setDoc(blogRef, {
+        account_type: form.account_type,
         createdAt: Timestamp.now().toDate(),
         createdBy: user?.displayName,
         userId: user?.uid,

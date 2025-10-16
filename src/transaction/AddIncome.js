@@ -155,6 +155,7 @@ function AddIncome() {
       const incomeRef = doc(collection(db, "Income"));
 
       await setDoc(incomeRef, {
+        account_type:form.account_type,
         createdAt: Timestamp.now().toDate(),
         createdBy: user?.displayName,
         userId: user?.uid,
