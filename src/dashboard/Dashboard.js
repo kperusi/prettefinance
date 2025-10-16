@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import { useDispatch, useSelector } from "react-redux";
 import "./dashboardstyles/dashboardstyles.css";
 import { db, auth } from "../firebase/firebase";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
@@ -37,6 +37,10 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
     useState();
 
   const [selectedIndex, setSelectedIndex] = useState(null);
+
+  const account_type = useSelector((state) => state.sliceData.account_type);
+
+  console.log(account_type);
 
   useEffect(() => {
     try {
@@ -194,7 +198,7 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
     for (let i = 0; i <= monthIndex; i++) {
       cummulativeMonths.push(monthArr[i]);
     }
-    console.log(cummulativeMonths);
+    // console.log(cummulativeMonths);
   };
 
   cummulativeMonth("April");
@@ -203,7 +207,7 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
     <main className="content-main">
       <section className="dashboard-logo">
         <div>
-          <h1>Prette</h1>
+          <h1>Prettefinance</h1>
           <h4>Easy Financial Keep</h4>
         </div>
       </section>
@@ -236,7 +240,9 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
           </NavLink>
         </section>
       )}
-
+      <section style={{paddingLeft:'20px'}}>
+        <h1>{account_type}</h1>
+      </section>
       <section className="dashboard-section-one">
         <div className="total-balance-cx">
           <div className="balancebf-cx">

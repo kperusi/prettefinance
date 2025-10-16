@@ -5,6 +5,7 @@ import Home from "./homepage/Home";
 import Login from "./login/Login";
 import Register from "./register/Register";
 import Content from "./dashboard/Dashboard";
+import WelcomePage from "./welcomepage/WelcomePage";
 import "../src/Styles/main.css";
 import Page from "./pages/Page";
 import Dashboard from "./dashboard/Dashboard";
@@ -64,8 +65,9 @@ export default function MyRouter() {
         <Route path="/" element={<Home />} />
         <Route path="/ebcfinance-register" element={<Register />} />
         <Route path="/ebcfinance-login" element={<Login />} />
+        <Route path="/prettifinance/accounts" element={<WelcomePage />} />
         <Route
-          path="/ebcfinance/views"
+          path="/prettifinance/account/main"
           element={
             <Page
               handleSelected={handleSelected}

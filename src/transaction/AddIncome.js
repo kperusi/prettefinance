@@ -10,9 +10,12 @@ import { db } from "../firebase/firebase";
 import { useNavigate, useParams } from "react-router-dom";
 import "./transactionstyle/transactionstyles.css";
 import Confirmation from "./confirmation";
+import { useSelector } from "react-redux";
 
 function AddIncome() {
+  const account_type=useSelector((state)=>state.sliceData.account_type)
   const [form, setForm] = useState({
+    account_type:account_type,
     main: "Income",
     amount: "",
     date: new Date(Date.now()).toISOString().split("T")[0],

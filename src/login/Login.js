@@ -9,7 +9,6 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
-
 import {
   arrayUnion,
   collection,
@@ -53,21 +52,20 @@ export default function Login() {
             JSON.stringify(auth.currentUser)
           );
           // navigate("/ebcfinance/views");
-          setErrorColor('green')
+          setErrorColor("green");
           setLoading(false);
           setError("Login Successful");
-          setTimeout(()=>{
-            navigate("/ebcfinance/views");
-          },1000)
-          
+          setTimeout(() => {
+            // navigate("/ebcfinance/views");
+            navigate("/prettifinance/accounts");
+          }, 1000);
         })
         .catch((e) => {
           if (e.message.split(" ")[2].includes("invalid")) {
-            setErrorColor('red')
+            setErrorColor("red");
             setError("Please Check Your Email or Password");
-
           } else if (e.message.split(" ")[2].includes("network")) {
-            setErrorColor('red')
+            setErrorColor("red");
             setError("Check Your Network Connection");
           }
 
@@ -78,7 +76,7 @@ export default function Login() {
       console.log(error.message);
     }
 
-  try {
+    try {
       const loginUserDetailsRef = collection(db, "users");
       const q = query(loginUserDetailsRef);
       onSnapshot(q, (snapshot) => {
@@ -105,10 +103,6 @@ export default function Login() {
     } catch (error) {
       setError(error);
     }
-
-
-
-
   };
 
   const handleVisibilityChange = (e) => {
@@ -138,7 +132,7 @@ export default function Login() {
           }}
         >
           <div className="email-cx">
-          <label>Email:</label>
+            <label>Email:</label>
             <div className="email-icon-cx">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -150,17 +144,15 @@ export default function Login() {
                 <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm320-280L160-640v400h640v-400L480-440Zm0-80 320-200H160l320 200ZM160-640v-80 480-400Z" />
               </svg>
               <input
-              style={{width: '95%',border:'none'}}
-              className="email"
-              onChange={(e) => handleChange(e)}
-              type="email"
-              name="email"
-              placeholder="Email"
-              required
-            />
+                style={{ width: "95%", border: "none" }}
+                className="email"
+                onChange={(e) => handleChange(e)}
+                type="email"
+                name="email"
+                placeholder="Email"
+                required
+              />
             </div>
-            
-        
           </div>
 
           <div className="password-cx">
@@ -179,7 +171,7 @@ export default function Login() {
                 style={{ width: "90%", border: "none" }}
                 onChange={(e) => handleChange(e)}
                 className="password"
-                type={visible ? "text" : "password" }
+                type={visible ? "text" : "password"}
                 name="password"
                 placeholder="Password"
                 required
@@ -218,7 +210,9 @@ export default function Login() {
           </div>
 
           <div className="error-x" style={{ marginTop: "-10px" }}>
-            <p className={`error `} style={{color:errorColor}}>{error}</p>
+            <p className={`error `} style={{ color: errorColor }}>
+              {error}
+            </p>
           </div>
           <section className="login-section-rw-2">
             {loading && (

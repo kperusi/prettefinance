@@ -25,7 +25,7 @@ export default function TransactionLayout() {
         <div className="layout-logo">
         <span
             onClick={() => {
-              navigate("/ebcfinance/views");
+              navigate("/prettifinance/account/main");
             }}
           >
             <svg

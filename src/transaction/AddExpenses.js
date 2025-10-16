@@ -12,8 +12,12 @@ import {
 import { db } from "../firebase/firebase";
 import { useNavigate, useParams } from "react-router-dom";
 import { formatedNumber } from "./FormatedNumber";
+import { useSelector } from "react-redux";
+
 function AddExpenses() {
+  const account_type=useSelector((state)=>state.sliceData.account_type)
   const [form, setForm] = useState({
+    account_type:account_type,
     amount: "",
     date: new Date(Date.now()).toISOString().split("T")[0],
     desc: "",

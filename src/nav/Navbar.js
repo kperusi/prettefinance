@@ -33,7 +33,7 @@ function Navbar({ setSelect, select, handleSelected }) {
           setSelect({ dashboard: "select", income: "", expenses: "" });
         }}
       >
-        <NavLink to="/ebcfinance/views" className={`navlink `}>
+        <NavLink to="" className={`navlink `}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="40px"
@@ -58,7 +58,7 @@ function Navbar({ setSelect, select, handleSelected }) {
           })
         }
       >
-        <NavLink to="/ebcfinance/views/income" className="navlink">
+        <NavLink to="income" className="navlink">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="40px"
