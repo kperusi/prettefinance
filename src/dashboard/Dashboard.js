@@ -38,9 +38,9 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
 
   const [selectedIndex, setSelectedIndex] = useState(null);
 
-  const account_type = useSelector((state) => state.sliceData.account_type);
-
-  console.log(account_type);
+  // const account_type = useSelector((state) => state.sliceData.account_type);
+const [account_types,setAccount_type]=useState()
+  console.log(account_types);
 
   useEffect(() => {
     try {
@@ -99,6 +99,7 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
   };
 
   useEffect(() => {
+   const storeAccount_type=JSON.parse(localStorage.getItem('account_type'))
     const storedIncome = JSON.parse(localStorage.getItem("incomes")) || [];
     const storedExpense = JSON.parse(localStorage.getItem("expenses")) || [];
     const storedUser =
@@ -112,6 +113,7 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
     const storedSelectedMonthIndex = JSON.parse(
       localStorage.getItem("selectedMonthIndex")
     );
+    setAccount_type(storeAccount_type)
     setIncomes(storedIncome);
     setExpenses(storedExpense);
     setLoginUserDetail(storedUserDetails);
@@ -241,7 +243,7 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
         </section>
       )}
       <section style={{paddingLeft:'20px'}}>
-        <h1>{account_type}</h1>
+        <h1>{account_types}</h1>
       </section>
       <section className="dashboard-section-one">
         <div className="total-balance-cx">

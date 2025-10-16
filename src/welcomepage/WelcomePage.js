@@ -10,10 +10,12 @@ export default function WelcomePage() {
 console.log(account_type)
 const handleMainBottonClick=()=>{
 navigate('/prettifinance/account/main')
+localStorage.setItem('account_type',JSON.stringify('Main account'))
 dispatch(handleSelectAccount('Main account'))
 }
 const handleProjectBottonClick=()=>{
 navigate('/prettifinance/account/main')
+localStorage.setItem('account_type',JSON.stringify('Project account'))
 dispatch(handleSelectAccount('Project account'))
 }
   return (

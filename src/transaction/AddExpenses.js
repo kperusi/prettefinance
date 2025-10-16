@@ -11,7 +11,7 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 import { useNavigate, useParams } from "react-router-dom";
-import { formatedNumber } from "./FormatedNumber";
+
 import { useSelector } from "react-redux";
 
 function AddExpenses() {
