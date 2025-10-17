@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./dashboardstyles/dashboardstyles.css";
 import { db, auth } from "../firebase/firebase";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 
 import { signOut } from "firebase/auth";
 import { NavLink } from "react-router-dom";
@@ -37,10 +43,11 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
     useState();
 
   const [selectedIndex, setSelectedIndex] = useState(null);
+  const [account_types, setAccount_type] = useState();
+  const [account_type_index,setAccount_type_index] = useState()
 
-  // const account_type = useSelector((state) => state.sliceData.account_type);
-const [account_types,setAccount_type]=useState()
   console.log(account_types);
+
 
   useEffect(() => {
     try {
@@ -48,7 +55,7 @@ const [account_types,setAccount_type]=useState()
       const q = query(
         expensesRef,
         orderBy("date", "desc")
-        // where("status", "==", "published")
+        // where("status", "==", "published")/
       );
       onSnapshot(q, (snapshot) => {
         const expenses = snapshot.docs.map((doc) => ({
@@ -69,24 +76,27 @@ const [account_types,setAccount_type]=useState()
       const incomeRef = collection(db, "Income");
       const q = query(
         incomeRef,
-        orderBy("date", "desc")
-        // where("status", "==", "published")
+        // where("account_type", "==", "Main account"),
+        orderBy("createdAt", "desc")
       );
       onSnapshot(q, (snapshot) => {
-        const incomes = snapshot.docs.map((doc) => ({
+        const incomes = snapshot.docs
+        .map((doc) => ({
           id: doc.id,
           ...doc.data(),
-        }));
+        }))
+        .filter(item=>item.account_type===account_types);
         setLoading(false);
-
-        if (incomes.length > 0) {
-          localStorage.setItem("incomes", JSON.stringify(incomes));
-        }
+        console.log(incomes);
+        localStorage.setItem("incomes", JSON.stringify(incomes));
+        // if (incomes.length > 0) {
+        //   localStorage.setItem("incomes", JSON.stringify(incomes));
+        // }
       });
     } catch (error) {
       setError(error);
     }
-  }, [id]);
+  }, [id,incomes,account_types]);
 
   const handleSelectedMonth = (month, index) => {
     localStorage.setItem("dashboard-selected-month", JSON.stringify(month));
@@ -99,7 +109,7 @@ const [account_types,setAccount_type]=useState()
   };
 
   useEffect(() => {
-   const storeAccount_type=JSON.parse(localStorage.getItem('account_type'))
+    const storeAccount_type = JSON.parse(localStorage.getItem("account_type"));
     const storedIncome = JSON.parse(localStorage.getItem("incomes")) || [];
     const storedExpense = JSON.parse(localStorage.getItem("expenses")) || [];
     const storedUser =
@@ -113,7 +123,7 @@ const [account_types,setAccount_type]=useState()
     const storedSelectedMonthIndex = JSON.parse(
       localStorage.getItem("selectedMonthIndex")
     );
-    setAccount_type(storeAccount_type)
+    setAccount_type(storeAccount_type);
     setIncomes(storedIncome);
     setExpenses(storedExpense);
     setLoginUserDetail(storedUserDetails);
@@ -138,9 +148,15 @@ const [account_types,setAccount_type]=useState()
     setTotalExpenses(totalExpenses);
     setTotalBalance(totalIncomes - totalExpenses);
 
+
+
+
+
     // filtering monthly transactions******************************************
   }, []);
 
+  
+  console.log(account_type_index)
   useEffect(() => {
     const thisMonthIncome = incomes.filter(function (item) {
       console.log("month running");
@@ -242,7 +258,7 @@ const [account_types,setAccount_type]=useState()
           </NavLink>
         </section>
       )}
-      <section style={{paddingLeft:'20px'}}>
+      <section style={{ paddingLeft: "20px" }}>
         <h1>{account_types}</h1>
       </section>
       <section className="dashboard-section-one">
