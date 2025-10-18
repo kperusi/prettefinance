@@ -10,13 +10,14 @@ import {
   where,
 } from "firebase/firestore";
 
-import { signOut } from "firebase/auth";
-import { NavLink } from "react-router-dom";
-import { Splitter } from "../Splitter";
+import { NavLink, useNavigate } from "react-router-dom";
+
 import { FormatedDate } from "../FormatedDate";
 import { TruncateTex } from "../TruncateText";
-import { NextPage } from "../NextPages";
+
 import { ListOfMonths } from "../ListOfMonths";
+import LogoutDialog from "./LogoutDialog";
+import { handleSelectAccount, handleShowDialog } from "../store/storeSlice";
 export default function Dashboard({ handleSelected, select, setSelect }) {
   const [user, setUser] = useState();
   const [avatarName, setAvatarName] = useState();
@@ -28,10 +29,10 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [id, setId] = useState();
-  const [userRole, setUserRole] = useState();
+
   const [loginUserDetail, setLoginUserDetail] = useState({});
   const [mouseEnter, setMouseEnter] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
+
   const balancebf = 1219033.01;
   const monthArray = ListOfMonths(new Date().getFullYear());
   const [incomeByMonth, setIncomeByMonth] = useState([]);
@@ -44,10 +45,12 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
 
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [account_types, setAccount_type] = useState();
-  const [account_type_index,setAccount_type_index] = useState()
+  const [account_type_index, setAccount_type_index] = useState();
+  const show_dialog = useSelector((state) => state.sliceData.show_dialog);
+  const dispatch = useDispatch();
 
   console.log(account_types);
-
+  console.log(show_dialog);
 
   useEffect(() => {
     try {
@@ -58,10 +61,12 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
         // where("status", "==", "published")/
       );
       onSnapshot(q, (snapshot) => {
-        const expenses = snapshot.docs.map((doc) => ({
+        const expenses = snapshot.docs
+        .map((doc) => ({
           id: doc.id,
           ...doc.data(),
-        }));
+        }))
+         .filter((item) => item.account_type === account_types);;
         setLoading(false);
         // setExpense(expenses);
         if (expenses.length > 0) {
@@ -81,22 +86,23 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
       );
       onSnapshot(q, (snapshot) => {
         const incomes = snapshot.docs
-        .map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }))
-        .filter(item=>item.account_type===account_types);
+          .map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+          .filter((item) => item.account_type === account_types);
         setLoading(false);
         console.log(incomes);
-        localStorage.setItem("incomes", JSON.stringify(incomes));
-        // if (incomes.length > 0) {
-        //   localStorage.setItem("incomes", JSON.stringify(incomes));
-        // }
+        console.log(expenses)
+     
+        if (incomes.length > 0) {
+          localStorage.setItem("incomes", JSON.stringify(incomes));
+        }
       });
     } catch (error) {
       setError(error);
     }
-  }, [id,incomes,account_types]);
+  }, [id, incomes, account_types]);
 
   const handleSelectedMonth = (month, index) => {
     localStorage.setItem("dashboard-selected-month", JSON.stringify(month));
@@ -148,15 +154,10 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
     setTotalExpenses(totalExpenses);
     setTotalBalance(totalIncomes - totalExpenses);
 
-
-
-
-
     // filtering monthly transactions******************************************
   }, []);
 
-  
-  console.log(account_type_index)
+  console.log(account_type_index);
   useEffect(() => {
     const thisMonthIncome = incomes.filter(function (item) {
       console.log("month running");
@@ -192,15 +193,6 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
     setTotalExpensesAmountThisMonth(addThisMonthExpenses);
   }, [selectedMonth]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("ebcfinance-user");
-    localStorage.removeItem("loginUserDetails");
-    signOut(auth);
-
-    // navigate("/");
-    window.location.href = "/ebcfinance-login";
-  };
-
   const handleMouseEnter = () => {
     if (mouseEnter === "") {
       setMouseEnter("mouseEnter");
@@ -220,7 +212,7 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
   };
 
   cummulativeMonth("April");
-
+  const navigate = useNavigate();
   return (
     <main className="content-main">
       <section className="dashboard-logo">
@@ -231,13 +223,14 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
       </section>
 
       <section className="dashboard-title">
-        <div className="dashboard-avatar" onClick={handleLogout}>
+        <div
+          className="dashboard-avatar"
+          onClick={() => navigate('/prettifinance/settings')}
+        >
           <h3>{avatarName}</h3>
         </div>
 
-        {/* <button onClick={handleLogout} className="logout">
-          Logout
-        </button> */}
+        
       </section>
       {loginUserDetail?.role === "admin" && (
         <section
@@ -542,7 +535,7 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
           >
             <h1>Recent Income</h1>
             <NavLink
-              to="/ebcfinance/views/income"
+              to="/prettifinance/account/main/income"
               onClick={() =>
                 setSelect({
                   dashboard: "",
@@ -598,15 +591,8 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
       </section>
 
       <section className="dashboard-section-two dashboard-expenses-cx">
-        <div
-          className="expenses-section-title"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            paddingRight: "10px",
-          }}
-        >
-          <span className="expenses-title-span">
+        <div className="expenses-section-title">
+          <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="26px"
@@ -629,7 +615,7 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
           >
             <h1>Recent Expenses</h1>
             <NavLink
-              to="/ebcfinance/views/expenses"
+              to="/prettifinance/account/main/expenses"
               onClick={() =>
                 setSelect({
                   dashboard: "",

@@ -529,7 +529,7 @@ export default function Report() {
       <div style={{ display: "flex", gap: "50px", padding: "5px 10px" }}>
         <span
           onClick={() => {
-            navigate("/ebcfinance/views");
+            navigate(-1);
           }}
         >
           <svg

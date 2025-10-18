@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, Outlet, useNavigate, useParams } from "react-router-dom";
 import "./transactionstyle/transactionstyles.css";
 export default function TransactionLayout() {
@@ -16,9 +16,15 @@ export default function TransactionLayout() {
     if (name === "expenses") {
       setSelected({ income: "", expenses: "selected" });
     }
+    
   };
-
+const [account_type,setAccount_type]=useState()
   console.log(id)
+
+  useEffect(()=>{
+  const storedAccount_type=JSON.parse(localStorage.getItem('account_type'))
+  setAccount_type(storedAccount_type)
+  },[])
   return (
     <main className="layout">
       <section className="layout-nav-cx">
@@ -48,8 +54,8 @@ export default function TransactionLayout() {
               <path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z" />
             </svg> */}
           </span>
-          <h4 style={{ color: "white" }}>Add Transactions</h4>
-        
+          <h4 style={{ color: "white" }}>Add Transactions{`${account_type}`}</h4>
+
         </div>
         <span className="divide"></span>
         <div className="row">

@@ -15,9 +15,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function AddExpenses() {
-  const account_type = useSelector((state) => state.sliceData.account_type);
+ 
   const [form, setForm] = useState({
-    account_type: account_type,
+    account_type: JSON.parse(localStorage.getItem('account_type')),
     amount: "",
     date: new Date(Date.now()).toISOString().split("T")[0],
     desc: "",
@@ -44,6 +44,7 @@ function AddExpenses() {
   const [totalExpenses, setTotalExpenses] = useState();
   const [singleExpenses, setSingleExpenses] = useState({});
   const [givenByError, setGivenByError] = useState("");
+  const [account_type,setAccount_type]=useState()
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -110,6 +111,7 @@ function AddExpenses() {
 
   useEffect(() => {
     const storedExpenses = JSON.parse(localStorage.getItem("expenses")) || [];
+    const storedAccount_type=JSON.parse(localStorage.getItem('account_type'))
     // Update state with retrieved values
     setExpense(storedExpenses);
 
@@ -119,6 +121,7 @@ function AddExpenses() {
     );
 
     setTotalExpenses(totalExpenses);
+    setAccount_type(storedAccount_type)
 
     // setTotalExpenses(totalExpenses);
   }, []);

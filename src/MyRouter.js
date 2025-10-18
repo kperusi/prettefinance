@@ -18,6 +18,7 @@ import SingleIncome from "./singleincome/SingleIncome";
 import Report from "./report/Report";
 import { useDispatch } from "react-redux";
 import { addExpenses } from "./store/storeSlice";
+import LogoutDialog from "./dashboard/LogoutDialog";
 export default function MyRouter() {
   const [select, setSelect] = useState({
     dashboard: "",
@@ -66,6 +67,7 @@ export default function MyRouter() {
         <Route path="/ebcfinance-register" element={<Register />} />
         <Route path="/ebcfinance-login" element={<Login />} />
         <Route path="/prettifinance/accounts" element={<WelcomePage />} />
+          <Route path='/prettifinance/settings' element={<LogoutDialog/>}/>
         <Route
           path="/prettifinance/account/main"
           element={
@@ -88,6 +90,7 @@ export default function MyRouter() {
           />
           <Route path="income" element={<Income />} />
           <Route path="expenses" element={<Expenses />} />
+       
         </Route>
         <Route
           path="/ebcfinance/addtransactions"

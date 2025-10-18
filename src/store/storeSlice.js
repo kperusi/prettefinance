@@ -9,7 +9,9 @@ export const storeSlice = createSlice({
     showFilterOption: "close",
     filteredIncome_Expenses: [],
     selectedMonthAndSource:[],
-    account_type:''
+    account_type:'',
+    show_dialog:false
+    
   },
   reducers: {
     addIncome: (state, action) => {},
@@ -31,7 +33,15 @@ export const storeSlice = createSlice({
 
     },
     handleSelectAccount:(state,action)=>{
-      state.account_type=action.payload
+      state.account_type=action.payload 
+         console.log('showdialog')
+    },
+    handleShowDialog:(state,action)=>{
+  
+      if(state.show_dialog===true){
+       state.show_dialog=false
+      }
+      else state.show_dialog=true
     }
   },
 });
@@ -43,5 +53,6 @@ export const {
   handleFilteredIncome_Expenses,
   handleSelectedMonthAndSource,
   handleSelectAccount,
+  handleShowDialog,
 } = storeSlice.actions;
 export default storeSlice.reducer;

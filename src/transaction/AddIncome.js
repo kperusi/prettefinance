@@ -13,9 +13,8 @@ import Confirmation from "./confirmation";
 import { useSelector } from "react-redux";
 
 function AddIncome() {
-  const account_type=useSelector((state)=>state.sliceData.account_type)
   const [form, setForm] = useState({
-    account_type:account_type,
+    account_type: JSON.parse(localStorage.getItem("account_type")),
     main: "Income",
     amount: "",
     date: new Date(Date.now()).toISOString().split("T")[0],
@@ -37,6 +36,7 @@ function AddIncome() {
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const [formatedNumber, setFormartedNumber] = useState();
+  const [account_type, setAccount_type] = useState();
   const navigate = useNavigate();
 
   const formatNumber = (values) => {
@@ -45,15 +45,13 @@ function AddIncome() {
       .replace(/\B(?=(\d{3})+(?!\d))/g, " "); // Add spaces every 3 digits
   };
 
-
   let date2 = new Date(Date.now());
   // console.log(date2.toDateString());
   const handleChange = (e) => {
-  
     if (e.target.name === "amount") {
       const newValue = e.target.value.replace(/[^0-9]/g, "");
       setFormartedNumber(formatNumber(newValue));
-      setForm({ ...form, amount: formatNumber(newValue)});
+      setForm({ ...form, amount: formatNumber(newValue) });
       console.log("changing number");
     }
 
@@ -72,8 +70,6 @@ function AddIncome() {
       setSourceErrors("");
     }
   };
-
-
 
   console.log(form);
 
@@ -115,6 +111,8 @@ function AddIncome() {
         desc: singleIncome?.desc,
       });
     }
+    const storedAccount_type = JSON.parse(localStorage.getItem("account_type"));
+    setAccount_type(storedAccount_type);
   }, [id, incomes, singleIncome]);
 
   const handleSubmit = async (e) => {
@@ -141,7 +139,7 @@ function AddIncome() {
       console.log("updating");
       await updateDoc(doc(db, "Income", id.trim()), {
         // amount: parseInt((form.amount).split(' ').join('')),
-        amount:parseInt(form.amount),
+        amount: parseInt(form.amount),
         date: form.date,
         desc: form.desc,
         incomeSource: form.income_source,
@@ -155,11 +153,11 @@ function AddIncome() {
       const incomeRef = doc(collection(db, "Income"));
 
       await setDoc(incomeRef, {
-        account_type:form.account_type,
+        account_type: form.account_type,
         createdAt: Timestamp.now().toDate(),
         createdBy: user?.displayName,
         userId: user?.uid,
-        amount: parseInt((form.amount).split(' ').join('')),
+        amount: parseInt(form.amount.split(" ").join("")),
         date: form.date,
         desc: form.desc,
         color: form.color,
@@ -168,7 +166,7 @@ function AddIncome() {
         incomeSource: form.income_source,
       });
     }
-   
+
     setLoading(false);
     handleShowConfirmation();
     setForm({
@@ -184,7 +182,7 @@ function AddIncome() {
     });
   };
 
- console.log(form.amount)
+  console.log(form.amount);
   return (
     <main className="addincome">
       <section>
@@ -277,6 +275,7 @@ function AddIncome() {
             <label htmlFor="income-source" style={{ color: "black" }}>
               Income Source
             </label>
+
             <select
               name="income_source"
               className="income-source"
@@ -286,42 +285,67 @@ function AddIncome() {
               onChange={(e) => handleChange(e)}
             >
               <option className="option">Please Select Income Source</option>
-              <option className="option" value="Balance b/f" selected>
-                Balance b/f
-              </option>
-              <option className="option" value="Main Offfering" selected>
-                Main Offering/Tithes
-              </option>
-              <option className="option" value="Rent">
-                Rent
-              </option>
-              <option className="option" value="Tithes">
-                Tithes
-              </option>
-              <option className="option" value="Mission Offering">
-                Mission Offering
-              </option>
-              <option className="option" value="Building Offering">
-                Building Offering
-              </option>
-              <option className="option" value="Sunday School Offering">
-                Sunday School Offering
-              </option>
-              <option className="option" value="Discples's Lifestyle Offering">
-                Disciple's Lifestyle Offering
-              </option>
-              <option className="option" value="Charity Offering">
-                Charity Offering
-              </option>
-              <option className="option" value="Seed Offering">
-                Seed Offering
-              </option>
-              <option className="option" value="Special Offering">
-                Special Offering
-              </option>
-              <option className="option" value="Others Offering">
-                Others Offering
-              </option>
+
+              {account_type === "Project account" && (
+                <div>
+                  <option className="option" value="Balance b/f" selected>
+                    Balance b/f
+                  </option>
+                  <option className="option" value="Mission Offering">
+                    Mission Offering
+                  </option>
+                  <option className="option" value="Building Offering">
+                    Building Offering
+                  </option>
+                  <option className="option" value="Solar Project">
+                    Solar Project
+                  </option>
+                  <option className="option" value="School Fees">
+                    School Fees
+                  </option>
+                  <option className="option" value="Interest Paid">
+                    Interest Paid
+                  </option>
+                </div>
+              )}
+              {account_type === "Main account" && (
+                <div>
+                  <option className="option" value="Balance b/f" selected>
+                    Balance b/f
+                  </option>
+                  <option className="option" value="Main Offfering" selected>
+                    Main Offering/Tithes
+                  </option>
+                  <option className="option" value="Rent">
+                    Rent
+                  </option>
+                  <option className="option" value="Tithes">
+                    Tithes
+                  </option>
+
+                  <option className="option" value="Sunday School Offering">
+                    Sunday School Offering
+                  </option>
+                  <option
+                    className="option"
+                    value="Discples's Lifestyle Offering"
+                  >
+                    Disciple's Lifestyle Offering
+                  </option>
+                  <option className="option" value="Charity Offering">
+                    Charity Offering
+                  </option>
+                  <option className="option" value="Seed Offering">
+                    Seed Offering
+                  </option>
+                  <option className="option" value="Special Offering">
+                    Special Offering
+                  </option>
+                  <option className="option" value="Others Offering">
+                    Others Offering
+                  </option>
+                </div>
+              )}
             </select>
             <p className="error">{sourceErrors}</p>
           </div>
