@@ -82,7 +82,7 @@ function Options(props) {
         </ul>
 
         <h3>{props.desc}</h3>
-        <div className="option-cat-cx">
+        <div className="option-cat-cxa">
           <ul>
             {props.catArray.map((cat, index) => (
               <li

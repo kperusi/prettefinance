@@ -10,7 +10,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
-
+import "./welcomepagestyles/welcomepage.css";
 export default function WelcomePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -124,22 +124,32 @@ export default function WelcomePage() {
     }
   };
   return (
-    <main>
+    <main className="welcome_main">
       <h1>Select Account</h1>
-      <section className="home-btn-cx">
+      <div>
+        <p>
+          {" "}
+          <span>Welcome to </span>
+          <span style={{ fontSize: "1.2em", color: "darkblue" }}>
+            <b>Prettifinance</b>
+          </span>
+          select your account to continue
+        </p>
+      </div>
+      <section className="home_btn_cx">
         <button
-          className="project-acct-btn"
-          onClick={handleProjectBottonClick}
-          type="button"
-        >
-          Project Account
-        </button>
-        <button
-          className="main-acct-btn"
+          className="main_acct_btn"
           onClick={handleMainBottonClick}
           type="button"
         >
           Main Account
+        </button>
+        <button
+          className="project_acct_btn"
+          onClick={handleProjectBottonClick}
+          type="button"
+        >
+          Project Account
         </button>
       </section>
     </main>

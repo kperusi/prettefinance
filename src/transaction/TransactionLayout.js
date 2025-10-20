@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink, Outlet, useNavigate, useParams } from "react-router-dom";
 import "./transactionstyle/transactionstyles.css";
 export default function TransactionLayout() {
-
-  const {id}=useParams()
+  const { id } = useParams();
   const [selected, setSelected] = useState({
     income: "selected",
     expenses: "",
@@ -16,20 +15,19 @@ export default function TransactionLayout() {
     if (name === "expenses") {
       setSelected({ income: "", expenses: "selected" });
     }
-    
   };
-const [account_type,setAccount_type]=useState()
-  console.log(id)
+  const [account_type, setAccount_type] = useState();
+  console.log(id);
 
-  useEffect(()=>{
-  const storedAccount_type=JSON.parse(localStorage.getItem('account_type'))
-  setAccount_type(storedAccount_type)
-  },[])
+  useEffect(() => {
+    const storedAccount_type = JSON.parse(localStorage.getItem("account_type"));
+    setAccount_type(storedAccount_type);
+  }, []);
   return (
     <main className="layout">
       <section className="layout-nav-cx">
         <div className="layout-logo">
-        <span
+          <span
             onClick={() => {
               navigate("/prettifinance/account/main");
             }}
@@ -54,8 +52,20 @@ const [account_type,setAccount_type]=useState()
               <path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z" />
             </svg> */}
           </span>
-          <h4 style={{ color: "white" }}>Add Transactions{`${account_type}`}</h4>
-
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            
+              alignSelf:'center',
+              justifySelf:'center',
+            paddingLeft:'20px'
+            }}
+          >
+            <h4 style={{ color: "white" }}>Add Transactions</h4>
+            <h4 style={{ color: "grey",textAlign:'center' }}>{`${account_type}`}</h4>
+          </div>
         </div>
         <span className="divide"></span>
         <div className="row">

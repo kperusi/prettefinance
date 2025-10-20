@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Option from "./Options";
-import "./filterstyles/filterstyles.css";
+import "./filterstyles/searchstyles/filterstyles.css"
 import { useDispatch, useSelector } from "react-redux";
 import {
   handleFilteredIncome_Expenses,

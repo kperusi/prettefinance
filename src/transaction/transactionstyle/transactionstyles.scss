@@ -43,8 +43,10 @@
 }
 .layout-logo {
   display: flex;
+  align-items: center;
   width: 100%;
   gap: 50px;
+
 }
 .layout-logo svg {
   fill: white !important;

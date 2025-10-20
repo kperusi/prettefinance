@@ -1,0 +1,100 @@
+.filter-main {
+  display: flex;
+  flex-direction: column;
+  /* background-color: darkblue; */
+}
+
+.filter-btns-cx {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.clearall-btn-cx button {
+  /* padding: 6px; */
+  align-self: first baseline;
+  border: none;
+  color: var(--Primary);
+  background-color: transparent;
+  outline: none;
+  border-bottom: solid 1.6px var(--Primary);
+}
+
+.clearall-btn-cx button:hover {
+  color: red;
+  border-bottom: solid 1.6px red;
+}
+
+.filters-cx {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: center;
+  background-color: var(--Primary);
+  padding: 10px;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 10px;
+  color: white;
+}
+
+.filters-cx span {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3px;
+  justify-content: center;
+}
+
+.filters-cx span svg {
+  fill: white;
+}
+
+.close {
+  display: none;
+}
+
+.open {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-option-cx {
+  background-color: rgba(10, 8, 8, 0.3);
+  position: fixed;
+  top: 0px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  height: 100vh;
+  width: 100%;
+  left: 0px;
+  /* border: solid; */
+}
+
+.filter-item-list-cx {
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  gap: 5px;
+  padding: 10px;
+  align-items: center;
+}
+
+.filter-item-cx {
+  display: flex;
+  border: solid 1px;
+  padding: 4px 9px;
+  gap: 6px;
+  background-color: rgba(0, 0, 139, 0.234);
+  align-items: center;
+  border-radius: 20px;
+}
+
+.filter-svg-cx {
+  display: flex;
+  border: solid 1px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 17px;
+  height: 17px;
+}/*# sourceMappingURL=filterstyles.css.map */
