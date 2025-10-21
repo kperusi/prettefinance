@@ -49,60 +49,59 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
   const show_dialog = useSelector((state) => state.sliceData.show_dialog);
   const dispatch = useDispatch();
 
-  console.log(account_types);
-  console.log(show_dialog);
+ 
 
-  useEffect(() => {
-    try {
-      const expensesRef = collection(db, "Expenses");
-      const q = query(
-        expensesRef,
-        orderBy("date", "desc")
-        // where("status", "==", "published")/
-      );
-      onSnapshot(q, (snapshot) => {
-        const expenses = snapshot.docs
-        .map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }))
-         .filter((item) => item.account_type === account_types);;
-        setLoading(false);
-        // setExpense(expenses);
-        if (expenses.length > 0) {
-          localStorage.setItem("expenses", JSON.stringify(expenses));
-        }
-      });
-    } catch (error) {
-      setError(error);
-    }
+  // useEffect(() => {
+  //   try {
+  //     const expensesRef = collection(db, "Expenses");
+  //     const q = query(
+  //       expensesRef,
+  //       orderBy("date", "desc")
+  //       // where("status", "==", "published")/
+  //     );
+  //     onSnapshot(q, (snapshot) => {
+  //       const expenses = snapshot.docs
+  //       .map((doc) => ({
+  //         id: doc.id,
+  //         ...doc.data(),
+  //       }))
+  //        .filter((item) => item.account_type === account_types);;
+  //       setLoading(false);
+  //       // setExpense(expenses);
+  //       if (expenses.length > 0) {
+  //         localStorage.setItem("expenses", JSON.stringify(expenses));
+  //       }
+  //     });
+  //   } catch (error) {
+  //     setError(error);
+  //   }
 
-    try {
-      const incomeRef = collection(db, "Income");
-      const q = query(
-        incomeRef,
-        // where("account_type", "==", "Main account"),
-        orderBy("createdAt", "desc")
-      );
-      onSnapshot(q, (snapshot) => {
-        const incomes = snapshot.docs
-          .map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }))
-          .filter((item) => item.account_type === account_types);
-        setLoading(false);
-        console.log(incomes);
-        console.log(expenses)
+  //   try {
+  //     const incomeRef = collection(db, "Income");
+  //     const q = query(
+  //       incomeRef,
+  //       // where("account_type", "==", "Main account"),
+  //       orderBy("createdAt", "desc")
+  //     );
+  //     onSnapshot(q, (snapshot) => {
+  //       const incomes = snapshot.docs
+  //         .map((doc) => ({
+  //           id: doc.id,
+  //           ...doc.data(),
+  //         }))
+  //         .filter((item) => item.account_type === account_types);
+  //       setLoading(false);
+  //       console.log(incomes);
+  //       console.log(expenses)
      
-        if (incomes.length > 0) {
-          localStorage.setItem("incomes", JSON.stringify(incomes));
-        }
-      });
-    } catch (error) {
-      setError(error);
-    }
-  }, [id, incomes, account_types]);
+  //       if (incomes.length > 0) {
+  //         localStorage.setItem("incomes", JSON.stringify(incomes));
+  //       }
+  //     });
+  //   } catch (error) {
+  //     setError(error);
+  //   }
+  // }, [id, incomes, account_types]);
 
   const handleSelectedMonth = (month, index) => {
     localStorage.setItem("dashboard-selected-month", JSON.stringify(month));
@@ -114,10 +113,16 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
     setSelectedIndex(JSON.parse(localStorage.getItem("selectedMonthIndex")));
   };
 
-  useEffect(() => {
+  useEffect(()=>{
     const storeAccount_type = JSON.parse(localStorage.getItem("account_type"));
-    const storedIncome = JSON.parse(localStorage.getItem("incomes")) || [];
-    const storedExpense = JSON.parse(localStorage.getItem("expenses")) || [];
+setAccount_type(storeAccount_type);
+  },[])
+
+  useEffect(() => {
+    console.log(account_types)
+    
+    const storedIncome = JSON.parse(localStorage.getItem(`${(account_types)} incomes`)) || [];
+    const storedExpense = JSON.parse(localStorage.getItem(`${account_types} expenses`)) || [];
     const storedUser =
       JSON.parse(localStorage.getItem("ebcfinance-user")) || null;
     const storedUserDetails =
@@ -129,7 +134,7 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
     const storedSelectedMonthIndex = JSON.parse(
       localStorage.getItem("selectedMonthIndex")
     );
-    setAccount_type(storeAccount_type);
+    
     setIncomes(storedIncome);
     setExpenses(storedExpense);
     setLoginUserDetail(storedUserDetails);
@@ -155,9 +160,10 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
     setTotalBalance(totalIncomes - totalExpenses);
 
     // filtering monthly transactions******************************************
-  }, []);
+  }, [account_types]);
 
-  console.log(account_type_index);
+  console.log(incomes);
+  console.log(JSON.parse(localStorage.getItem('account_type')))
   useEffect(() => {
     const thisMonthIncome = incomes.filter(function (item) {
       console.log("month running");

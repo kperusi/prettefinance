@@ -41,6 +41,7 @@ export default function WelcomePage() {
         // localStorage.setItem("incomes", JSON.stringify(incomes));
         if (incomes.length > 0) {
           localStorage.setItem("incomes", JSON.stringify(incomes));
+          localStorage.setItem("Main account incomes", JSON.stringify(incomes));
         }
       });
     } catch (error) {
@@ -65,6 +66,7 @@ export default function WelcomePage() {
         // setExpense(expenses);
         if (expenses.length > 0) {
           localStorage.setItem("expenses", JSON.stringify(expenses));
+          localStorage.setItem("Main account expenses", JSON.stringify(expenses));
         }
       });
     } catch (error) {
@@ -94,6 +96,7 @@ export default function WelcomePage() {
         // localStorage.setItem("incomes", JSON.stringify(incomes));
         if (incomes.length > 0) {
           localStorage.setItem("incomes", JSON.stringify(incomes));
+          localStorage.setItem("Project account incomes", JSON.stringify(incomes));
         }
       });
     } catch (error) {
@@ -117,6 +120,8 @@ export default function WelcomePage() {
         // setExpense(expenses);
         if (expenses.length > 0) {
           localStorage.setItem("expenses", JSON.stringify(expenses));
+          localStorage.setItem("Project account expenses", JSON.stringify(expenses));
+
         }
       });
     } catch (error) {

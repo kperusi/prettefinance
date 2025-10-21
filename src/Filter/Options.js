@@ -21,31 +21,42 @@ function Options(props) {
   const [selectedCat, setSelectedCat] = useState();
   const [catIndex, setCatIndex] = useState("");
   const [count, setCount] = useState(0);
-  
+  const [uniqueMonthArray, setUniqueMonthArray] = useState(new Set());
 
   const handleSelectedMonth = (month, index) => {
     setSelectedMonth(month);
     setSelectedIndex(index);
+
     selectedMonthArray.push(month);
 
-    filterArray[0] = month;
-   
-   
+    // filterArray[0] = month;
+
+    if (uniqueMonthArray.has(month)) {
+      uniqueMonthArray.delete(month);
+    } else {
+      setUniqueMonthArray(new Set([...uniqueMonthArray, month]));
+    }
+console.log(uniqueMonthArray)
+    
   };
 
+
+
+  useEffect(()=>{
+    setFilterArray(Array.from(uniqueMonthArray));
+  },[uniqueMonthArray])
   const handleSelectedCat = (cat, index) => {
     setSelectedCat(cat);
     setCatIndex(index);
     filterArray[1] = cat;
   };
-
+  console.log(filterArray);
   const handleApplyFilter = () => {
-    props.handleFilterItem(filterArray);
+    props.handleFilterItem(uniqueMonthArray);
     // dispatch(handleSelectedMonthAndSource(selectedMonth,selectedCat))
     dispatch(handleShowFilterOption("close"));
   };
-
-
+  console.log(uniqueMonthArray);
   return (
     <main className="option-main">
       <button
@@ -69,12 +80,14 @@ function Options(props) {
           {months.slice(1).map((month, index) => (
             <li
               className={`month-input-label-cx ${
-                selectedIndex === index ? "option-active" : "option-no-active"
+                uniqueMonthArray.has(month)
+                  ? "option-active"
+                  : "option-no-active "
+                //selectedIndex === index ? "option-active" : " "
               }`}
               onClick={() => {
                 handleSelectedMonth(month, index);
               }}
-              // onClick={props.handlefilterItem()}
             >
               {month}
             </li>
@@ -82,7 +95,7 @@ function Options(props) {
         </ul>
 
         <h3>{props.desc}</h3>
-        <div className="option-cat-cxa">
+        <div className="option-cat-cx">
           <ul>
             {props.catArray.map((cat, index) => (
               <li

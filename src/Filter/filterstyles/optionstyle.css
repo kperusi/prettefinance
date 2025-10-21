@@ -23,6 +23,7 @@ li {
 }
 .option-no-active {
   color: black;
+
 }
 .option-active {
   background-color: var(--Primary);
@@ -46,9 +47,9 @@ li {
   color: var(--Primary);
 }
 .option-cat-cx{
-  overflow-y: scroll;
-  /* border: solid; */
-  height: 40vh;
+  /* overflow-y: scroll; */
+   /* border: solid;  */
+  height: 10vh;
 }
 .option-cat-list{
   display: flex;
