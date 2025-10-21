@@ -45,11 +45,9 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
 
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [account_types, setAccount_type] = useState();
-  const [account_type_index, setAccount_type_index] = useState();
+ 
   const show_dialog = useSelector((state) => state.sliceData.show_dialog);
   const dispatch = useDispatch();
-
- 
 
   // useEffect(() => {
   //   try {
@@ -93,7 +91,7 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
   //       setLoading(false);
   //       console.log(incomes);
   //       console.log(expenses)
-     
+
   //       if (incomes.length > 0) {
   //         localStorage.setItem("incomes", JSON.stringify(incomes));
   //       }
@@ -113,16 +111,18 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
     setSelectedIndex(JSON.parse(localStorage.getItem("selectedMonthIndex")));
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     const storeAccount_type = JSON.parse(localStorage.getItem("account_type"));
-setAccount_type(storeAccount_type);
-  },[])
+    setAccount_type(storeAccount_type);
+  }, []);
 
   useEffect(() => {
-    console.log(account_types)
-    
-    const storedIncome = JSON.parse(localStorage.getItem(`${(account_types)} incomes`)) || [];
-    const storedExpense = JSON.parse(localStorage.getItem(`${account_types} expenses`)) || [];
+    console.log(account_types);
+
+    const storedIncome =
+      JSON.parse(localStorage.getItem(`${account_types} incomes`)) || [];
+    const storedExpense =
+      JSON.parse(localStorage.getItem(`${account_types} expenses`)) || [];
     const storedUser =
       JSON.parse(localStorage.getItem("ebcfinance-user")) || null;
     const storedUserDetails =
@@ -134,7 +134,7 @@ setAccount_type(storeAccount_type);
     const storedSelectedMonthIndex = JSON.parse(
       localStorage.getItem("selectedMonthIndex")
     );
-    
+
     setIncomes(storedIncome);
     setExpenses(storedExpense);
     setLoginUserDetail(storedUserDetails);
@@ -163,7 +163,7 @@ setAccount_type(storeAccount_type);
   }, [account_types]);
 
   console.log(incomes);
-  console.log(JSON.parse(localStorage.getItem('account_type')))
+  console.log(JSON.parse(localStorage.getItem("account_type")));
   useEffect(() => {
     const thisMonthIncome = incomes.filter(function (item) {
       console.log("month running");
@@ -197,7 +197,7 @@ setAccount_type(storeAccount_type);
       0
     );
     setTotalExpensesAmountThisMonth(addThisMonthExpenses);
-  }, [selectedMonth]);
+  }, [selectedMonth,expenses,incomes]);
 
   const handleMouseEnter = () => {
     if (mouseEnter === "") {
@@ -231,12 +231,10 @@ setAccount_type(storeAccount_type);
       <section className="dashboard-title">
         <div
           className="dashboard-avatar"
-          onClick={() => navigate('/prettifinance/settings')}
+          onClick={() => navigate("/prettifinance/settings")}
         >
           <h3>{avatarName}</h3>
         </div>
-
-        
       </section>
       {loginUserDetail?.role === "admin" && (
         <section

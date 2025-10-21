@@ -71,7 +71,7 @@ export default function Report() {
   const [cummulativeExpensesAmount, setCummulativeExpenseAmount] = useState(0);
   const [cummulativeIncomes, setCummulativeIncomes] = useState([]);
   const [cummulativeIncomesAmount, setCummulativeIncomesAmount] = useState(0);
-
+  const [account_types, setAccount_type] = useState();
   const balancebf = 1219033.01;
 
   let allExpenses = [];
@@ -86,6 +86,11 @@ export default function Report() {
     }
   };
 
+  useEffect(() => {
+    const storeAccount_type = JSON.parse(localStorage.getItem("account_type"));
+    setAccount_type(storeAccount_type);
+  }, []);
+
   const cummulativeMonth = (month) => {
     const monthArr = ListOfMonths().slice(1);
     const monthIndex = monthArr.indexOf(month);
@@ -96,13 +101,15 @@ export default function Report() {
     return cummulativeMonths;
   };
 
- 
-
   // console.log(cummulativeMonth(form.month));
-
+  console.log(account_types);
   useEffect(() => {
-    const storedIncome = JSON.parse(localStorage.getItem("incomes")) || [];
-    const storedExpense = JSON.parse(localStorage.getItem("expenses")) || [];
+    //const storedIncome = JSON.parse(localStorage.getItem("incomes")) || [];
+    //const storedExpense = JSON.parse(localStorage.getItem("expenses")) || [];
+    const storedIncome =
+      JSON.parse(localStorage.getItem(`${account_types} incomes`)) || [];
+    const storedExpense =
+      JSON.parse(localStorage.getItem(`${account_types} expenses`)) || [];
     const storedUser =
       JSON.parse(localStorage.getItem("ebcfinance-user")) || null;
 
@@ -133,7 +140,6 @@ export default function Report() {
 
     // cummulated Incoomes and expenses/////////////////////////////////////////////////////////
 
-   
     const cummulatedIncomes = incomes?.filter(function (item) {
       const date = new Date(item.date);
       const month = date.toLocaleDateString("en-US", {
@@ -143,7 +149,7 @@ export default function Report() {
       return cummulativeMonth(form.month).includes(month);
     });
     setCummulativeIncomes(cummulatedIncomes);
-   
+
     const cummulatedExpenses = expenses?.filter(function (item) {
       const date = new Date(item.date);
       const month = date.toLocaleDateString("en-US", {
@@ -154,23 +160,20 @@ export default function Report() {
     });
     setCummulativeExpenses(cummulatedExpenses);
 
-// Cummulated amounts ==========================================================
-     const _cummulatedIncomeAmount = cummulatedIncomes.reduce(
+    // Cummulated amounts ==========================================================
+    const _cummulatedIncomeAmount = cummulatedIncomes.reduce(
       (sum, each) => sum + (each?.amount || 0),
       0
     );
 
-    setCummulativeIncomesAmount(_cummulatedIncomeAmount)
-
+    setCummulativeIncomesAmount(_cummulatedIncomeAmount);
 
     const _cummulatedExpensesAmount = cummulatedExpenses.reduce(
       (sum, each) => sum + (each?.amount || 0),
       0
     );
 
-    setCummulativeExpenseAmount(_cummulatedExpensesAmount)
-
-
+    setCummulativeExpenseAmount(_cummulatedExpensesAmount);
 
     const totalExpenses = storedExpense.reduce(
       (sum, each) => sum + (each?.amount || 0),
@@ -197,16 +200,15 @@ export default function Report() {
 
     setTotalExpenses(totalExpenses);
 
-    console.log(cummulativeExpensesAmount)
+    console.log(cummulativeExpensesAmount);
 
-    setTotalBalance(cummulativeIncomesAmount - cummulativeExpensesAmount)
+    setTotalBalance(cummulativeIncomesAmount - cummulativeExpensesAmount);
     // setTotalBalance((cummulativeIncomesAmount - cummulativeExpensesAmount));
     setForm({ ...form, name: user?.displayName });
-  }, [form.month]);
+  }, [form.month,account_types]);
 
   // console.log(cummulativeIncomesAmount);
   // console.log(cummulativeIncomesAmount - cummulativeExpensesAmount)
-
 
   const handlePreviewReport = () => {
     if (form.month === "") {
@@ -465,7 +467,10 @@ export default function Report() {
       items: [
         { desc: "Total Income", amount: cummulativeIncomesAmount },
         { desc: "Total Expenses", amount: cummulativeExpensesAmount },
-        { desc: "Total Balance", amount: cummulativeIncomesAmount-cummulativeExpensesAmount},
+        {
+          desc: "Total Balance",
+          amount: cummulativeIncomesAmount - cummulativeExpensesAmount,
+        },
       ],
     });
 
@@ -542,6 +547,7 @@ export default function Report() {
             <path d="M360-240 120-480l240-240 56 56-144 144h568v80H272l144 144-56 56Z" />
           </svg>
         </span>
+        <h4>{account_types}</h4>
         <h3>Report settings</h3>
       </div>
 
