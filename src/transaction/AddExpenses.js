@@ -56,14 +56,21 @@ function AddExpenses() {
       .replace(/\W/g, "") // Remove non-digit characters
       .replace(/\B(?=(\d{3})+(?!\d))/g, " "); // Add spaces every 3 digits
   };
+  const formatNumberwithDecimal=(num)=>{
+const clenaed = num.replace(/[^0-9.]/g, "")
+const parts =clenaed.split('.')
+parts[0]=parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+return parts.join('.')
+}
 
   const handleChange = (e) => {
     // setForm({ ...form, [e.target.name]: e.target.value });
 
     if (e.target.name === "amount") {
-      const newValue = e.target.value.replace(/[^0-9]/g, "");
+      // const newValue = e.target.value.replace(/[^0-9]/g, "");
 
-      setForm({ ...form, amount: formatNumber(newValue) });
+      // setForm({ ...form, amount: formatNumber(newValue) });
+         setForm({ ...form, amount: formatNumberwithDecimal(e.target.value) });
       console.log("changing number");
     }
 
@@ -181,7 +188,7 @@ function AddExpenses() {
       console.log("updating");
       await updateDoc(doc(db, "Expenses", id.trim()), {
         // amount: parseInt(form?.amount.split(" ").join("")),
-        amount: parseInt(form?.amount),
+        amount: parseFloat(form?.amount),
         date: form.date,
         MOD: form.MOD,
         desc: form.desc,
@@ -201,7 +208,7 @@ function AddExpenses() {
         createdAt: Timestamp.now().toDate(),
         createdBy: user?.displayName,
         userId: user?.uid,
-        amount: parseInt(form?.amount.split(" ").join("")),
+        amount: parseFloat(form?.amount.split(" ").join("")),
         date: form.date,
         desc: form.desc,
         MOD: form.MOD,

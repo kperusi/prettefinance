@@ -116,9 +116,9 @@ export default function SingleIncome() {
   };
   const handleBackAfterEditing = () => {
     if (singleIncome?.main === "Expenses") {
-      navigate(`/ebcfinance/views/expenses`);
+      navigate(`/prettifinance/account/main/expenses`);
     } else if (singleIncome?.main === "Income") {
-      navigate(`/ebcfinance/views/income`);
+      navigate(`/prettifinance/account/main/income`);
     }
   };
   console.log(singleIncome);
@@ -135,7 +135,7 @@ export default function SingleIncome() {
       <section className="single-income-section-one">
         <div className="single-income-cancel-edit-del-btn-cx">
           <div className="single-income-cancel-btn-cx">
-            <button onClick={() => navigate(-1)}>
+            <button onClick={() =>handleBackAfterEditing()}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="24px"
