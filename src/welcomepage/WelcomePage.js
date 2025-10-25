@@ -133,11 +133,10 @@ export default function WelcomePage() {
       <h1>Select Account</h1>
       <div>
         <p>
-          {" "}
-          <span>Welcome to </span>
-          <span style={{ fontSize: "1.2em", color: "darkblue" }}>
+          <span style={{ fontSize: "1.4em",fontStyle:'oblique'}}>Welcome to  <span style={{ fontSize: "1.2em", color: "darkblue" }}>
             <b>Prettifinance</b>
-          </span>
+          </span></span>
+         
           select your account to continue
         </p>
       </div>

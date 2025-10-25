@@ -36,43 +36,58 @@ function Options(props) {
     } else {
       setUniqueMonthArray(new Set([...uniqueMonthArray, month]));
     }
-console.log(uniqueMonthArray)
-    
-  };
-
-
-
-  useEffect(()=>{
     setFilterArray(Array.from(uniqueMonthArray));
-  },[uniqueMonthArray])
-  const handleSelectedCat = (cat, index) => {
-    setSelectedCat(cat);
-    setCatIndex(index);
-    filterArray[1] = cat;
   };
-  console.log(filterArray);
+
+  useEffect(() => {
+    setFilterArray(Array.from(uniqueMonthArray));
+  }, [uniqueMonthArray]);
+
+  const handleSelectedCat = (cat, index) => {
+    // setSelectedCat(cat);
+    // setCatIndex(index);
+    // filterArray[1] = cat;
+     if (uniqueMonthArray.has(cat)) {
+      uniqueMonthArray.delete(cat);
+    } else {
+      setUniqueMonthArray(new Set([...uniqueMonthArray, cat]));
+    }
+    setFilterArray(Array.from(uniqueMonthArray));
+  };
+
   const handleApplyFilter = () => {
-    props.handleFilterItem(uniqueMonthArray);
+    props.handleFilterItem(filterArray);
     // dispatch(handleSelectedMonthAndSource(selectedMonth,selectedCat))
     dispatch(handleShowFilterOption("close"));
   };
-  console.log(uniqueMonthArray);
+   //console.log(uniqueMonthArray);
+   //console.log(filterArray);
   return (
     <main className="option-main">
-      <button
-        className="option-close-btn"
-        onClick={() => dispatch(handleShowFilterOption("close"))}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          height="24px"
-          viewBox="0 -960 960 960"
-          width="24px"
-          fill="#1f1f1f"
+      <div className="option-close-apply-btn-cx" style={{ display: "flex" }}>
+        {(selectedMonth || selectedCat) && (
+          <div className="apply-filter-btn-cx">
+            <button>Clear Filters</button>
+            <button onClick={() => handleApplyFilter()}>Apply Filters</button>
+          </div>
+        )}
+
+        <button
+          className="option-close-btn"
+          onClick={() => dispatch(handleShowFilterOption("close"))}
         >
-          <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
-        </svg>
-      </button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="24px"
+            viewBox="0 -960 960 960"
+            width="24px"
+            fill="#1f1f1f"
+          >
+            <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+          </svg>
+        </button>
+      </div>
+
       <div className="months-cx">
         <h3>Months</h3>
 
@@ -90,6 +105,18 @@ console.log(uniqueMonthArray)
               }}
             >
               {month}
+              {uniqueMonthArray.has(month)&& <span className="month-input-label-cancel">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="14px"
+                  viewBox="0 -960 960 960"
+                  width="14px"
+                  fill="#1f1f1f"
+                >
+                  <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+                </svg>
+              </span>}
+             
             </li>
           ))}
         </ul>
@@ -100,7 +127,10 @@ console.log(uniqueMonthArray)
             {props.catArray.map((cat, index) => (
               <li
                 className={`month-input-label-cx ${
-                  catIndex === index ? "option-active" : "option-no-active"
+                  // catIndex === index ? "option-active" : "option-no-active"
+                   uniqueMonthArray.has(cat)
+                  ? "option-active"
+                  : "option-no-active "
                 }`}
                 onClick={() => handleSelectedCat(cat, index)}
               >
@@ -110,7 +140,7 @@ console.log(uniqueMonthArray)
           </ul>
         </div>
       </div>
-      <hr></hr>
+
       {/* <div className="filter-list-cx">
         {filterArray && (
           <div>
@@ -120,12 +150,6 @@ console.log(uniqueMonthArray)
           </div>
         )}
       </div> */}
-      {(selectedMonth || selectedCat) && (
-        <div className="apply-filter-btn-cx">
-          <button>Clear Filters</button>
-          <button onClick={() => handleApplyFilter()}>Apply Filters</button>
-        </div>
-      )}
     </main>
   );
 }

@@ -135,7 +135,7 @@ export default function SingleIncome() {
       <section className="single-income-section-one">
         <div className="single-income-cancel-edit-del-btn-cx">
           <div className="single-income-cancel-btn-cx">
-            <button onClick={() => handleBackAfterEditing()}>
+            <button onClick={() => navigate(-1)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="24px"

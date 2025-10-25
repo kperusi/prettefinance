@@ -5,16 +5,25 @@
   width: 80%;
   border-radius: 10px;
   height: 100%;
-  padding: 20px;
+  padding: 20px 10px;
   transition: all 3ms;
+}
+.option-close-apply-btn-cx{
+  justify-content: flex-end;
+  border-bottom: 1px gray solid;
+  margin-bottom: 5px;
+  gap: 5px;
 }
 .option-close-btn {
   align-self: flex-end;
+
   border: none;
   border-radius: 50%;
   padding: 7px;
   width: 40px;
   height: 40px;
+  background-color: white;
+
 }
 li {
   list-style: none;
@@ -29,8 +38,13 @@ li {
   background-color: var(--Primary);
   color: white;
   width: fit-content;
+margin-bottom: 3px;
 }
-
+.months-cx{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 .months-cx ul{
   padding: 0 10px;
 }
@@ -59,11 +73,28 @@ li {
 
 }
 .month-input-label-cx{
+  align-items: center;
   display: flex;
-  border-radius: 10px;
+  border-radius: 6px;
   padding: 1px 5px;
+  justify-content: space-between;
+  gap: 10px;
   /* border: solid; */
  
+}
+.month-input-label-cancel{
+  position: relative;
+  top: -6px;
+  right: -10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: aliceblue;
+  height: 20px;
+
+  width: 20px;
+  border-radius: 50%;
+ border: solid darkblue 1px;
 }
 label{
   font-size: 1rem;
@@ -79,14 +110,15 @@ label{
 
 .apply-filter-btn-cx {
   display: flex;
-  padding: 10px;
+  padding: 1px;
   align-items: flex-end;
   justify-content: flex-end;
   gap: 10px;
+  margin-bottom: 5px;
 }
 .apply-filter-btn-cx button {
-  padding: 10px;
-  border-radius: 10px;
+  padding: 7px;
+  border-radius: 7px;
 }
 .apply-filter-btn-cx :nth-child(1) {
   border: 1px solid rgb(204, 203, 203);

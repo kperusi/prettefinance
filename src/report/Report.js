@@ -547,8 +547,11 @@ export default function Report() {
             <path d="M360-240 120-480l240-240 56 56-144 144h568v80H272l144 144-56 56Z" />
           </svg>
         </span>
-        <h4>{account_types}</h4>
+        <div style={{display:'flex',gap:'-12px',flexDirection:'column'}}>
+          <h4>{account_types}</h4>
         <h3>Report settings</h3>
+        </div>
+        
       </div>
 
       <form>

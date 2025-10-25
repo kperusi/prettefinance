@@ -40,18 +40,31 @@ function AddIncome() {
   const navigate = useNavigate();
 
   const formatNumber = (values) => {
-    return values
-      .replace(/\W/g, "") // Remove non-digit characters
-      .replace(/\B(?=(\d{3})+(?!\d))/g, " "); // Add spaces every 3 digits
+    return (
+      values
+        .toString()
+        //.replace(/\W/g, "")  Remove non-digit characters
+        .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+    ); // Add spaces every 3 digits
   };
+const formatNumberwithDecimal=(num)=>{
+const clenaed = num.replace(/[^0-9.]/g, "")
+const parts =clenaed.split('.')
+parts[0]=parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+return parts.join('.')
+}
 
   let date2 = new Date(Date.now());
   // console.log(date2.toDateString());
   const handleChange = (e) => {
     if (e.target.name === "amount") {
-      const newValue = e.target.value.replace(/[^0-9]/g, "");
-      setFormartedNumber(formatNumber(newValue));
-      setForm({ ...form, amount: formatNumber(newValue) });
+     
+      const newValue = e.target.value.replace(/[^0-9.]/g, "");
+      // .replace(/(\..*)\./g, '$1');
+      //  setFormartedNumber(formatNumber(newValue));
+     // setForm({ ...form, amount: formatNumber(newValue) });
+      setForm({ ...form, amount: formatNumberwithDecimal(e.target.value) });
+
       console.log("changing number");
     }
 
@@ -157,7 +170,7 @@ function AddIncome() {
         createdAt: Timestamp.now().toDate(),
         createdBy: user?.displayName,
         userId: user?.uid,
-        amount: parseInt(form.amount.split(" ").join("")),
+        amount: parseFloat(form.amount.split(" ").join("")),
         date: form.date,
         desc: form.desc,
         color: form.color,

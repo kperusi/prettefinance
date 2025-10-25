@@ -132,7 +132,7 @@
   overflow-x: scroll;
   gap: 20px;
   padding: 5px 20px;
-  width: 345px;
+  width: 330px;
   cursor: pointer;
   // background-color: rgb(236, 236, 234);
   border-bottom: 1px solid gray;
@@ -154,8 +154,12 @@
 }
 
 .analytic-balance {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   // padding: 0 20px;
   line-height: 1.6em;
+
 }
 
 .analytic-balance h3{

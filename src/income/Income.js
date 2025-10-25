@@ -32,13 +32,23 @@ export default function Income() {
   );
   const [totalAmountFilteredIncome, setTotalAmountFilteredIncome] = useState(0);
   const [displayedIncome, setDisplayedIncome] = useState([]);
+  const [account_type, setAccount_type] = useState();
   const catArray = ["Main Offfering", "Rent"];
 
   useEffect(() => {
-    const storedIncome = JSON.parse(localStorage.getItem("incomes")) || [];
+    const storedAccount_type = JSON.parse(localStorage.getItem("account_type"));
+    setAccount_type(storedAccount_type);
+  }, []);
+
+   //console.log(`${account_type} incomes`)
+   //console.log(incomes)
+
+  useEffect(() => {
+    const storedIncome = JSON.parse(localStorage.getItem(`${account_type} incomes`)) || [];
     const storedUserDetails =
       JSON.parse(localStorage.getItem("loginUserDetails")) || null;
     // Update state with retrieved values
+    console.log(account_type)
     setIncomes(storedIncome);
     setLoginUserDetail(storedUserDetails);
 
@@ -47,12 +57,7 @@ export default function Income() {
       0
     );
     setTotalIncome(totalIncome);
-
-    // return () => {
-    //   dispatch(handleShowFilterOption("close"));
-
-    // };
-  }, []);
+  }, [account_type]);
 
   useEffect(() => {
     const totalFilteredIncome = filteredIncome.reduce(
@@ -62,18 +67,6 @@ export default function Income() {
 
     setTotalAmountFilteredIncome(totalFilteredIncome);
 
-    // if (filteredIncome.length > 0) {
-    //   const totalFilteredIncome = filteredIncome.reduce(
-    //     (sum, each) => sum + (each.amount || 0),
-    //     0
-    //   );
-    //   setDisplayedTotalIncome(totalFilteredIncome);
-    //   setDisplayedIncome(filteredIncome);
-    //   setEmptyFilter(true);
-    // } else {
-    //   setDisplayedIncome(incomes);
-    //   setDisplayedTotalIncome(totalIncome);
-    // }
   }, [filteredIncome, incomes, totalIncome]);
 
   const handleMouseEnter = () => {
@@ -83,8 +76,7 @@ export default function Income() {
       setMouseEnter("");
     }
   };
-  console.log(filteredIncome);
-  console.log(totalAmountFilteredIncome);
+
 
   return (
     <main className="income-main">

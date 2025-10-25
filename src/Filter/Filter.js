@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Option from "./Options";
-import "./filterstyles/searchstyles/filterstyles.css"
+import "./filterstyles/searchstyles/filterstyles.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   handleFilteredIncome_Expenses,
@@ -15,31 +15,150 @@ export default function Filter({ name, catArray, desc }) {
   const expenses = useSelector((state) => state.sliceData.expenses);
   const [filteredIncome_expenses, setFilteredIncome_expenses] = useState([]);
   const [emptyFilter, setEmptyFilter] = useState(false);
+   const [account_type, setAccount_type] = useState();
   const filteredTransaction = useSelector(
     (state) => state.sliceData.filteredIncome_Expenses
   );
-  const selectedMonthAndSource=useSelector((state)=>state.sliceData.sle)
+  const selectedMonthAndSource = useSelector((state) => state.sliceData.sle);
 
   const handleClearFilter = (items) => {};
 
 
-
-
-
+   useEffect(() => {
+      const storedAccount_type = JSON.parse(localStorage.getItem("account_type"));
+      setAccount_type(storedAccount_type);
+    }, []);
   const handlefilterItem = (items) => {
     console.log("i am controlled from child");
+    console.log(items);
     setFilterItems(items);
-   
-    const storedIncome = JSON.parse(localStorage.getItem("incomes")) || [];
+    const storedIncome = JSON.parse(localStorage.getItem(`${account_type} incomes`)) || [];
     setIncome(storedIncome);
 
+    console.log(name);
 
+    // if (name === "income") {
+    //   console.log(filterItems.length);
+    //   console.log(filterItems);
 
+    //   if (filterItems.length > 1) {
+    //     console.log("...");
+    //     const localFilteredIncome = income.filter(function (item) {
+    //       const date = new Date(item.date);
+
+    //       const month = date.toLocaleDateString("en-US", {
+    //         month: "long",
+    //       });
+
+    //       return (
+    //         filterItems.includes(month) &&
+    //         filterItems.includes(item.incomeSource)
+    //       );
+    //     });
+
+    //     setFilteredIncome_expenses(localFilteredIncome);
+    //     dispatch(handleFilteredIncome_Expenses(localFilteredIncome));
+    //   }
+    //   if (filterItems.length <= 1) {
+    //     const localFilteredIncome = income.filter(function (item) {
+    //       const date = new Date(item.date);
+
+    //       const month = date.toLocaleDateString("en-US", {
+    //         month: "long",
+    //       });
+
+    //       return (
+    //         filterItems.includes(month) ||
+    //         filterItems.includes(item.incomeSource)
+    //       );
+    //     });
+
+    //     setFilteredIncome_expenses(localFilteredIncome);
+    //     dispatch(handleFilteredIncome_Expenses(localFilteredIncome));
+    //   }
+
+    //   if (filterItems[0] === undefined) {
+    //     const localFilteredIncome = income.filter(function (item) {
+    //       const date = new Date(item.date);
+
+    //       const month = date.toLocaleDateString("en-US", {
+    //         month: "long",
+    //       });
+
+    //       return (
+    //         filterItems.includes(month) ||
+    //         filterItems.includes(item.incomeSource)
+    //       );
+    //     });
+
+    //     setFilteredIncome_expenses(localFilteredIncome);
+    //     dispatch(handleFilteredIncome_Expenses(localFilteredIncome));
+    //   }
+    // } else if (name === "expenses") {
+    //   if (filterItems.length > 1) {
+    //     const localFilteredExpenses = expenses.filter(function (item) {
+    //       const date = new Date(item.date);
+
+    //       const month = date.toLocaleDateString("en-US", {
+    //         month: "long",
+    //       });
+
+    //       return (
+    //         filterItems.includes(month) &&
+    //         filterItems.includes(item.expensesCategory)
+    //       );
+    //     });
+
+    //     setFilteredIncome_expenses(localFilteredExpenses);
+    //     dispatch(handleFilteredIncome_Expenses(localFilteredExpenses));
+    //   }
+    //   if (filterItems.length <= 1) {
+    //     const localFilteredExpenses = expenses.filter(function (item) {
+    //       const date = new Date(item.date);
+
+    //       const month = date.toLocaleDateString("en-US", {
+    //         month: "long",
+    //       });
+
+    //       return (
+    //         filterItems.includes(month) ||
+    //         filterItems.includes(item.expensesCategory)
+    //       );
+    //     });
+
+    //     setFilteredIncome_expenses(localFilteredExpenses);
+    //     dispatch(handleFilteredIncome_Expenses(localFilteredExpenses));
+    //   }
+
+    //   if (filterItems[0] === undefined) {
+    //     const localFilteredExpenses = expenses.filter(function (item) {
+    //       const date = new Date(item.date);
+
+    //       const month = date.toLocaleDateString("en-US", {
+    //         month: "long",
+    //       });
+
+    //       return (
+    //         filterItems.includes(month) ||
+    //         filterItems.includes(item.expensesCategory)
+    //       );
+    //     });
+
+    //     setFilteredIncome_expenses(localFilteredExpenses);
+    //     dispatch(handleFilteredIncome_Expenses(localFilteredExpenses));
+    //   }
+    // }
+    // console.log("outside");
+  };
+  // console.log(filterItems)
+  useEffect(() => {
+    console.log(filterItems.length);
+    console.log(filterItems);
+    console.log(name)
     if (name === "income") {
     
-      console.log(filterItems)
-      if (filterItems.length >1) {
-       console.log('...')
+      if (filterItems.length >= 1) {
+        console.log(income)
         const localFilteredIncome = income.filter(function (item) {
           const date = new Date(item.date);
 
@@ -56,134 +175,23 @@ export default function Filter({ name, catArray, desc }) {
         setFilteredIncome_expenses(localFilteredIncome);
         dispatch(handleFilteredIncome_Expenses(localFilteredIncome));
       }
-      if (filterItems.length <= 1) {
-        const localFilteredIncome = income.filter(function (item) {
-          const date = new Date(item.date);
+      // if (filterItems.length <1) {
+      //   const localFilteredIncome = income.filter(function (item) {
+      //     const date = new Date(item.date);
 
-          const month = date.toLocaleDateString("en-US", {
-            month: "long",
-          });
+      //     const month = date.toLocaleDateString("en-US", {
+      //       month: "long",
+      //     });
 
-          return (
-            filterItems.includes(month) ||
-            filterItems.includes(item.incomeSource)
-          );
-        });
+      //     return (
+      //       filterItems.includes(month) ||
+      //       filterItems.includes(item.incomeSource)
+      //     );
+      //   });
 
-        setFilteredIncome_expenses(localFilteredIncome);
-        dispatch(handleFilteredIncome_Expenses(localFilteredIncome));
-      }
-
-      if (filterItems[0] === undefined) {
-        const localFilteredIncome = income.filter(function (item) {
-          const date = new Date(item.date);
-
-          const month = date.toLocaleDateString("en-US", {
-            month: "long",
-          });
-
-          return (
-            filterItems.includes(month) ||
-            filterItems.includes(item.incomeSource)
-          );
-        });
-
-        setFilteredIncome_expenses(localFilteredIncome);
-        dispatch(handleFilteredIncome_Expenses(localFilteredIncome));
-      }
-    } else if (name === "expenses") {
-      if (filterItems.length > 1) {
-        const localFilteredExpenses = expenses.filter(function (item) {
-          const date = new Date(item.date);
-
-          const month = date.toLocaleDateString("en-US", {
-            month: "long",
-          });
-
-          return (
-            filterItems.includes(month) &&
-            filterItems.includes(item.expensesCategory)
-          );
-        });
-
-        setFilteredIncome_expenses(localFilteredExpenses);
-        dispatch(handleFilteredIncome_Expenses(localFilteredExpenses));
-      }
-      if (filterItems.length <= 1) {
-        const localFilteredExpenses = expenses.filter(function (item) {
-          const date = new Date(item.date);
-
-          const month = date.toLocaleDateString("en-US", {
-            month: "long",
-          });
-
-          return (
-            filterItems.includes(month) ||
-            filterItems.includes(item.expensesCategory)
-          );
-        });
-
-        setFilteredIncome_expenses(localFilteredExpenses);
-        dispatch(handleFilteredIncome_Expenses(localFilteredExpenses));
-      }
-
-      if (filterItems[0] === undefined) {
-        const localFilteredExpenses = expenses.filter(function (item) {
-          const date = new Date(item.date);
-
-          const month = date.toLocaleDateString("en-US", {
-            month: "long",
-          });
-
-          return (
-            filterItems.includes(month) ||
-            filterItems.includes(item.expensesCategory)
-          );
-        });
-
-        setFilteredIncome_expenses(localFilteredExpenses);
-        dispatch(handleFilteredIncome_Expenses(localFilteredExpenses));
-      }
-    }
-console.log('outside')
-  };
-// console.log(filterItems)
-  useEffect(() => {
-    if (name === "income") {
-      if (filterItems.length > 1) {
-        const localFilteredIncome = income.filter(function (item) {
-          const date = new Date(item.date);
-
-          const month = date.toLocaleDateString("en-US", {
-            month: "long",
-          });
-
-          return (
-            filterItems.includes(month) &&
-            filterItems.includes(item.incomeSource)
-          );
-        });
-
-        setFilteredIncome_expenses(localFilteredIncome);
-        dispatch(handleFilteredIncome_Expenses(localFilteredIncome));
-      }
-      if (filterItems.length <= 1) {
-        const localFilteredIncome = income.filter(function (item) {
-          const date = new Date(item.date);
-
-          const month = date.toLocaleDateString("en-US", {
-            month: "long",
-          });
-
-          return (
-            filterItems.includes(month) ||
-            filterItems.includes(item.incomeSource)
-          );
-        });
-
-        setFilteredIncome_expenses(localFilteredIncome);
-        dispatch(handleFilteredIncome_Expenses(localFilteredIncome));
-      }
+      //   setFilteredIncome_expenses(localFilteredIncome);
+      //   dispatch(handleFilteredIncome_Expenses(localFilteredIncome));
+      // }
 
       if (filterItems[0] === undefined) {
         const localFilteredIncome = income.filter(function (item) {
@@ -258,14 +266,10 @@ console.log('outside')
     }
   }, [filterItems, income, name, expenses]);
 
-
-
-
-  // console.log(filteredIncome_expenses)
+  console.log(filteredIncome_expenses);
 
   const handleDelectItem = (index) => {
     setFilterItems(filterItems.filter((item, i) => i !== index));
-
   };
 
   const handlefilterIncome = () => {
@@ -279,7 +283,6 @@ console.log('outside')
 
   return (
     <main className="filter-main">
-   
       <section className="filter-btns-cx">
         <div
           className="filters-cx"
