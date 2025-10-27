@@ -93,10 +93,13 @@ return parts.join('.')
   useEffect(() => {
     set_Date(new Date(Date.now()).toISOString().split("T")[0]);
     setUser(JSON.parse(localStorage.getItem("ebcfinance-user")));
-  }, [id]);
+
+     const storedAccount_type = JSON.parse(localStorage.getItem("account_type"));
+    setAccount_type(storedAccount_type);
+  }, [id, account_type]);
 
   useEffect(() => {
-    const storedIncome = JSON.parse(localStorage.getItem("incomes")) || [];
+    const storedIncome = JSON.parse(localStorage.getItem(`${account_type} incomes`)) || [];
     // Update state with retrieved values
     setIncomes(storedIncome);
 
@@ -124,8 +127,7 @@ return parts.join('.')
         desc: singleIncome?.desc,
       });
     }
-    const storedAccount_type = JSON.parse(localStorage.getItem("account_type"));
-    setAccount_type(storedAccount_type);
+   
   }, [id, incomes, singleIncome]);
 
   const handleSubmit = async (e) => {
@@ -319,6 +321,12 @@ return parts.join('.')
                   <option className="option" value="Interest Paid">
                     Interest Paid
                   </option>
+                   <option className="option" value="Loan">
+                    Loan
+                  </option>
+                   <option className="option" value="School Admission">
+                   School Admission
+                  </option>
                 </div>
               )}
               {account_type === "Main account" && (
@@ -356,6 +364,12 @@ return parts.join('.')
                   </option>
                   <option className="option" value="Others Offering">
                     Others Offering
+                  </option>
+                     <option className="option" value="Loan">
+                    Loan
+                  </option>
+                   <option className="option" value="School Admission">
+                   School Admission
                   </option>
                 </div>
               )}

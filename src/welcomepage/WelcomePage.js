@@ -78,6 +78,7 @@ export default function WelcomePage() {
     localStorage.setItem("account_type", JSON.stringify("Project account"));
     dispatch(handleSelectAccount("Project account"));
     try {
+      
       const incomeRef = collection(db, "Income");
       const q = query(
         incomeRef,
@@ -117,6 +118,7 @@ export default function WelcomePage() {
           }))
           .filter((item) => item.account_type === "Project account");
         setLoading(false);
+        console.log(expenses)
         // setExpense(expenses);
         if (expenses.length > 0) {
           localStorage.setItem("expenses", JSON.stringify(expenses));

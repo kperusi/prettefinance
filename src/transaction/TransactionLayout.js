@@ -17,7 +17,7 @@ export default function TransactionLayout() {
     }
   };
   const [account_type, setAccount_type] = useState();
-  console.log(id);
+ 
 
   useEffect(() => {
     const storedAccount_type = JSON.parse(localStorage.getItem("account_type"));

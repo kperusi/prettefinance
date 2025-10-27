@@ -15,9 +15,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function AddExpenses() {
- 
+  const [account_types, setAccount_type] = useState();
+
+  useEffect(() => {
+    const storeAccount_type = JSON.parse(localStorage.getItem("account_type"));
+    setAccount_type(storeAccount_type);
+  }, []);
+
   const [form, setForm] = useState({
-    account_type: JSON.parse(localStorage.getItem('account_type')),
+    account_type: JSON.parse(localStorage.getItem("account_type")),
     amount: "",
     date: new Date(Date.now()).toISOString().split("T")[0],
     desc: "",
@@ -44,7 +50,6 @@ function AddExpenses() {
   const [totalExpenses, setTotalExpenses] = useState();
   const [singleExpenses, setSingleExpenses] = useState({});
   const [givenByError, setGivenByError] = useState("");
-  const [account_type,setAccount_type]=useState()
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -56,12 +61,12 @@ function AddExpenses() {
       .replace(/\W/g, "") // Remove non-digit characters
       .replace(/\B(?=(\d{3})+(?!\d))/g, " "); // Add spaces every 3 digits
   };
-  const formatNumberwithDecimal=(num)=>{
-const clenaed = num.replace(/[^0-9.]/g, "")
-const parts =clenaed.split('.')
-parts[0]=parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ")
-return parts.join('.')
-}
+  const formatNumberwithDecimal = (num) => {
+    const clenaed = num.replace(/[^0-9.]/g, "");
+    const parts = clenaed.split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    return parts.join(".");
+  };
 
   const handleChange = (e) => {
     // setForm({ ...form, [e.target.name]: e.target.value });
@@ -70,7 +75,7 @@ return parts.join('.')
       // const newValue = e.target.value.replace(/[^0-9]/g, "");
 
       // setForm({ ...form, amount: formatNumber(newValue) });
-         setForm({ ...form, amount: formatNumberwithDecimal(e.target.value) });
+      setForm({ ...form, amount: formatNumberwithDecimal(e.target.value) });
       console.log("changing number");
     }
 
@@ -117,8 +122,14 @@ return parts.join('.')
   }, [id]);
 
   useEffect(() => {
-    const storedExpenses = JSON.parse(localStorage.getItem("expenses")) || [];
-    const storedAccount_type=JSON.parse(localStorage.getItem('account_type'))
+    const storeAccount_type = JSON.parse(localStorage.getItem("account_type"));
+    setAccount_type(storeAccount_type);
+  }, []);
+
+  useEffect(() => {
+    const storedExpenses =
+      JSON.parse(localStorage.getItem(`${account_types} expenses`)) || [];
+
     // Update state with retrieved values
     setExpense(storedExpenses);
 
@@ -128,10 +139,9 @@ return parts.join('.')
     );
 
     setTotalExpenses(totalExpenses);
-    setAccount_type(storedAccount_type)
 
     // setTotalExpenses(totalExpenses);
-  }, []);
+  }, [account_types]);
 
   useEffect(() => {
     const filterTasksById = (id) => {
@@ -237,28 +247,7 @@ return parts.join('.')
     });
   };
 
-  const fetchExpenses = function () {
-    console.log("expenses fetched");
-    try {
-      const expenseRef = collection(db, "Expenses");
-      const q = query(
-        expenseRef,
-        orderBy("date", "desc")
-        // where("status", "==", "published")
-      );
-      onSnapshot(q, (snapshot) => {
-        const expenses = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setLoading(false);
-        setExpense(expenses);
-        localStorage.setItem("expenses", JSON.stringify(expenses));
-      });
-    } catch (error) {
-      setError(error);
-    }
-  };
+  console.log(form);
 
   return (
     <main className="addexpenses">
@@ -433,6 +422,19 @@ return parts.join('.')
                 </option>
                 <option className="option" value="Cooperative Payment">
                   Cooperative Payment
+                </option>
+                <option className="option" value="Bank Charges">
+                  Bank Charges
+                </option>
+                <option className="option" value="Withholding Tax">
+                  Withholding Tax
+                </option>
+
+                <option className="option" value="Appreciation">
+                  Appreciation
+                </option>
+                <option className="option" value="Solar">
+                  Solar
                 </option>
               </optgroup>
               <optgroup label="Dues">

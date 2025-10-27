@@ -272,15 +272,7 @@ export default function Filter({ name, catArray, desc }) {
     setFilterItems(filterItems.filter((item, i) => i !== index));
   };
 
-  const handlefilterIncome = () => {
-    const storedIncome = JSON.parse(localStorage.getItem("Income"));
-    setIncome(storedIncome);
-  };
-
-  const handleCloseNotification = () => {
-    setEmptyFilter(false);
-  };
-
+  
   return (
     <main className="filter-main">
       <section className="filter-btns-cx">

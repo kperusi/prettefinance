@@ -45,61 +45,9 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
 
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [account_types, setAccount_type] = useState();
- 
+
   const show_dialog = useSelector((state) => state.sliceData.show_dialog);
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   try {
-  //     const expensesRef = collection(db, "Expenses");
-  //     const q = query(
-  //       expensesRef,
-  //       orderBy("date", "desc")
-  //       // where("status", "==", "published")/
-  //     );
-  //     onSnapshot(q, (snapshot) => {
-  //       const expenses = snapshot.docs
-  //       .map((doc) => ({
-  //         id: doc.id,
-  //         ...doc.data(),
-  //       }))
-  //        .filter((item) => item.account_type === account_types);;
-  //       setLoading(false);
-  //       // setExpense(expenses);
-  //       if (expenses.length > 0) {
-  //         localStorage.setItem("expenses", JSON.stringify(expenses));
-  //       }
-  //     });
-  //   } catch (error) {
-  //     setError(error);
-  //   }
-
-  //   try {
-  //     const incomeRef = collection(db, "Income");
-  //     const q = query(
-  //       incomeRef,
-  //       // where("account_type", "==", "Main account"),
-  //       orderBy("createdAt", "desc")
-  //     );
-  //     onSnapshot(q, (snapshot) => {
-  //       const incomes = snapshot.docs
-  //         .map((doc) => ({
-  //           id: doc.id,
-  //           ...doc.data(),
-  //         }))
-  //         .filter((item) => item.account_type === account_types);
-  //       setLoading(false);
-  //       console.log(incomes);
-  //       console.log(expenses)
-
-  //       if (incomes.length > 0) {
-  //         localStorage.setItem("incomes", JSON.stringify(incomes));
-  //       }
-  //     });
-  //   } catch (error) {
-  //     setError(error);
-  //   }
-  // }, [id, incomes, account_types]);
 
   const handleSelectedMonth = (month, index) => {
     localStorage.setItem("dashboard-selected-month", JSON.stringify(month));
@@ -115,6 +63,121 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
     const storeAccount_type = JSON.parse(localStorage.getItem("account_type"));
     setAccount_type(storeAccount_type);
   }, []);
+
+  useEffect(() => {
+    try {
+      const incomeRef = collection(db, "Income");
+      const q = query(
+        incomeRef,
+        // where("account_type", "==", "Main account"),
+        orderBy("createdAt", "desc")
+      );
+      onSnapshot(q, (snapshot) => {
+        const incomes = snapshot.docs
+          .map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+          .filter((item) => item.account_type === "Main account");
+        setLoading(false);
+        console.log(incomes);
+        // localStorage.setItem("incomes", JSON.stringify(incomes));
+        localStorage.setItem("Main account incomes", JSON.stringify(incomes));
+        // if (incomes.length > 0) {
+        //   localStorage.setItem("incomes", JSON.stringify(incomes));
+        //   localStorage.setItem("Main account incomes", JSON.stringify(incomes));
+        // }
+      });
+    } catch (error) {
+      setError(error);
+    }
+
+    try {
+      const expensesRef = collection(db, "Expenses");
+      const q = query(
+        expensesRef,
+        orderBy("date", "desc")
+        // where("status", "==", "published")/
+      );
+      onSnapshot(q, (snapshot) => {
+        const expenses = snapshot.docs
+          .map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+          .filter((item) => item.account_type === "Main account");
+        setLoading(false);
+        console.log(expenses);
+        // setExpense(expenses);
+        localStorage.setItem("Main account expenses", JSON.stringify(expenses));
+        // if (expenses.length > 0) {
+        //   localStorage.setItem("expenses", JSON.stringify(expenses));
+        //   localStorage.setItem("Main account expenses", JSON.stringify(expenses));
+        // }
+      });
+    } catch (error) {
+      setError(error);
+    }
+
+    try {
+      const incomeRef = collection(db, "Income");
+      const q = query(
+        incomeRef,
+        // where("account_type", "==", "Main account"),
+        orderBy("createdAt", "desc")
+      );
+      onSnapshot(q, (snapshot) => {
+        const incomes = snapshot.docs
+          .map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+          .filter((item) => item.account_type === "Project account");
+        setLoading(false);
+
+        // localStorage.setItem("incomes", JSON.stringify(incomes));
+        localStorage.setItem(
+          "Project account incomes",
+          JSON.stringify(incomes)
+        );
+        // if (incomes.length > 0) {
+        //   localStorage.setItem("incomes", JSON.stringify(incomes));
+        //   localStorage.setItem("Project account incomes", JSON.stringify(incomes));
+        // }
+      });
+    } catch (error) {
+      setError(error);
+    }
+    try {
+      const expensesRef = collection(db, "Expenses");
+      const q = query(
+        expensesRef,
+        orderBy("date", "desc")
+        // where("status", "==", "published")/
+      );
+      onSnapshot(q, (snapshot) => {
+        const expenses = snapshot.docs
+          .map((doc) => ({
+            id: doc.id,
+            ...doc.data(),
+          }))
+          .filter((item) => item.account_type === "Project account");
+        setLoading(false);
+        console.log(expenses);
+        // setExpense(expenses);
+        localStorage.setItem(
+          "Project account expenses",
+          JSON.stringify(expenses)
+        );
+        // if (expenses.length > 0) {
+        //   localStorage.setItem("expenses", JSON.stringify(expenses));
+
+        // }
+      });
+    } catch (error) {
+      setError(error);
+    }
+  }, [id, incomes, account_types]);
 
   useEffect(() => {
     console.log(account_types);
@@ -162,8 +225,6 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
     // filtering monthly transactions******************************************
   }, [account_types]);
 
-  console.log(incomes);
-  console.log(JSON.parse(localStorage.getItem("account_type")));
   useEffect(() => {
     const thisMonthIncome = incomes.filter(function (item) {
       console.log("month running");
@@ -197,7 +258,7 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
       0
     );
     setTotalExpensesAmountThisMonth(addThisMonthExpenses);
-  }, [selectedMonth,expenses,incomes]);
+  }, [selectedMonth, expenses, incomes]);
 
   const handleMouseEnter = () => {
     if (mouseEnter === "") {
