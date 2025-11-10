@@ -19,7 +19,7 @@ export default function SingleIncome() {
   const [msg, setMsg] = useState("");
   const [expenses, setExpenses] = useState([]);
   const [loginUserDetail, setLoginUserDetail] = useState();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { id } = useParams();
   const navigate = useNavigate();
   const [account_types, setAccount_type] = useState();
@@ -139,6 +139,7 @@ export default function SingleIncome() {
         <section className="del-loading-cx">
           <div className="del-loading">
             <h2>Delecting {SingleIncome?.main}</h2>
+            <h3>Please Wait ...</h3>
           </div>
         </section>
       )}

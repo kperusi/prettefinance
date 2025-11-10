@@ -381,6 +381,9 @@ function AddExpenses() {
                 <option className="option" value="Electrical Department">
                   Electrical Department
                 </option>
+                 <option className="option" value="Electronic Transfer Levy">
+                  Electronic Transfer Levy
+                </option>
                 <option
                   className="option"
                   value="Finance/Stewardship Committee"
@@ -402,6 +405,9 @@ function AddExpenses() {
                 <option className="option" value="Publicity Committee">
                   Publicity Committee
                 </option>
+                <option className="option" value="Teacher Salary">
+                  Teacher Salary
+                </option>
                 <option className="option" value="Transport Committee">
                   Transport Committee
                 </option>
@@ -416,6 +422,9 @@ function AddExpenses() {
                 </option>
                 <option className="option" value="Salary Payment">
                   Salary Payment
+                </option>
+                  <option className="option" value="SMS Charges">
+                  SMS Charges
                 </option>
                 <option className="option" value="Allocation">
                   Allocation
@@ -434,7 +443,7 @@ function AddExpenses() {
                   Appreciation
                 </option>
                 <option className="option" value="Solar">
-                  Solar
+                  Solar Project
                 </option>
               </optgroup>
               <optgroup label="Dues">

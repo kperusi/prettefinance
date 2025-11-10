@@ -140,10 +140,10 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
           "Project account incomes",
           JSON.stringify(incomes)
         );
-        // if (incomes.length > 0) {
-        //   localStorage.setItem("incomes", JSON.stringify(incomes));
-        //   localStorage.setItem("Project account incomes", JSON.stringify(incomes));
-        // }
+        if (incomes.length > 0) {
+          localStorage.setItem("incomes", JSON.stringify(incomes));
+          localStorage.setItem("Project account incomes", JSON.stringify(incomes));
+        }
       });
     } catch (error) {
       setError(error);
@@ -169,10 +169,10 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
           "Project account expenses",
           JSON.stringify(expenses)
         );
-        // if (expenses.length > 0) {
-        //   localStorage.setItem("expenses", JSON.stringify(expenses));
+        if (expenses.length > 0) {
+          localStorage.setItem("expenses", JSON.stringify(expenses));
 
-        // }
+        }
       });
     } catch (error) {
       setError(error);

@@ -55,6 +55,12 @@ export default function Report() {
   const [social_warfare, setSocial_warfare] = useState([]);
   const [decorationExpenses, setDecorationExpenses] = useState([]);
   const [healthExpenses, setHealthExpenses] = useState([]);
+  const [bankCharges, setBankCharges] = useState([]);
+const [teacherSalary, setTeacherSalary]=useState([])
+const [withHoldingTax, setWithHoldingTax]=useState([])
+const [solar, setSolar]=useState([])
+const [appreciation, setAppreciation]=useState([])
+
   const [departmentExpenses, setDepartmentExpenses] = useState([]);
   const [totalIncomeAmountThisMonth, setTotalIncomeAmountThisMonth] =
     useState();
@@ -247,6 +253,11 @@ export default function Report() {
     setConferenceDues(filterExpensesByName("Conference Dues"));
     setConventionDues(filterExpensesByName("Convention Dues"));
     setAllocation(filterExpensesByName("Allocation"));
+    setBankCharges(filterExpensesByName('Bank Charges'))
+    setTeacherSalary(filterExpensesByName('Teacher Salary'))
+    setWithHoldingTax(filterExpensesByName('Withholding Tax'))
+    setSolar(filterExpensesByName('Solar'))
+    setAppreciation(filterExpensesByName('Appreciation'))
 
     if (display === "hide") {
       setDisplay("show");
@@ -439,6 +450,52 @@ export default function Report() {
       });
       itemCount += social_warfare.length;
     }
+
+ if (solar.length !== 0) {
+      allExpenses.push({
+        heading: "",
+        name: "Solar Expenses",
+        items: solar,
+      });
+      itemCount += solar.length;
+    }
+
+     if (withHoldingTax.length !== 0) {
+      allExpenses.push({
+        heading: "",
+        name: "Tax Withheld",
+        items: withHoldingTax,
+      });
+      itemCount += withHoldingTax.length;
+    }
+
+     if (bankCharges.length !== 0) {
+      allExpenses.push({
+        heading: "",
+        name: "Bank Charges",
+        items: bankCharges,
+      });
+      itemCount += bankCharges.length;
+    }
+
+   if (appreciation.length !== 0) {
+      allExpenses.push({
+        heading: "",
+        name: "Appreciation",
+        items: appreciation,
+      });
+      itemCount += appreciation.length;
+    }
+
+     if (teacherSalary.length !== 0) {
+      allExpenses.push({
+        heading: "",
+        name: "Teacher Salary",
+        items: teacherSalary,
+      });
+      itemCount += teacherSalary.length;
+    }
+
     if (otherExpenses.length !== 0) {
       allExpenses.push({
         heading: "",
@@ -447,6 +504,8 @@ export default function Report() {
       });
       itemCount += otherExpenses.length;
     }
+ 
+
 
     allExpenses.push({
       name: "This Month Summary",
