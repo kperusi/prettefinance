@@ -22,7 +22,7 @@
 }
 .dashboard-logo div h4 {
   color: gray;
-    font-size: 0.8em;
+  font-size: 0.8em;
 }
 .dashboard-logo h1 {
   color: white;
@@ -59,7 +59,7 @@
   padding: 5px;
   border-radius: 5px;
 }
-.logoutdialog_cx{
+.logoutdialog_cx {
   display: flex;
   position: absolute;
   border: solid red;
@@ -159,10 +159,9 @@
   align-items: center;
   // padding: 0 20px;
   line-height: 1.6em;
-
 }
 
-.analytic-balance h3{
+.analytic-balance h3 {
   background-color: var(--Primary);
   color: white;
   width: fit-content;
@@ -170,10 +169,9 @@
   padding: 0 5px;
   border-radius: 5px;
 }
-.analytic-balance h2{
+.analytic-balance h2 {
   text-align: center;
   font-size: 1.3rem;
-  
 }
 .analytic-details {
   // border: solid;
@@ -195,22 +193,18 @@
   transition: all 0.3s ease-in-out;
 }
 
-
-.analytic-btn-active::after{
+.analytic-btn-active::after {
   width: 100%;
   background-color: var(--Primary);
   display: block;
   height: 3px;
   position: relative;
   top: 10px;
-  content: '';
+  content: "";
   border-radius: 2px;
   transform: scale(1.2);
   transition: all 0.5s ease-in-out;
-  
-  
 }
-
 
 .no-active {
   color: grey;
@@ -267,7 +261,6 @@
   // background-color: rgb(227, 226, 226);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-   
 }
 .income-section-title span {
   display: flex;
@@ -288,7 +281,6 @@
   height: 30px;
   background-color: rgb(240, 77, 12);
   border-radius: 50%;
-
 }
 .expenses-section-title svg {
   fill: white;
@@ -365,7 +357,6 @@ h5 {
   margin-top: 10px;
 }
 
-
 .expenses-section-title {
   // background-color: lightcoral;
   padding: 5px 5px;
@@ -396,7 +387,8 @@ h5 {
   background-color: var(--Primary);
 }
 
-.dashboard-income-cx, .dashboard-expenses-cx {
+.dashboard-income-cx,
+.dashboard-expenses-cx {
   padding: 40px 10px;
   margin-top: -35px;
   border-bottom-right-radius: 7px;
@@ -404,35 +396,48 @@ h5 {
   margin-left: 5px;
   margin-right: 5px;
 }
-.dashboard-expenses-cx h1, .dashboard-income-cx h1{
+.dashboard-expenses-cx h1,
+.dashboard-income-cx h1 {
   font-size: 1.2em;
 }
 .red-color {
   color: red;
 }
 
-.setting_main{
+.setting_main {
   display: flex;
   flex-direction: column;
-
+  background-color: #f5f7fa;
   gap: 3px;
+  height: 100vh;
 }
-.setting_back_icon_cx{
+.setting_back_icon_cx {
   display: flex;
   align-items: center;
   align-content: center;
   gap: 10px;
 }
-.setting_section_two{
+.setting_section_two {
   display: flex;
   flex-direction: column;
   gap: 5px;
   padding: 20px;
 }
-.setting_main li{
+.setting_main ul{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.setting_main li {
   margin-left: 0;
   list-style-type: none;
-  padding: 0;
+  padding: 10px;
+  background-color: white;
+  border-radius: 8px;
+ 
+}
+.log-out-btn{
+  color: red;
 }
 
 @media (min-width: 600px) and (max-width: 767px) {

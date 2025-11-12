@@ -56,10 +56,10 @@ export default function Report() {
   const [decorationExpenses, setDecorationExpenses] = useState([]);
   const [healthExpenses, setHealthExpenses] = useState([]);
   const [bankCharges, setBankCharges] = useState([]);
-const [teacherSalary, setTeacherSalary]=useState([])
-const [withHoldingTax, setWithHoldingTax]=useState([])
-const [solar, setSolar]=useState([])
-const [appreciation, setAppreciation]=useState([])
+  const [teacherSalary, setTeacherSalary] = useState([]);
+  const [withHoldingTax, setWithHoldingTax] = useState([]);
+  const [solar, setSolar] = useState([]);
+  const [appreciation, setAppreciation] = useState([]);
 
   const [departmentExpenses, setDepartmentExpenses] = useState([]);
   const [totalIncomeAmountThisMonth, setTotalIncomeAmountThisMonth] =
@@ -211,7 +211,7 @@ const [appreciation, setAppreciation]=useState([])
     setTotalBalance(cummulativeIncomesAmount - cummulativeExpensesAmount);
     // setTotalBalance((cummulativeIncomesAmount - cummulativeExpensesAmount));
     setForm({ ...form, name: user?.displayName });
-  }, [form.month,account_types]);
+  }, [form.month, account_types]);
 
   // console.log(cummulativeIncomesAmount);
   // console.log(cummulativeIncomesAmount - cummulativeExpensesAmount)
@@ -253,11 +253,11 @@ const [appreciation, setAppreciation]=useState([])
     setConferenceDues(filterExpensesByName("Conference Dues"));
     setConventionDues(filterExpensesByName("Convention Dues"));
     setAllocation(filterExpensesByName("Allocation"));
-    setBankCharges(filterExpensesByName('Bank Charges'))
-    setTeacherSalary(filterExpensesByName('Teacher Salary'))
-    setWithHoldingTax(filterExpensesByName('Withholding Tax'))
-    setSolar(filterExpensesByName('Solar'))
-    setAppreciation(filterExpensesByName('Appreciation'))
+    setBankCharges(filterExpensesByName("Bank Charges"));
+    setTeacherSalary(filterExpensesByName("Teacher Salary"));
+    setWithHoldingTax(filterExpensesByName("Withholding Tax"));
+    setSolar(filterExpensesByName("Solar"));
+    setAppreciation(filterExpensesByName("Appreciation"));
 
     if (display === "hide") {
       setDisplay("show");
@@ -451,7 +451,7 @@ const [appreciation, setAppreciation]=useState([])
       itemCount += social_warfare.length;
     }
 
- if (solar.length !== 0) {
+    if (solar.length !== 0) {
       allExpenses.push({
         heading: "",
         name: "Solar Expenses",
@@ -460,7 +460,7 @@ const [appreciation, setAppreciation]=useState([])
       itemCount += solar.length;
     }
 
-     if (withHoldingTax.length !== 0) {
+    if (withHoldingTax.length !== 0) {
       allExpenses.push({
         heading: "",
         name: "Tax Withheld",
@@ -469,7 +469,7 @@ const [appreciation, setAppreciation]=useState([])
       itemCount += withHoldingTax.length;
     }
 
-     if (bankCharges.length !== 0) {
+    if (bankCharges.length !== 0) {
       allExpenses.push({
         heading: "",
         name: "Bank Charges",
@@ -478,7 +478,7 @@ const [appreciation, setAppreciation]=useState([])
       itemCount += bankCharges.length;
     }
 
-   if (appreciation.length !== 0) {
+    if (appreciation.length !== 0) {
       allExpenses.push({
         heading: "",
         name: "Appreciation",
@@ -487,7 +487,7 @@ const [appreciation, setAppreciation]=useState([])
       itemCount += appreciation.length;
     }
 
-     if (teacherSalary.length !== 0) {
+    if (teacherSalary.length !== 0) {
       allExpenses.push({
         heading: "",
         name: "Teacher Salary",
@@ -504,8 +504,6 @@ const [appreciation, setAppreciation]=useState([])
       });
       itemCount += otherExpenses.length;
     }
- 
-
 
     allExpenses.push({
       name: "This Month Summary",
@@ -606,11 +604,10 @@ const [appreciation, setAppreciation]=useState([])
             <path d="M360-240 120-480l240-240 56 56-144 144h568v80H272l144 144-56 56Z" />
           </svg>
         </span>
-        <div style={{display:'flex',gap:'-12px',flexDirection:'column'}}>
-          <h4>{account_types}</h4>
-        <h3>Report settings</h3>
+        <div style={{ display: "flex", gap: "-12px", flexDirection: "column" ,alignItems:'center',paddingBottom:'30px'}}>
+          <h3>Report settings</h3>
+          <h4 style={{ display: "flex", gap: "-12px", flexDirection: "column" ,}}>{account_types}</h4>
         </div>
-        
       </div>
 
       <form>

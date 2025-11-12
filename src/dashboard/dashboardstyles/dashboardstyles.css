@@ -407,7 +407,8 @@ h5 {
   background-color: var(--Primary);
 }
 
-.dashboard-income-cx, .dashboard-expenses-cx {
+.dashboard-income-cx,
+.dashboard-expenses-cx {
   padding: 40px 10px;
   margin-top: -35px;
   border-bottom-right-radius: 7px;
@@ -416,7 +417,8 @@ h5 {
   margin-right: 5px;
 }
 
-.dashboard-expenses-cx h1, .dashboard-income-cx h1 {
+.dashboard-expenses-cx h1,
+.dashboard-income-cx h1 {
   font-size: 1.2em;
 }
 
@@ -427,7 +429,9 @@ h5 {
 .setting_main {
   display: flex;
   flex-direction: column;
+  background-color: #f5f7fa;
   gap: 3px;
+  height: 100vh;
 }
 
 .setting_back_icon_cx {
@@ -444,10 +448,22 @@ h5 {
   padding: 20px;
 }
 
+.setting_main ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .setting_main li {
   margin-left: 0;
   list-style-type: none;
-  padding: 0;
+  padding: 10px;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.log-out-btn {
+  color: red;
 }
 
 @media (min-width: 600px) and (max-width: 767px) {

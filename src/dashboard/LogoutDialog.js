@@ -185,7 +185,7 @@ export default function LogoutDialog() {
           </ul>
         </div>
         <hr />
-        <span onClick={handleLogout}>Log Out</span>
+        <span className="log-out-btn" onClick={handleLogout}>Log Out</span>
       </section>
     </main>
   );
