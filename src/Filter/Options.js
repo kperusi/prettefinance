@@ -94,6 +94,7 @@ function Options(props) {
         <ul>
           {months.slice(1).map((month, index) => (
             <li
+        
               className={`month-input-label-cx ${
                 uniqueMonthArray.has(month)
                   ? "option-active"

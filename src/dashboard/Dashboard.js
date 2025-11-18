@@ -70,7 +70,7 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
       const q = query(
         incomeRef,
         // where("account_type", "==", "Main account"),
-        orderBy("createdAt", "desc")
+        orderBy("date", "desc")
       );
       onSnapshot(q, (snapshot) => {
         const incomes = snapshot.docs
@@ -124,7 +124,7 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
       const q = query(
         incomeRef,
         // where("account_type", "==", "Main account"),
-        orderBy("createdAt", "desc")
+        orderBy("date", "desc")
       );
       onSnapshot(q, (snapshot) => {
         const incomes = snapshot.docs
