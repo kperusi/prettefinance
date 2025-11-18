@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { ListOfMonths } from "../ListOfMonths";
 import "./filterstyles/optionstyle.css";
- import {
+   import {
    handleFilteredIncome,
    handleSelectedMonthAndSource,
   handleShowFilterOption,

@@ -144,6 +144,7 @@ function AddExpenses() {
   }, [account_types]);
 
   useEffect(() => {
+    console.log(expense)
     const filterTasksById = (id) => {
       return expense?.find((task) => task?.id.trim() === id?.trim());
     };

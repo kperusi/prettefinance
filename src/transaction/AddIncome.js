@@ -98,6 +98,8 @@ return parts.join('.')
     setAccount_type(storedAccount_type);
   }, [id, account_type]);
 
+
+
   useEffect(() => {
     const storedIncome = JSON.parse(localStorage.getItem(`${account_type} incomes`)) || [];
     // Update state with retrieved values
@@ -111,14 +113,16 @@ return parts.join('.')
     setTotalIncome(totalIncome);
 
     // setTotalExpenses(totalExpenses);
-  }, []);
+  }, [account_type]);
 
   useEffect(() => {
+  console.log(incomes)
     const filterTasksById = (id) => {
       return incomes?.find((task) => task?.id.trim() === id?.trim());
     };
     setSingleIncome(filterTasksById(id));
     if (id) {
+  
       setForm({
         ...form,
         amount: singleIncome?.amount,
