@@ -4,11 +4,11 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { ListOfMonths } from "../ListOfMonths";
 import "./filterstyles/optionstyle.css";
-// import {
-//   handleFilteredIncome,
-//   handleSelectedMonthAndSource,
-//   handleShowFilterOption,
-// } from "../store/storeSlice";
+ import {
+   handleFilteredIncome,
+   handleSelectedMonthAndSource,
+  handleShowFilterOption,
+} from "../store/storeSlice";
  //import { TruncateTex } from "../TruncateText";
 
 function Options(props) {
