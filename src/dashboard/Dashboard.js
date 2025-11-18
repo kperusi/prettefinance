@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+ //import { useDispatch, useSelector } from "react-redux";
 import "./dashboardstyles/dashboardstyles.css";
-import { db, auth } from "../firebase/firebase";
+import { db } from "../firebase/firebase";
 import {
   collection,
   onSnapshot,
   orderBy,
   query,
-  where,
+
 } from "firebase/firestore";
 
 import { NavLink, useNavigate } from "react-router-dom";
@@ -16,10 +16,10 @@ import { FormatedDate } from "../FormatedDate";
 import { TruncateTex } from "../TruncateText";
 
 import { ListOfMonths } from "../ListOfMonths";
-import LogoutDialog from "./LogoutDialog";
-import { handleSelectAccount, handleShowDialog } from "../store/storeSlice";
+// import LogoutDialog from "./LogoutDialog";
+// import { handleSelectAccount, handleShowDialog } from "../store/storeSlice";
 export default function Dashboard({ handleSelected, select, setSelect }) {
-  const [user, setUser] = useState();
+  // const [user, setUser] = useState();
   const [avatarName, setAvatarName] = useState();
   const [expenses, setExpenses] = useState([]);
   const [incomes, setIncomes] = useState([]);
@@ -46,8 +46,8 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [account_types, setAccount_type] = useState();
 
-  const show_dialog = useSelector((state) => state.sliceData.show_dialog);
-  const dispatch = useDispatch();
+   //const show_dialog = useSelector((state) => state.sliceData.show_dialog);
+   //const dispatch = useDispatch();
 
   const handleSelectedMonth = (month, index) => {
     localStorage.setItem("dashboard-selected-month", JSON.stringify(month));
@@ -82,11 +82,11 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
         setLoading(false);
         console.log(incomes);
         // localStorage.setItem("incomes", JSON.stringify(incomes));
-        localStorage.setItem("Main account incomes", JSON.stringify(incomes));
-        // if (incomes.length > 0) {
-        //   localStorage.setItem("incomes", JSON.stringify(incomes));
-        //   localStorage.setItem("Main account incomes", JSON.stringify(incomes));
-        // }
+         //localStorage.setItem("Main account incomes", JSON.stringify(incomes));
+         if (incomes.length > 0) {
+           localStorage.setItem("incomes", JSON.stringify(incomes));
+           localStorage.setItem("Main account incomes", JSON.stringify(incomes));
+         }
       });
     } catch (error) {
       setError(error);
@@ -136,10 +136,10 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
         setLoading(false);
 
         // localStorage.setItem("incomes", JSON.stringify(incomes));
-        localStorage.setItem(
-          "Project account incomes",
-          JSON.stringify(incomes)
-        );
+        // localStorage.setItem(
+        //   "Project account incomes",
+        //   JSON.stringify(incomes)
+        // );
         if (incomes.length > 0) {
           localStorage.setItem("incomes", JSON.stringify(incomes));
           localStorage.setItem("Project account incomes", JSON.stringify(incomes));
@@ -202,7 +202,7 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
     setExpenses(storedExpense);
     setLoginUserDetail(storedUserDetails);
     setId(storedUser.uid);
-    setUser(storedUser);
+     //setUser(storedUser);
     setSelectedMonth(storedSelectedMonth);
     setSelectedIndex(storedSelectedMonthIndex);
     let fName = storedUser?.displayName.split(" ")[0].slice(0, 1);
@@ -280,6 +280,11 @@ export default function Dashboard({ handleSelected, select, setSelect }) {
 
   cummulativeMonth("April");
   const navigate = useNavigate();
+
+  console.log(error)
+  console.log(loading)
+  console.log(incomeByMonth)
+  console.log(expensesByMonth)
   return (
     <main className="content-main">
       <section className="dashboard-logo">

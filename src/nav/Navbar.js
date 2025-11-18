@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect,} from "react";
 import "./navbarstyles/navbaarstyles.css";
 // import { useSelector, useDispatch } from "react-redux";
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { NavLink, } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { handleShowFilterOption } from "../store/storeSlice";
 
 function Navbar({ setSelect, select, handleSelected }) {
-  const params = useParams();
 
-  const navigate = useNavigate();
+
+  
   const dispatch = useDispatch();
 
   useEffect(() => {

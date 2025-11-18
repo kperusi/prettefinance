@@ -4,12 +4,12 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { ListOfMonths } from "../ListOfMonths";
 import "./filterstyles/optionstyle.css";
-import {
-  handleFilteredIncome,
-  handleSelectedMonthAndSource,
-  handleShowFilterOption,
-} from "../store/storeSlice";
-import { TruncateTex } from "../TruncateText";
+// import {
+//   handleFilteredIncome,
+//   handleSelectedMonthAndSource,
+//   handleShowFilterOption,
+// } from "../store/storeSlice";
+ //import { TruncateTex } from "../TruncateText";
 
 function Options(props) {
   const months = ListOfMonths(new Date().getFullYear());
@@ -19,7 +19,7 @@ function Options(props) {
   const [filterArray, setFilterArray] = useState([]);
   const [selectedMonthArray, setSelectedMonthArray] = useState([]);
   const [selectedCat, setSelectedCat] = useState();
-  const [catIndex, setCatIndex] = useState("");
+   //const [catIndex, setCatIndex] = useState("");
   const [count, setCount] = useState(0);
   const [uniqueMonthArray, setUniqueMonthArray] = useState(new Set());
 

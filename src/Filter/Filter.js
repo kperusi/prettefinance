@@ -14,14 +14,14 @@ export default function Filter({ name, catArray, desc }) {
   const [income, setIncome] = useState([]);
   const expenses = useSelector((state) => state.sliceData.expenses);
   const [filteredIncome_expenses, setFilteredIncome_expenses] = useState([]);
-  const [emptyFilter, setEmptyFilter] = useState(false);
+   //const [emptyFilter, setEmptyFilter] = useState(false);
    const [account_type, setAccount_type] = useState();
-  const filteredTransaction = useSelector(
-    (state) => state.sliceData.filteredIncome_Expenses
-  );
-  const selectedMonthAndSource = useSelector((state) => state.sliceData.sle);
+  // const filteredTransaction = useSelector(
+  //   (state) => state.sliceData.filteredIncome_Expenses
+  // );
+   //const selectedMonthAndSource = useSelector((state) => state.sliceData.sle);
 
-  const handleClearFilter = (items) => {};
+   //const handleClearFilter = (items) => {};
 
 
    useEffect(() => {

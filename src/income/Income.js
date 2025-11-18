@@ -4,15 +4,12 @@ import { NavLink } from "react-router-dom";
 import "./incomestyles/incomestyles.css";
 import { useNavigate } from "react-router-dom";
 import { Splitter } from "../Splitter";
-import backbtn from "../images/arrow_back_ios_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg";
-import forwardbtn from "../images/arrow_forward_ios_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg";
-import { NextPage } from "../NextPages";
-import { ListOfMonths } from "../ListOfMonths";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  handleSelectedMonth,
-  handleShowFilterOption,
-} from "../store/storeSlice";
+ //import backbtn from "../images/arrow_back_ios_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg";
+ //import forwardbtn from "../images/arrow_forward_ios_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg";
+ //import { NextPage } from "../NextPages";
+ //import { ListOfMonths } from "../ListOfMonths";
+import {useSelector } from "react-redux";
+ //import { handleSelectedMonth,handleShowFilterOption,} from "../store/storeSlice";
 import { FormatedDate } from "../FormatedDate";
 import Filter from "../Filter/Filter";
 import Search from "../Filter/Search";
@@ -21,17 +18,17 @@ export default function Income() {
   const [totalIncome, setTotalIncome] = useState();
   const [loginUserDetail, setLoginUserDetail] = useState({});
   const [mouseEnter, setMouseEnter] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
+   //const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [displayedTotalIncome, setDisplayedTotalIncome] = useState();
-  const selectedMonth = useSelector((state) => state.sliceData.selectedMonth);
-  const [emptyFilter, setEmptyFilter] = useState(false);
+   //const dispatch = useDispatch();
+   //const [displayedTotalIncome, setDisplayedTotalIncome] = useState();
+   //const selectedMonth = useSelector((state) => state.sliceData.selectedMonth);
+   //const [emptyFilter, setEmptyFilter] = useState(false);
   const filteredIncome = useSelector(
     (state) => state.sliceData.filteredIncome_Expenses
   );
   const [totalAmountFilteredIncome, setTotalAmountFilteredIncome] = useState(0);
-  const [displayedIncome, setDisplayedIncome] = useState([]);
+   //const [displayedIncome, setDisplayedIncome] = useState([]);
   const [account_type, setAccount_type] = useState();
   const catArray = ["Main Offfering", "Rent"];
 

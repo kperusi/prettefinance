@@ -9,7 +9,7 @@ import {
   onSnapshot,
   orderBy,
   query,
-  where,
+ 
 } from "firebase/firestore";
 
 export default function LogoutDialog() {
@@ -133,6 +133,8 @@ export default function LogoutDialog() {
       setError(error);
     }
   };
+
+  console.log(loading,error)
   return (
     <main className="setting_main">
       <div

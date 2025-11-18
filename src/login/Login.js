@@ -1,28 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { auth, db } from "../firebase/firebase";
-import {
-  GoogleAuthProvider,
-  createUserWithEmailAndPassword,
-  signInWithPopup,
-  updateProfile,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
-import {
-  arrayUnion,
-  collection,
-  doc,
-  increment,
-  onSnapshot,
-  orderBy,
-  query,
-  updateDoc,
-  setDoc,
-  Timestamp,
-  where,
-  getDoc,
-} from "firebase/firestore";
+import { collection, onSnapshot, query } from "firebase/firestore";
 
 import "./styles/loginstyles.css";
 // import { connectStorageEmulator } from "firebase/storage";

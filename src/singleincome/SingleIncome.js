@@ -19,7 +19,7 @@ export default function SingleIncome() {
   const [msg, setMsg] = useState("");
   const [expenses, setExpenses] = useState([]);
   const [loginUserDetail, setLoginUserDetail] = useState();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
   const [account_types, setAccount_type] = useState();

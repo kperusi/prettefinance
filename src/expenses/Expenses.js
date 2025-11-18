@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import "./expensestyles/expensestyles.css";
-import backbtn from "../images/arrow_back_ios_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg";
-import forwardbtn from "../images/arrow_forward_ios_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg";
+ //import backbtn from "../images/arrow_back_ios_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg";
+ //import forwardbtn from "../images/arrow_forward_ios_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg";
 import { Splitter } from "../Splitter";
-import { NextPage } from "../NextPages";
-import { ListOfMonths } from "../ListOfMonths";
+ //import { NextPage } from "../NextPages";
+ //import { ListOfMonths } from "../ListOfMonths";
 import { FormatedDate } from "../FormatedDate";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Search from "../Filter/Search";
 import Filter from "../Filter/Filter";
-import { handleShowFilterOption } from "../store/storeSlice";
+ //import { handleShowFilterOption } from "../store/storeSlice";
 import { TruncateTex } from "../TruncateText";
 
 export default function Expenses() {
@@ -19,14 +19,14 @@ export default function Expenses() {
   const [loginUserDetail, setLoginUserDetail] = useState({});
   const [mouseEnter, setMouseEnter] = useState("");
   const navigate = useNavigate();
-  const [currentPage, setCurrentPage] = useState(1);
-  const monthsArrAy = ListOfMonths(new Date().getFullYear());
-  const dispatch = useDispatch();
-  const [displayedExpenses, setDisplayedExpenses] = useState([]);
+   //const [currentPage, setCurrentPage] = useState(1);
+   //const monthsArrAy = ListOfMonths(new Date().getFullYear());
+  // const dispatch = useDispatch();
+  // const [displayedExpenses, setDisplayedExpenses] = useState([]);
   const [filteredTotalExpenesesAmount, setFilterTotalExpensesAmount] =
     useState();
-  const [displayedTotalExpenses, setDisplayedTotalExpenses] = useState();
-  const selectedMonth = useSelector((state) => state.sliceData.selectedMonth);
+  // const [displayedTotalExpenses, setDisplayedTotalExpenses] = useState();
+  // const selectedMonth = useSelector((state) => state.sliceData.selectedMonth);
   const filteredExpenses = useSelector(
     (state) => state.sliceData.filteredIncome_Expenses
   );

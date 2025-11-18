@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import PdfGenerator from "../pdf/PdfGenerator";
 import {
-  PDFDownloadLink,
-  PDFViewer,
-  Document,
-  Page,
-  View,
-  Text,
-  StyleSheet,
+  
   pdf,
 } from "@react-pdf/renderer";
 import "./reportstyle/reportstyles.css";
@@ -22,9 +16,9 @@ export default function Report() {
   const [totalIncome, setTotalIncome] = useState();
   const [totalExpenses, setTotalExpenses] = useState();
   const [totalBalance, setTotalBalance] = useState();
-  const [loginUserDetail, setLoginUserDetail] = useState();
-  const [title, setTitle] = useState("");
-  const [month, setMonth] = useState("");
+  // const [loginUserDetail, setLoginUserDetail] = useState();
+  // const [title, setTitle] = useState("");
+  // const [month, setMonth] = useState("");
   const [user, setUser] = useState({});
   const [form, setForm] = useState({
     desc: "Monthly Financial Report Presented to the Executive Members of Ebenezer Baptist Church, Enerhen",
