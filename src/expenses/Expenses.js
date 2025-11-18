@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import "./expensestyles/expensestyles.css";
- //import backbtn from "../images/arrow_back_ios_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg";
- //import forwardbtn from "../images/arrow_forward_ios_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg";
+//import backbtn from "../images/arrow_back_ios_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg";
+//import forwardbtn from "../images/arrow_forward_ios_24dp_FFFFFF_FILL0_wght400_GRAD0_opsz24.svg";
 import { Splitter } from "../Splitter";
- //import { NextPage } from "../NextPages";
- //import { ListOfMonths } from "../ListOfMonths";
+//import { NextPage } from "../NextPages";
+//import { ListOfMonths } from "../ListOfMonths";
 import { FormatedDate } from "../FormatedDate";
 import { useSelector } from "react-redux";
 import Search from "../Filter/Search";
 import Filter from "../Filter/Filter";
- //import { handleShowFilterOption } from "../store/storeSlice";
+//import { handleShowFilterOption } from "../store/storeSlice";
 import { TruncateTex } from "../TruncateText";
 
 export default function Expenses() {
@@ -19,8 +19,8 @@ export default function Expenses() {
   const [loginUserDetail, setLoginUserDetail] = useState({});
   const [mouseEnter, setMouseEnter] = useState("");
   const navigate = useNavigate();
-   //const [currentPage, setCurrentPage] = useState(1);
-   //const monthsArrAy = ListOfMonths(new Date().getFullYear());
+  //const [currentPage, setCurrentPage] = useState(1);
+  //const monthsArrAy = ListOfMonths(new Date().getFullYear());
   // const dispatch = useDispatch();
   // const [displayedExpenses, setDisplayedExpenses] = useState([]);
   const [filteredTotalExpenesesAmount, setFilterTotalExpensesAmount] =
@@ -71,7 +71,7 @@ export default function Expenses() {
 
     setLoginUserDetail(storedUserDetails);
     // Update state with retrieved values
-   
+
     setExpenses(storedExpense);
 
     const total_Expenses = storedExpense.reduce(
@@ -86,7 +86,7 @@ export default function Expenses() {
     );
 
     setFilterTotalExpensesAmount(totalFilteredExpenses);
- console.log(expenses);
+    console.log(expenses);
     // return () => {
     //   dispatch(handleShowFilterOption("close"));
     // };
@@ -138,7 +138,10 @@ export default function Expenses() {
               <path d="M360-240 120-480l240-240 56 56-144 144h568v80H272l144 144-56 56Z" />
             </svg>
           </span>
-          <p> Expenses</p>
+          <div>
+            <p style={{textAlign:'center'}}> Expenses</p>
+            <p style={{fontSize:'0.8em',marginTop:'-4px'}}>{account_type}</p>
+          </div>
 
           <span className="moon-cx">
             <svg

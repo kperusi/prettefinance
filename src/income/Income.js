@@ -98,7 +98,7 @@ export default function Income() {
       )}
       <section className="income-main-month-title-cx">
         <div className="heading-cx">
-          <span>
+          <span >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="24px"
@@ -109,7 +109,10 @@ export default function Income() {
               <path d="M360-240 120-480l240-240 56 56-144 144h568v80H272l144 144-56 56Z" />
             </svg>
           </span>
-          <p> Income</p>
+      <div>
+            <p style={{textAlign:'center'}}> Incomes</p>
+            <p style={{fontSize:'0.8em',marginTop:'-4px'}}>{account_type}</p>
+          </div>
 
           <span className="moon-cx">
             <svg
