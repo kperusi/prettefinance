@@ -158,7 +158,7 @@ return parts.join('.')
       console.log("updating");
       await updateDoc(doc(db, "Income", id.trim()), {
         // amount: parseInt((form.amount).split(' ').join('')),
-        amount: parseFloat(form.amount),
+        amount: parseFloat(form?.amount.split(" ").join("")),
         date: form.date,
         desc: form.desc,
         incomeSource: form.income_source,

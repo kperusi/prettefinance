@@ -199,7 +199,7 @@ function AddExpenses() {
       console.log("updating");
       await updateDoc(doc(db, "Expenses", id.trim()), {
         // amount: parseInt(form?.amount.split(" ").join("")),
-        amount: parseFloat(form?.amount),
+        amount: parseFloat(form?.amount.split(" ").join("")),
         date: form.date,
         MOD: form.MOD,
         desc: form.desc,
