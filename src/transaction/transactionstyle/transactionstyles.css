@@ -8,10 +8,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--Primary);
   width: 100%;
-  padding: 5px 20px;
-  background-image: url("../../images/bg-boost-mobile.svg");
+  padding: 0px 0px;
   background-repeat: no-repeat;
   background-position: center right;
   background-size: 100px 100px;
@@ -22,11 +20,12 @@
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  margin-bottom: 0px;
 }
 
 .layout-navlink {
   text-decoration: none;
-  color: #add8e6;
+  color: var(--Primary);
   font-weight: 900;
 }
 
@@ -39,25 +38,35 @@
 }
 
 .selected {
-  color: white;
-  display: block;
+  color: red;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(167, 237, 255, 0.2392156863);
 }
 
 .layout-logo {
   display: flex;
   align-items: center;
   width: 100%;
-  gap: 50px;
+  gap: 30px;
 }
 
 .layout-logo svg {
-  fill: white !important;
+  fill: var(--Primary) !important;
+}
+
+.layout-logo span {
+  padding-left: 20px;
 }
 
 .navbar-item-cx span {
-  height: 3px;
+  height: 2px;
   width: 100%;
-  background-color: white;
+  background-color: var(--Primary);
+}
+
+.navbar-item-cx h4 {
+  padding: 5px 15px;
 }
 
 .input-div-cx {
@@ -65,6 +74,7 @@
   flex-direction: column;
   padding: 10px;
   gap: 20px;
+  background-color: rgba(167, 237, 255, 0.2392156863);
 }
 
 .input-div-cx label {
@@ -83,6 +93,7 @@
   gap: 5px;
   border-radius: 6px;
   height: 50px;
+  background-color: white;
 }
 
 .amount-naira-cx h1 {
@@ -93,7 +104,8 @@
   justify-content: center;
   width: 33px;
   color: lightblue;
-  width: 15%;
+  width: 50px;
+  border-radius: 5px 0px 0px 5px;
 }
 
 .mod-input {
@@ -123,14 +135,17 @@
 }
 
 .input-cx input[type=date],
-textarea,
 select,
 .input-cx input[type=text] {
   padding: 10px;
   border: solid darkblue 1.2px;
-  font-size: 1.1em;
   border-radius: 6px;
   outline: none;
+  background-color: white;
+}
+
+select {
+  font-size: 1.01em;
 }
 
 input[type=date] {
@@ -144,11 +159,10 @@ input[type=date] {
 textarea {
   padding: 5px 10px;
   border: solid darkblue 1.2px;
-  font-size: 1.1em;
+  font-size: 1.2em;
   border-radius: 6px;
   outline: none;
   font-family: Arial, Helvetica, sans-serif;
-  font-weight: 200;
   font-style: bold;
   height: 80px;
 }

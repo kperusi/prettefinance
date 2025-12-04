@@ -302,7 +302,7 @@ function AddExpenses() {
                 </svg>
               </h1>
               <input
-                style={{ border: "none", outline: "none" }}
+                style={{ border: "none", outline: "none",fontSize:'1.29em' }}
                 type="text"
                 name="amount"
                 id="income"

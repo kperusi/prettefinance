@@ -17,7 +17,6 @@ export default function TransactionLayout() {
     }
   };
   const [account_type, setAccount_type] = useState();
- 
 
   useEffect(() => {
     const storedAccount_type = JSON.parse(localStorage.getItem("account_type"));
@@ -37,7 +36,7 @@ export default function TransactionLayout() {
               height="29px"
               viewBox="0 -960 960 960"
               width="29px"
-              fill="#white"
+              fill="darkblue"
             >
               <path d="M360-240 120-480l240-240 56 56-144 144h568v80H272l144 144-56 56Z" />
             </svg>
@@ -57,17 +56,21 @@ export default function TransactionLayout() {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-            
-              alignSelf:'center',
-              justifySelf:'center',
-            paddingLeft:'20px'
+
+              alignSelf: "center",
+              justifySelf: "center",
+              paddingLeft: "20px",
+              paddingTop: "10px",
+              marginBottom:'30px'
             }}
           >
-            <h4 style={{ color: "white" }}>Add Transactions</h4>
-            <h4 style={{ color: "grey",textAlign:'center' }}>{`${account_type}`}</h4>
+            <h4 style={{ color: "darkblue" }}>Add Transactions</h4>
+            <h4
+              style={{ color: "grey", textAlign: "center" ,marginTop:'-5px'}}
+            >{`${account_type}`}</h4>
           </div>
         </div>
-        <span className="divide"></span>
+
         <div className="row">
           <div className="navbar-item-cx">
             <NavLink
@@ -75,8 +78,8 @@ export default function TransactionLayout() {
               onClick={() => handleSelected("income")}
               className={`layout-navlink ${selected.income}`}
             >
-              <h4>Add Income</h4>
               <span className={`${selected.income}`}></span>
+              <h4>Add Income</h4>
             </NavLink>
           </div>
 
@@ -86,9 +89,8 @@ export default function TransactionLayout() {
               onClick={() => handleSelected("expenses")}
               className={`layout-navlink ${selected.expenses}`}
             >
-              <h4> Add Expenses</h4>
-
               <span className={`${selected.expenses}`}></span>
+              <h4> Add Expenses</h4>
             </NavLink>
           </div>
         </div>
