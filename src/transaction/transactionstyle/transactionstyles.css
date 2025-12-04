@@ -15,12 +15,29 @@
   background-size: 100px 100px;
 }
 
+.layout-logo {
+  display: flex;
+  flex-direction: row;
+  padding: 30px;
+}
+
+.title-cx {
+  align-self: center;
+  justify-self: center;
+}
+
 .row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
   margin-bottom: 0px;
+}
+
+.back {
+  position: absolute;
+  left: 40px;
+  top: 30px;
 }
 
 .layout-navlink {
@@ -44,13 +61,6 @@
   background-color: rgba(167, 237, 255, 0.2392156863);
 }
 
-.layout-logo {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  gap: 30px;
-}
-
 .layout-logo svg {
   fill: var(--Primary) !important;
 }
@@ -69,12 +79,16 @@
   padding: 5px 15px;
 }
 
+.layout-content-cx {
+  height: 100vh;
+  background-color: rgba(167, 237, 255, 0.2392156863);
+}
+
 .input-div-cx {
   display: flex;
   flex-direction: column;
   padding: 10px;
   gap: 20px;
-  background-color: rgba(167, 237, 255, 0.2392156863);
 }
 
 .input-div-cx label {

@@ -18,6 +18,18 @@
   background-position: center right;
   background-size: 100px 100px;
 }
+.layout-logo {
+  display: flex;
+  flex-direction: row;
+ 
+  padding: 30px;
+
+}
+.title-cx{
+
+  align-self:center;
+  justify-self: center;
+}
 .row {
   display: flex;
   flex-direction: row;
@@ -25,6 +37,12 @@
   width: 100%;
   margin-bottom: 0px;
 
+}
+.back{
+
+  position: absolute;
+  left: 40px;
+  top: 30px;
 }
 
 .layout-navlink {
@@ -47,12 +65,7 @@
   flex-direction: column;
   background-color: #a7edff3d;
 }
-.layout-logo {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  gap: 30px;
-}
+
 .layout-logo svg {
   fill: var(--Primary) !important;
 }
@@ -68,12 +81,17 @@
 .navbar-item-cx h4 {
   padding: 5px 15px;
 }
+.layout-content-cx{
+ 
+  height: 100vh;  
+  background-color: #a7edff3d;
+}
 .input-div-cx {
   display: flex;
   flex-direction: column;
   padding: 10px;
   gap: 20px;
-  background-color: #a7edff3d;
+
 }
 .input-div-cx label {
   font-size: 1em;

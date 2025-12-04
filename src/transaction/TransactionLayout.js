@@ -27,6 +27,7 @@ export default function TransactionLayout() {
       <section className="layout-nav-cx">
         <div className="layout-logo">
           <span
+          className="back btn"
             onClick={() => {
               navigate("/prettifinance/account/main");
             }}
@@ -41,28 +42,11 @@ export default function TransactionLayout() {
               <path d="M360-240 120-480l240-240 56 56-144 144h568v80H272l144 144-56 56Z" />
             </svg>
 
-            {/* <svg
-              xmlns="http://www.w3.org/2000/svg"
-              height="30px"
-              viewBox="0 -960 960 960"
-              width="34px"
-              fill="#add8e6"
-            >
-              <path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z" />
-            </svg> */}
+           
           </span>
           <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-
-              alignSelf: "center",
-              justifySelf: "center",
-              paddingLeft: "20px",
-              paddingTop: "10px",
-              marginBottom:'30px'
-            }}
+          className="title-cx"
+            
           >
             <h4 style={{ color: "darkblue" }}>Add Transactions</h4>
             <h4
