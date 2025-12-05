@@ -331,6 +331,9 @@ return parts.join('.')
                    <option className="option" value="School Admission">
                    School Admission
                   </option>
+                  <option className="option" value="Others">
+                   Others
+                  </option>
                 </div>
               )}
               {account_type === "Main account" && (
